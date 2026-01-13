@@ -4,22 +4,33 @@ const Home = () => {
     return (
         <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] p-8 border border-white/10">
-                <div className="relative z-10">
-                    <h2 className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">About Me</h2>
-                    <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-                        侯汶政 <span className="text-slate-500 text-2xl font-normal">| Go后端工程师</span>
-                    </h1>
-                    <p className="text-lg text-slate-300 leading-relaxed max-w-2xl mb-8">
-                        深耕 Go 后端开发与私有云存储（NAS）领域。拥有高并发系统设计架构经验，
-                        擅长通过技术手段解决业务痛点，如 NAT 穿透、文件索引同步等核心模块。
-                    </p>
-                    <div className="flex flex-wrap gap-4">
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-400">
-                            <span className="w-2 h-2 rounded-full bg-green-500" /> 深圳在职
+                <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
+                    <div className="flex-1">
+                        <h2 className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">About Me</h2>
+                        <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+                            侯汶政 <span className="text-slate-500 text-2xl font-normal">| Go后端工程师</span>
+                        </h1>
+                        <p className="text-lg text-slate-300 leading-relaxed mb-8">
+                            深耕 Go 后端开发与私有云存储（NAS）领域。拥有高并发系统设计架构经验，
+                            擅长通过技术手段解决业务痛点，如 NAT 穿透、文件索引同步等核心模块。
+                        </p>
+                        <div className="flex flex-wrap gap-4">
+                            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-400">
+                                <span className="w-2 h-2 rounded-full bg-green-500" /> 深圳在职
+                            </div>
+                            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-400">
+                                邮箱：Soofjan1489938120@gmail.com
+                            </div>
                         </div>
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-400">
-                            邮箱：Soofjan1489938120@gmail.com
-                        </div>
+                    </div>
+
+                    <div className="relative group">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-purple-500/50 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                        <img
+                            src="/avator.jpg"
+                            alt="Avatar"
+                            className="relative w-[100px] h-[100px] rounded-full object-cover border-4 border-white/10 shadow-2xl"
+                        />
                     </div>
                 </div>
                 {/* Decorative background element */}
