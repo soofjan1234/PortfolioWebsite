@@ -35,7 +35,7 @@ CET-6 英语六级（602分），全国大学生算法设计与编程挑战赛�
 
 \paragraph*{私有云存储系统（NAS）开发}
 % \mbox{} \\
-% \textcolor{gray}{ \textbf{技术栈：} Go, Android, Vue, C++, MySQL, SQLite, NSQ, AES+RSA, ElasticSearch, Docker  }
+% \textcolor{gray}{ \textbf{技术栈：} Go, Vue, C++, MySQL, SQLite, NSQ, AES+RSA, ElasticSearch, Docker  }
 
 \begin{itemize}
 \item \textbf{团队协作与系统架构}：
@@ -58,19 +58,25 @@ CET-6 英语六级（602分），全国大学生算法设计与编程挑战赛�
         \item 图片分类：通过 JNI 调用实现前处理、推理和后处理流程，模型分类准确率达 89.2\%，
         \item 人脸识别与检测：通过 DBSCAN 聚类方法，支持 1 万人级人脸库的快速管理与比对，识别准确率达 97.3\%。
         \item 后端：在检索模块中，运用策略、工厂模式，实现独立模式与依赖网盘模式两种检索策略，满足不同部署场景需求。
-        \item 安卓端：结合 RxJava 与 Realm 构建响应式数据流，自动驱动 UI 更新，实现无感刷新与高效数据同步。
+    \end{itemize}
+
+    \item \textbf{智能文档中心}：
+    \begin{itemize}
+        \item 针对内存受限环境，完成了从 Elasticsearch 到 Bleve 的搜索引擎迁移，结合GPT 语义扩展与高性能缓存，实现快速的全文与多维度检索。
+        \item 构建了支持 PDF, Office, ePub, Mobi, Markdown 的统一解析引擎，利用 chardet 实现跨编码自动纠正与全量 UTF-8 归一化。
+        \item 针对超长文档，设计了基于块的索引策略与搜索结果聚合算法，为用户提供了具备高上下文关联性的“搜索高亮快照”。
     \end{itemize}
 
     \item \textbf{文件索引同步系统}：
     \begin{itemize}
-        \item 将核心逻辑解耦为可复用子模块，提供统一接口供多个项目集成调用。
-        \item 初期基于 fsnotify 快速开发，后期自研 DFS+Queue 架构，事件响应能力提升 80\%。
+        \item 从 fsnotify 事件监听模型切换至自研 DFS+Queue 架构，避免OOM风险，在海量文件场景下内存开销降低 90\% 以上。
+        \item 实现基于 SQLite 状态机的增量同步引擎，通过文件指纹比对与任务优先级调度实现断点续传及冗余过滤，显著提升同步可靠性与响应效率。
+        \item 基于接口抽象与 Functional Options 模式，实现同步逻辑与底层存储、IO 的深度解耦，支持跨项目的高内聚集成。
     \end{itemize}
 
     \item \textbf{其他}：
     \begin{itemize}
-        \item 使用 Elasticsearch 配合 AI 文档中心，因项目空间限制最终选用更轻量的 Bleve，实现快速的全文与多维度检索。
-        \item 开发并维护 Docker 、虚拟机、ChatGPT 等前后端项目，提供 NAS 生态支持。
+        \item 开发并维护 Docker、虚拟机、Webdav、ChatGPT 等前后端项目，提供 NAS 生态支持。
         \item 通过 rate 限流、Ristretto 缓存库、sync.Map+sync.Mutex 的方式有效缓解并发流量冲击；核心接口缓存命中率达 85\%，响应时间缩短 120ms。
     \end{itemize}
 
