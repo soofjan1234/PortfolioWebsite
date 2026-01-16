@@ -1,6 +1,8 @@
 # 🚀 portfolio website
 
 ## 1. 项目概述
+https://soofjan.vercel.app/
+
 这是一个基于 **Next.js (App Router)** 构建的高性能个人网站。目标是打造一个视觉冲击力强、不仅展示代码能力，还能作为“被动求职”和“被动接单”的自动化名片。
 
 ### 核心技术栈
