@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { marked } from 'marked'
-
-marked.use({
-  breaks: true, // 关键：允许回车换行（将 \n 解析为 <br>）
-  gfm: true,    // 启用 GitHub 风格 Markdown
-});
+import React, { useState } from 'react'
+import MarkdownRenderer from '../components/MarkdownRenderer'
 
 const Blog = () => {
-    // 硬编码文章列表，按年份分类
+    // Hardcoded article list by year
     const articles = [
+        {
+            year: '2026',
+            posts: [
+                { title: '博客Markdown渲染演进史', path: '/posts/2026/博客Markdown渲染演进史.md' }
+            ]
+        },
         {
             year: '2025',
             posts: [
@@ -30,83 +31,117 @@ const Blog = () => {
     const [content, setContent] = useState('')
     const [loading, setLoading] = useState(false)
 
-    // 加载选中的文章
+    // Load selected article
     const loadArticle = (article) => {
         setLoading(true)
         setSelectedArticle(article)
         fetch(article.path)
-            .then(res => res.text())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return res.text();
+            })
             .then(text => {
-                setContent(marked(text))
+                setContent(text)
                 setLoading(false)
             })
             .catch(err => {
-                console.error('加载失败:', err)
+                console.error('Failed to load article:', err)
+                setContent('Failed to load content. Please make sure the markdown file exists.')
                 setLoading(false)
             })
     }
 
     return (
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <header className="mb-12">
-                <h2 className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">Writing</h2>
-                <h1 className="text-4xl font-bold text-white mb-4">技术专栏</h1>
-                <p className="text-slate-400">记录技术思考、源码分析与开发经验。</p>
-            </header>
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 min-h-screen">
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                {/* 文章列表（左侧） */}
-                <div className="lg:col-span-1">
-                    <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/10 sticky top-8">
-                        <h3 className="text-xl font-bold text-white mb-4">文章列表</h3>
-                        {articles.map((yearGroup) => (
-                            <div key={yearGroup.year} className="mb-6">
-                                <h4 className="text-lg font-semibold text-primary mb-3">{yearGroup.year}</h4>
-                                <ul className="space-y-2">
-                                    {yearGroup.posts.map((post) => (
-                                        <li key={post.path}>
-                                            <button
-                                                onClick={() => loadArticle(post)}
-                                                className={`text-left w-full px-3 py-2 rounded-lg transition-all duration-200 hover:bg-primary/10 ${
-                                                    selectedArticle?.path === post.path
-                                                        ? 'text-primary bg-primary/10'
-                                                        : 'text-slate-300'
-                                                }`}
-                                            >
-                                                {post.title}
-                                            </button>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
+            {/* Header */}
+            <div className="text-center mb-16 pt-12">
+                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600 mb-4">Writing & Thoughts</h2>
+                <h1 className="text-4xl md:text-6xl font-black text-gray-900">Technical Blog</h1>
+                <p className="mt-6 text-gray-500 max-w-2xl mx-auto">
+                    Exploring code, architecture, and the journey of building software.
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 container mx-auto px-4 md:px-0">
+                {/* Article List (Left Sidebar) */}
+                <div className="lg:col-span-3">
+                    <div className="bg-white/50 backdrop-blur-md border border-white/50 rounded-2xl p-6 sticky top-24 shadow-sm">
+                        <h3 className="text-lg font-bold text-gray-900 mb-6 flex items-center">
+                            <span className="w-1.5 h-6 bg-blue-600 rounded-full mr-3"></span>
+                            Latest Posts
+                        </h3>
+
+                        <div className="space-y-8">
+                            {articles.map((yearGroup) => (
+                                <div key={yearGroup.year}>
+                                    <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">
+                                        {yearGroup.year}
+                                    </div>
+                                    <ul className="space-y-1">
+                                        {yearGroup.posts.map((post) => (
+                                            <li key={post.path}>
+                                                <button
+                                                    onClick={() => loadArticle(post)}
+                                                    className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group flex items-center justify-between ${selectedArticle?.path === post.path
+                                                        ? 'bg-blue-50 text-blue-700 shadow-sm'
+                                                        : 'text-gray-600 hover:bg-white hover:text-gray-900 hover:shadow-sm'
+                                                        }`}
+                                                >
+                                                    <span className="truncate">{post.title}</span>
+                                                    {selectedArticle?.path === post.path && (
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500 ml-2 animate-pulse"></span>
+                                                    )}
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-                {/* 文章内容（右侧） */}
-                <div className="lg:col-span-3">
+                {/* Article Content (Right/Main Area) */}
+                <div className="lg:col-span-9">
                     {loading ? (
-                        <div className="flex justify-center py-20">
-                            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-primary" />
+                        <div className="flex flex-col items-center justify-center h-96 bg-white/50 backdrop-blur-md rounded-3xl border border-white/50">
+                            <div className="w-10 h-10 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin mb-4"></div>
+                            <p className="text-gray-400 text-sm font-medium">Loading content...</p>
                         </div>
                     ) : selectedArticle ? (
-                        <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10">
-                            <h2 className="text-2xl font-bold text-white mb-6">{selectedArticle.title}</h2>
-                            <article
-                                className="prose prose-invert max-w-none 
-              prose-headings:text-white prose-headings:font-bold 
-              prose-h1:text-3xl prose-h2:text-2xl 
-              prose-p:text-slate-300 prose-p:leading-relaxed
-              prose-p:my-8
-              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-              prose-code:text-primary prose-code:bg-primary/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
-              prose-pre:bg-slate-900 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-2xl"
-                                dangerouslySetInnerHTML={{ __html: content }}
-                            />
+                        <div className="bg-white/80 backdrop-blur-xl border border-white rounded-[2rem] shadow-xl p-8 md:p-12 min-h-[80vh] transition-all duration-500 mb-24">
+                            <div className="mb-10 pb-8 border-b border-gray-100">
+                                <div className="flex items-center gap-2 mb-4">
+                                    <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider">
+                                        Note
+                                    </span>
+                                    <span className="text-gray-400 text-xs font-medium">
+                                        / posts / {selectedArticle.path.split('/')[3]}
+                                    </span>
+                                </div>
+                                <h1 className="text-3xl md:text-5xl font-black text-gray-900 leading-tight">
+                                    {selectedArticle.title}
+                                </h1>
+                            </div>
+
+                            <article>
+                                <MarkdownRenderer content={content} />
+                            </article>
                         </div>
                     ) : (
-                        <div className="flex justify-center items-center h-64 p-8 rounded-3xl bg-white/[0.02] border border-white/10">
-                            <p className="text-slate-400 text-lg">请从左侧选择一篇文章阅读</p>
+                        <div className="flex flex-col items-center justify-center h-[60vh] bg-white/50 backdrop-blur-md border border-white/50 rounded-[2.5rem] p-12 text-center border-dashed border-2 border-gray-200 hover:border-blue-200 transition-colors group cursor-default">
+                            <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <svg className="w-8 h-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">Select an Article</h3>
+                            <p className="text-gray-500 max-w-sm">
+                                Choose a topic from the sidebar to start reading.
+                            </p>
                         </div>
                     )}
                 </div>

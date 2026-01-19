@@ -3,31 +3,24 @@
 ## 1. 项目概述
 https://soofjan.vercel.app/
 
-这是一个基于 **Next.js (App Router)** 构建的高性能个人网站。目标是打造一个视觉冲击力强、不仅展示代码能力，还能作为“被动求职”和“被动接单”的自动化名片。
+## 2. 页面美化
+1. 整体布局改进
+    a. 顶部左侧：Soofjan 右侧：联系我
+    b. 顶部中间导航栏：首页、工作经历、项目经历、博客
+    c. 像苹果页面一样的流，下滑出现新内容，点击导航跳到对应页面
+2. 配色改进
+    电光矢车菊蓝 (Electric Blue),#5974FF,"89, 116, 255",
+    复古米白 (Warm Cream),#F3F0E6,"243, 240, 230"
+    深炭黑 (Charcoal Black),#111111,"17, 17, 17"
+3. 字体
+4. 动画
 
-### 核心技术栈
-* **框架**: Next.js 14+ (App Router)
-* **语言**: TypeScript
-* **样式**: Tailwind CSS
-* **UI 动效库**: Framer Motion, Aceternity UI, Magic UI
-* **3D 渲染**: React Three Fiber (R3F) / Drei
-* **内容管理**: MDX (博客), JSON/TypeScript Const (静态数据)
-* **部署**: Vercel
 
----
+https://ds-k.site/  城墙一样 下滑变为logo 上滑变为3d城墙
+https://www.goonsdesign.com/en 内容学习；鼠标位置会出现contact us圆圈
+https://matvoyce.tv/media 悬浮字体粗细变化
 
-## 2. 页面架构
 
-### 2.1 首页 (Home)
-About me. 参考data/resume.tex
-
-### 2.2 技能与项目页 (Stack & Projects)
-参考data/resume.tex
-
-### 2.3 博客展示 (Blog)
-### 2.4 书单与工具 (Books & Tools)
-
-## 3. 参考网站
-https://sawad.framer.website/
-https://tedawf.com/
-https://jasoncameron.dev/
+电光矢车菊蓝 (Electric Blue),#5974FF,"89, 116, 255",
+复古米白 (Warm Cream),#F3F0E6,"243, 240, 230"
+深炭黑 (Charcoal Black),#111111,"17, 17, 17"

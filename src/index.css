@@ -4,25 +4,32 @@
 
 @layer base {
   :root {
-    --primary: 59 130 246;
-    /* blue-500 */
-    color-scheme: dark;
+    --primary: 37 99 235;
+    /* Blue 600 */
+    --background: 243 244 246;
+    /* Gray 100 */
+    --text: 17 24 39;
+    /* Gray 900 */
   }
 
   body {
-    @apply bg-[#0f172a] overflow-x-hidden antialiased;
+    @apply bg-[#f3f4f6] text-gray-900 overflow-x-hidden antialiased;
   }
 }
 
 @layer components {
   .prose {
-    @apply max-w-none text-slate-300;
+    @apply max-w-none text-text;
+  }
+
+  .prose p {
+    @apply mb-6 leading-relaxed;
   }
 
   .prose h1,
   .prose h2,
   .prose h3 {
-    @apply text-white font-bold tracking-tight;
+    @apply text-text font-bold tracking-tight;
   }
 
   /* Custom Scrollbar */
@@ -68,4 +75,36 @@
 
 .slide-in-up {
   animation: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float-delayed {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite;
 }
