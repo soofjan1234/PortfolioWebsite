@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Experience from './pages/Experience'
@@ -6,6 +6,7 @@ import Projects from './pages/Projects'
 import Blog from './pages/Blog'
 
 function App() {
+    const [showContactModal, setShowContactModal] = useState(false)
     const location = useLocation()
 
     // 路由切换时滚动到顶部
@@ -13,9 +14,17 @@ function App() {
         window.scrollTo(0, 0)
     }, [location.pathname])
 
+    // 监听全局弹窗事件
+    useEffect(() => {
+        const handleOpen = () => setShowContactModal(true)
+        window.addEventListener('open-contact-modal', handleOpen)
+        return () => window.removeEventListener('open-contact-modal', handleOpen)
+    }, [])
+
     const navItems = [
         { label: 'ABOUT', path: '/' },
         { label: 'WORKS', path: '/experience' },
+        { label: 'PROJECTS', path: '/projects' },
         { label: 'BLOG', path: '/blog' }
     ]
 
@@ -47,12 +56,12 @@ function App() {
 
                     {/* Right column */}
                     <div className="flex z-50">
-                        <Link
-                            to="/blog"
+                        <button
+                            onClick={() => setShowContactModal(true)}
                             className="px-6 py-2.5 bg-blue-600 text-white rounded-full text-xs font-bold tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20 active:scale-95"
                         >
-                            Contact Us
-                        </Link>
+                            Contact
+                        </button>
                     </div>
                 </div>
             </header>
@@ -61,7 +70,7 @@ function App() {
             <main className="min-h-screen">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/works" element={
+                    <Route path="/projects" element={
                         <div className="pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <Projects />
                         </div>
@@ -83,13 +92,46 @@ function App() {
             <footer className="py-12 bg-[#f3f4f6] border-t border-gray-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-gray-500 text-sm flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <p>&copy; {new Date().getFullYear()} 侯汶政. All rights reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} HouWenzheng. All rights reserved.</p>
                         <div className="flex space-x-6">
                             <a href="https://github.com/soofjan1234" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">GitHub</a>
                         </div>
                     </div>
                 </div>
             </footer>
+
+            {/* Contact Modal */}
+            {showContactModal && (
+                <div
+                    className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-300"
+                    onClick={() => setShowContactModal(false)}
+                >
+                    <div
+                        className="bg-white rounded-[2.5rem] p-8 md:p-12 max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-300 text-center"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="relative mb-8 group">
+                            <div className="absolute inset-0 bg-blue-500/10 rounded-3xl blur-2xl group-hover:bg-blue-500/20 transition-all duration-700" />
+                            <img
+                                src="/contact.jpg"
+                                alt="WeChat QR Code"
+                                className="relative w-full object-cover rounded-3xl shadow-lg border border-gray-100"
+                            />
+                        </div>
+                        <h3 className="text-2xl font-black text-gray-900 mb-2">WeChat Contact</h3>
+                        <p className="text-gray-500 font-medium mb-8">
+                            扫码添加微信<br />
+                            <span className="text-blue-600 font-bold">请备注来意</span>
+                        </p>
+                        <button
+                            onClick={() => setShowContactModal(false)}
+                            className="w-full py-4 bg-gray-900 text-white rounded-2xl font-bold hover:bg-gray-800 transition-all active:scale-95"
+                        >
+                            Got it
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

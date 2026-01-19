@@ -86,7 +86,7 @@ const Home = () => {
                 {/* 顶部渐变过渡 */}
                 <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#f3f4f6] to-blue-600 z-10" />
 
-                <div className="relative z-20 container mx-auto px-6 py-32 md:py-40">
+                <div className="relative z-20 container mx-auto px-6 py-40 md:py-48">
                     {/* 背景标题 - 仿照 Hero 样式 */}
                     <div className="absolute top-30 inset-0 flex flex-col items-center justify-center select-none pointer-events-none opacity-10 leading-none z-0">
                         <h2 className="text-[16vw] font-black tracking-tighter uppercase italic"
@@ -100,10 +100,10 @@ const Home = () => {
                     </div>
 
                     {/* 内容容器 */}
-                    <div className="relative z-10 max-w-6xl mx-auto space-y-8 md:space-y-12 mt-12 md:mt-24">
+                    <div className="relative z-10 max-w-7xl mx-auto space-y-12 md:space-y-16 mt-12 md:mt-24">
 
                         {/* 1. 教育背景 - 宽卡片布局 */}
-                        <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 md:p-12 rounded-3xl hover:bg-white/20 transition-all duration-500 shadow-xl group">
+                        <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-10 md:p-16 rounded-[2.5rem] hover:bg-white/20 transition-all duration-500 shadow-2xl group">
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                                 <div>
                                     <div className="flex items-center gap-4 mb-2">
@@ -114,12 +114,12 @@ const Home = () => {
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-3xl md:text-4xl font-black tracking-tight">广州大学</h3>
+                                        <h3 className="text-4xl md:text-6xl font-black tracking-tight">广州大学</h3>
                                     </div>
-                                    <p className="text-xl text-white/90 font-medium ml-1">计算机科学与技术 <span className="text-white/60 text-base ml-2">/ 学士</span></p>
+                                    <p className="text-2xl text-white/90 font-medium ml-1">计算机科学与技术 <span className="text-white/60 text-lg ml-2">/ 学士</span></p>
                                 </div>
                                 <div className="text-left md:text-right">
-                                    <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">2019.09 -- 2023.06</div>
+                                    <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">2019.09 -- 2023.06</div>
                                     <div className="mt-3 flex flex-wrap gap-3 justify-start md:justify-end">
                                         <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium border border-white/10">CET-6 (602分)</span>
                                         <span className="px-3 py-1 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 rounded-full text-sm font-medium border border-yellow-400/30 text-yellow-100">全国大学生算法设计与编程挑战赛（银奖）</span>
@@ -131,16 +131,22 @@ const Home = () => {
                         {/* 2. 技能卡片 Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                             {/* Academic */}
-                            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-all duration-300">
-                                <h3 className="text-lg font-bold mb-4 text-white/60 tracking-widest uppercase">Academic Foundation</h3>
-                                <ul className="space-y-2">
-                                    <li className="flex items-center gap-3 text-lg font-bold"><span className="w-2 h-2 rounded-full bg-blue-300" /> C++</li>
-                                    <li className="flex items-center gap-3 text-lg font-bold"><span className="w-2 h-2 rounded-full bg-blue-300" /> JAVA</li>
+                            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-[2.5rem] hover:bg-white/10 transition-all duration-300 flex flex-col justify-center">
+                                <h3 className="text-xl font-bold mb-6 text-white/60 tracking-widest uppercase">Academic Foundation</h3>
+                                <ul className="space-y-4">
+                                    <li className="flex items-center gap-4 text-2xl font-bold">
+                                        <span className="w-3 h-3 rounded-full bg-blue-300 shadow-[0_0_12px_rgba(147,197,253,0.5)]" />
+                                        C++
+                                    </li>
+                                    <li className="flex items-center gap-4 text-2xl font-bold">
+                                        <span className="w-3 h-3 rounded-full bg-blue-300 shadow-[0_0_12px_rgba(147,197,253,0.5)]" />
+                                        JAVA
+                                    </li>
                                 </ul>
                             </div>
 
                             {/* Professional - Highlighted */}
-                            <div className="col-span-1 md:col-span-2 bg-gradient-to-br from-white to-blue-50 text-blue-900 p-8 rounded-2xl shadow-2xl relative overflow-hidden group">
+                            <div className="col-span-1 md:col-span-2 bg-gradient-to-br from-white to-blue-50 text-blue-900 p-10 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                     <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
                                 </div>
@@ -150,38 +156,38 @@ const Home = () => {
                                 </h3>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
-                                        <div className="font-black text-3xl">Go</div>
-                                        <div className="text-sm font-medium text-blue-600/70">Backend Core</div>
+                                        <div className="font-black text-4xl">Go/Gin</div>
+                                        <div className="text-base font-medium text-blue-600/70">Backend Core</div>
                                     </div>
                                     <div className="space-y-2">
-                                        <div className="font-black text-3xl">Vue.js</div>
-                                        <div className="text-sm font-medium text-blue-600/70">Frontend Modern</div>
+                                        <div className="font-black text-4xl">Vue.js</div>
+                                        <div className="text-base font-medium text-blue-600/70">Frontend Modern</div>
                                     </div>
                                     <div className="space-y-2">
-                                        <div className="font-black text-3xl">MySQL</div>
-                                        <div className="text-sm font-medium text-blue-600/70">Relational DB</div>
+                                        <div className="font-black text-4xl">MySQL</div>
+                                        <div className="text-base font-medium text-blue-600/70">Relational DB</div>
                                     </div>
                                     <div className="space-y-2">
-                                        <div className="font-black text-3xl">SQLite</div>
-                                        <div className="text-sm font-medium text-blue-600/70">Embedded DB</div>
+                                        <div className="font-black text-4xl">SQLite</div>
+                                        <div className="text-base font-medium text-blue-600/70">Embedded DB</div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Self-Study & Freelance Combined */}
-                            <div className="space-y-6">
-                                <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition-all duration-300">
-                                    <h3 className="text-xs font-bold mb-3 text-white/50 tracking-widest uppercase">Freelance</h3>
+                            <div className="flex flex-col gap-6 md:gap-8">
+                                <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-[2.5rem] hover:bg-white/10 transition-all duration-300 flex flex-col justify-center">
+                                    <h3 className="text-sm font-bold mb-4 text-white/50 tracking-widest uppercase">Freelance</h3>
                                     <div className="flex flex-wrap gap-2">
-                                        <span className="px-2 py-1 bg-white/10 rounded text-sm">Python</span>
-                                        <span className="px-2 py-1 bg-white/10 rounded text-sm">Android</span>
+                                        <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium">Python</span>
+                                        <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium">Android</span>
                                     </div>
                                 </div>
-                                <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition-all duration-300">
-                                    <h3 className="text-xs font-bold mb-3 text-white/50 tracking-widest uppercase">Self-Study</h3>
+                                <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-[2.5rem] hover:bg-white/10 transition-all duration-300 flex flex-col justify-center">
+                                    <h3 className="text-sm font-bold mb-3 text-white/50 tracking-widest uppercase">Self-Study</h3>
                                     <div className="flex flex-wrap gap-2">
-                                        <span className="px-2 py-1 bg-white/10 rounded text-sm">TypeScript</span>
-                                        <span className="px-2 py-1 bg-white/10 rounded text-sm">React</span>
+                                        <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium">TypeScript</span>
+                                        <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium">React</span>
                                     </div>
                                 </div>
                             </div>
@@ -192,10 +198,11 @@ const Home = () => {
 
             {/* Contact Section */}
             <section
-                className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden transition-colors duration-1000 ${isHoveringContact ? 'cursor-none' : ''} bg-gradient-to-b from-blue-600 to-[#f3f4f6]`}
+                className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden transition-colors duration-1000 ${isHoveringContact ? 'cursor-none' : ''} bg-gradient-to-b from-blue-600 to-[#f3f4f6] active:scale-[0.99] transition-transform`}
                 onMouseMove={handleContactMouseMove}
                 onMouseEnter={() => setIsHoveringContact(true)}
                 onMouseLeave={() => setIsHoveringContact(false)}
+                onClick={() => window.dispatchEvent(new CustomEvent('open-contact-modal'))}
             >
                 {/* 背景大字 */}
                 <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden">
