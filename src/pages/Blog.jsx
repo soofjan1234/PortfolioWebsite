@@ -7,7 +7,7 @@ const Blog = () => {
         {
             year: '2026',
             posts: [
-                { title: '告别 xxx.vercel.app', path: '/posts/2026/1/告别 xxx.vercel.app.md' }
+                { title: '告别vercel.app域名', path: '/posts/2026/1/告别vercel.app域名.md' }
             ]
         },
         {

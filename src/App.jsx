@@ -7,11 +7,13 @@ import Blog from './pages/Blog'
 
 function App() {
     const [showContactModal, setShowContactModal] = useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const location = useLocation()
 
-    // 路由切换时滚动到顶部
+    // 路由切换时滚动到顶部并关闭移动菜单
     useEffect(() => {
         window.scrollTo(0, 0)
+        setMobileMenuOpen(false)
     }, [location.pathname])
 
     // 监听全局弹窗事件
@@ -55,7 +57,21 @@ function App() {
                     </nav>
 
                     {/* Right column */}
-                    <div className="flex z-50">
+                    <div className="flex items-center gap-4 z-50">
+                        {/* Mobile hamburger button */}
+                        <button 
+                            className="md:hidden text-gray-900 p-2" 
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {mobileMenuOpen ? (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                ) : (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                )}
+                            </svg>
+                        </button>
+                        
                         <button
                             onClick={() => setShowContactModal(true)}
                             className="px-6 py-2.5 bg-blue-600 text-white rounded-full text-xs font-bold tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20 active:scale-95"
@@ -64,6 +80,27 @@ function App() {
                         </button>
                     </div>
                 </div>
+
+                {/* Mobile menu */}
+                {mobileMenuOpen && (
+                    <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 py-4 px-4 shadow-lg">
+                        <div className="flex flex-col space-y-2">
+                            {navItems.map((item) => (
+                                <Link
+                                    key={item.label}
+                                    to={item.path}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className={`py-3 px-4 rounded-xl text-sm font-bold tracking-wide transition-all ${(location.pathname === item.path) || (item.path !== '/' && location.pathname.startsWith(item.path))
+                                        ? 'bg-blue-600 text-white'
+                                        : 'text-gray-700 hover:bg-gray-100'
+                                    }`}
+                                >
+                                    {item.label}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </header>
 
             {/* 主内容区域 */}

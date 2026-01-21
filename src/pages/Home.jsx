@@ -22,35 +22,35 @@ const Home = () => {
 
                 {/* 自我介绍内容 */}
                 <div className="relative z-30 min-h-screen flex flex-col justify-end items-end p-8 md:p-24 pb-48">
-                    <div className="flex flex-col md:flex-row items-center md:items-end gap-16 max-w-[95vw]">
+                    <div className="flex flex-col md:flex-row items-center md:items-end gap-16 w-full max-w-full md:max-w-[95vw]">
                         {/* 文字内容容器 */}
-                        <div className="text-right space-y-10 order-2 md:order-1">
+                        <div className="text-center md:text-right space-y-6 md:space-y-10 order-2 md:order-1 w-full md:w-auto">
                             <div className="space-y-4">
                                 <h2 className="text-base font-semibold uppercase tracking-widest text-primary">About Me</h2>
-                                <h1 className="text-6xl md:text-8xl font-black text-gray-900 leading-tight">
-                                    Hou <span className="text-gray-400 text-4xl md:text-5xl font-normal ml-6">| 全栈工程师</span>
+                                <h1 className="text-4xl md:text-8xl font-black text-gray-900 leading-tight">
+                                    Hou <span className="text-gray-400 text-2xl md:text-5xl font-normal md:ml-6">| 全栈工程师</span>
                                 </h1>
                             </div>
 
-                            <div className="ml-auto">
-                                <p className="text-2xl md:text-4xl text-gray-600 font-medium whitespace-nowrap">
+                            <div className="md:ml-auto max-w-full">
+                                <p className="text-lg md:text-4xl text-gray-600 font-medium">
                                     深耕 <span className="text-primary font-bold">Go 后端开发</span> 与
-                                    <span className="text-primary font-bold mx-2">私有云存储（NAS）</span> 领域，同时具备
-                                    <span className="text-primary font-bold ml-2">全栈开发能力</span>。
+                                    <span className="text-primary font-bold mx-1 md:mx-2">私有云存储（NAS）</span> 领域，同时具备
+                                    <span className="text-primary font-bold ml-1 md:ml-2">全栈开发能力</span>。
                                 </p>
-                                <p className="text-xl md:text-2xl text-gray-400 mt-6 whitespace-nowrap">
+                                <p className="text-base md:text-2xl text-gray-400 mt-4 md:mt-6">
                                     擅长通过技术手段解决业务痛点，如
-                                    <span className="text-gray-900 font-semibold mx-2">NAT 穿透</span>、
-                                    <span className="text-gray-800 font-semibold mx-2">文件索引同步</span> 等核心模块。
+                                    <span className="text-gray-900 font-semibold mx-1 md:mx-2">NAT 穿透</span>、
+                                    <span className="text-gray-800 font-semibold mx-1 md:mx-2">文件索引同步</span> 等核心模块。
                                 </p>
                             </div>
 
-                            <div className="flex justify-end gap-4 pb-8">
-                                <div className="flex items-center gap-3 px-8 py-4 rounded-full bg-white shadow-sm border border-gray-100 text-base text-gray-600">
+                            <div className="flex flex-col md:flex-row justify-center md:justify-end gap-3 md:gap-4 pb-8 w-full md:w-auto">
+                                <div className="flex items-center justify-center gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full bg-white shadow-sm border border-gray-100 text-sm md:text-base text-gray-600">
                                     <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
                                     深圳在职
                                 </div>
-                                <div className="px-8 py-4 rounded-full bg-white shadow-sm border border-gray-100 text-base text-gray-600">
+                                <div className="px-6 md:px-8 py-3 md:py-4 rounded-full bg-white shadow-sm border border-gray-100 text-sm md:text-base text-gray-600 text-center md:text-left">
                                     邮箱：Soofjan1489938120@gmail.com
                                 </div>
                             </div>
