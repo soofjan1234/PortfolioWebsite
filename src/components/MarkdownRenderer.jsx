@@ -85,11 +85,17 @@ const MarkdownRenderer = ({ content }) => {
                 },
                 img({ src, alt }) {
                     return (
-                        <img
-                            src={src}
-                            alt={alt}
-                            className="rounded-2xl shadow-lg my-4"
-                        />
+                        <div className="my-6">
+                            <img
+                                src={src}
+                                alt={alt || 'Image'}
+                                className="rounded-2xl shadow-lg w-full h-auto max-w-full"
+                                onError={(e) => {
+                                    console.error('Failed to load image:', src)
+                                    e.target.style.display = 'none'
+                                }}
+                            />
+                        </div>
                     )
                 },
                 table({ children }) {

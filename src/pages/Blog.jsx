@@ -7,7 +7,7 @@ const Blog = () => {
         {
             year: '2026',
             posts: [
-                { title: '博客Markdown渲染演进史', path: '/posts/2026/博客Markdown渲染演进史.md' }
+                { title: '告别 xxx.vercel.app', path: '/posts/2026/1/告别 xxx.vercel.app.md' }
             ]
         },
         {
@@ -31,6 +31,25 @@ const Blog = () => {
     const [content, setContent] = useState('')
     const [loading, setLoading] = useState(false)
 
+    // Helper function to convert relative image paths to absolute paths
+    const processImagePaths = (markdownContent, articlePath) => {
+        // Get the directory path of the article (remove the filename)
+        const articleDir = articlePath.substring(0, articlePath.lastIndexOf('/'))
+        
+        // Replace relative image paths (both .\ and ./ formats)
+        // Match patterns like ![](.\image.png) or ![](./image.png)
+        return markdownContent.replace(
+            /!\[([^\]]*)\]\(([.\/\\]+)([^)]+)\)/g,
+            (match, alt, prefix, imageName) => {
+                // Remove any leading dots, slashes, or backslashes
+                const cleanImageName = imageName.replace(/^[.\/\\]+/, '')
+                // Construct absolute path
+                const absolutePath = `${articleDir}/${cleanImageName}`
+                return `![${alt}](${absolutePath})`
+            }
+        )
+    }
+
     // Load selected article
     const loadArticle = (article) => {
         setLoading(true)
@@ -43,7 +62,9 @@ const Blog = () => {
                 return res.text();
             })
             .then(text => {
-                setContent(text)
+                // Process image paths to convert relative paths to absolute paths
+                const processedContent = processImagePaths(text, article.path)
+                setContent(processedContent)
                 setLoading(false)
             })
             .catch(err => {
