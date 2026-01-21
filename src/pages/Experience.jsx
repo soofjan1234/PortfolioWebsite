@@ -88,14 +88,14 @@ const Experience = () => {
                         <h1 className="text-4xl md:text-6xl font-black text-gray-900">Project Gallery</h1>
                     </div>
 
-                    <div className="space-y-12 md:space-y-0">
+                    <div className="space-y-8 md:space-y-0">
                         {projectModules.map((module, index) => (
                             <div
                                 key={index}
-                                className="sticky top-0 min-h-screen flex items-center justify-center py-10 md:py-0"
+                                className="md:sticky md:top-0 md:min-h-screen flex items-center justify-center py-4 md:py-0"
                             >
                                 <div
-                                    className="w-full max-w-5xl h-[65vh] md:h-[70vh] flex flex-col justify-center bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-16 border border-white shadow-2xl overflow-hidden relative group transition-all duration-500"
+                                    className="w-full max-w-5xl min-h-[auto] md:h-[70vh] flex flex-col justify-center bg-white/80 backdrop-blur-xl rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-16 border border-white shadow-2xl overflow-hidden relative group transition-all duration-500"
                                     style={{
                                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)',
                                         transform: `rotate(${index % 2 === 0 ? '1deg' : '-1deg'})`
@@ -105,24 +105,24 @@ const Experience = () => {
                                     <div className={`absolute -right-20 -top-20 w-96 h-96 bg-gradient-to-br from-${['blue', 'purple', 'indigo', 'cyan', 'teal'][index % 5]}-500/10 to-transparent rounded-full blur-3xl opacity-50`} />
 
                                     <div className="relative z-10">
-                                        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4">
+                                        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 md:mb-12 gap-4">
                                             <div className="space-y-2">
-                                                <span className="text-5xl md:text-7xl font-black text-gray-200 absolute -top-10 -left-6 md:-left-10 select-none -z-10">
+                                                <span className="text-4xl md:text-7xl font-black text-gray-200 absolute -top-6 md:-top-10 -left-4 md:-left-10 select-none -z-10">
                                                     0{index + 1}
                                                 </span>
-                                                <h3 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight">
+                                                <h3 className="text-2xl md:text-4xl font-black text-gray-900 leading-tight">
                                                     {module.title}
                                                 </h3>
                                             </div>
                                             <span className="hidden md:block w-24 h-1 bg-gray-200 rounded-full" />
                                         </div>
 
-                                        <div className="grid md:grid-cols-12 gap-8 md:gap-12">
+                                        <div className="grid md:grid-cols-12 gap-6 md:gap-12">
                                             <div className="md:col-span-12">
-                                                <ul className="space-y-4 md:space-y-6">
+                                                <ul className="space-y-3 md:space-y-6">
                                                     {module.details.map((detail, dIdx) => (
-                                                        <li key={dIdx} className="flex items-start text-lg md:text-xl text-gray-600 font-medium leading-relaxed group-hover:text-gray-800 transition-colors">
-                                                            <span className="w-2 h-2 mt-2.5 mr-4 bg-blue-500 rounded-full flex-shrink-0" />
+                                                        <li key={dIdx} className="flex items-start text-sm md:text-xl text-gray-600 font-medium leading-relaxed group-hover:text-gray-800 transition-colors">
+                                                            <span className="w-1.5 h-1.5 md:w-2 md:h-2 mt-2 md:mt-2.5 mr-3 md:mr-4 bg-blue-500 rounded-full flex-shrink-0" />
                                                             {detail}
                                                         </li>
                                                     ))}
