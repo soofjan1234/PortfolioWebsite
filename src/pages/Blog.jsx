@@ -7,15 +7,17 @@ const Blog = () => {
         {
             year: '2026',
             posts: [
-                { title: '告别vercel.app域名', path: '/posts/2026/1/告别vercel.app域名.md' }
+                { title: '告别vercel.app域名', path: '/posts/2026/1/告别vercel.app域名.md' },
+                { title: 'Skills', path: '/posts/2026/2/skills.md' }
             ]
         },
         {
             year: '2025',
             posts: [
-                { title: '爬虫', path: '/posts/2025/爬虫.md' },
+                { title: '爬虫入门', path: '/posts/2025/爬虫/爬虫入门.md' },
+                { title: '爬虫进阶', path: '/posts/2025/爬虫/爬虫进阶.md' },
+                { title: 'Playwright', path: '/posts/2025/爬虫/Playwright.md' },
                 { title: '如何做一个好的个人网站', path: '/posts/2025/如何做一个好的个人网站.md' },
-                { title: 'CC使用方法', path: '/posts/2025/CC使用方法.md' }
             ]
         },
         {

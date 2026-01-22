@@ -132,7 +132,8 @@ const Home = () => {
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                             {/* Academic */}
                             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-[2.5rem] hover:bg-white/10 transition-all duration-300 flex flex-col justify-center">
-                                <h3 className="text-xl font-bold mb-6 text-white/60 tracking-widest uppercase">Academic Foundation</h3>
+                                <h3 className="text-xl font-bold mb-2 text-white/60 tracking-widest uppercase">Academic Foundation</h3>
+                                <p className="text-sm text-white/40 mb-6 italic">Almost forgot</p>
                                 <ul className="space-y-4">
                                     <li className="flex items-center gap-4 text-2xl font-bold">
                                         <span className="w-3 h-3 rounded-full bg-blue-300 shadow-[0_0_12px_rgba(147,197,253,0.5)]" />
@@ -150,10 +151,11 @@ const Home = () => {
                                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                     <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
                                 </div>
-                                <h3 className="text-xl font-bold mb-6 text-blue-600 tracking-widest uppercase flex items-center gap-2">
+                                <h3 className="text-xl font-bold mb-1 text-blue-600 tracking-widest uppercase flex items-center gap-2">
                                     <span className="w-8 h-1 bg-blue-600 rounded-full"></span>
                                     Professional Stack
                                 </h3>
+                                <p className="text-sm text-blue-600/50 mb-6 italic ml-10">Most frequently used</p>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <div className="font-black text-4xl">Go/Gin</div>
@@ -175,20 +177,14 @@ const Home = () => {
                             </div>
 
                             {/* Self-Study & Freelance Combined */}
-                            <div className="flex flex-col gap-6 md:gap-8">
-                                <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-[2.5rem] hover:bg-white/10 transition-all duration-300 flex flex-col justify-center">
-                                    <h3 className="text-sm font-bold mb-4 text-white/50 tracking-widest uppercase">Freelance</h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium">Python</span>
-                                        <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium">Android</span>
-                                    </div>
-                                </div>
-                                <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-[2.5rem] hover:bg-white/10 transition-all duration-300 flex flex-col justify-center">
-                                    <h3 className="text-sm font-bold mb-3 text-white/50 tracking-widest uppercase">Self-Study</h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium">TypeScript</span>
-                                        <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium">React</span>
-                                    </div>
+                            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-[2.5rem] hover:bg-white/10 transition-all duration-300 flex flex-col justify-center">
+                                <h3 className="text-xl font-bold mb-2 text-white/60 tracking-widest uppercase">Self-Study & Freelance</h3>
+                                <p className="text-sm text-white/40 mb-6 italic">Multi-platform adaptability</p>
+                                <div className="flex flex-wrap gap-2">
+                                    <span className="px-3 py-1.5 bg-white/10 rounded-full text-sm font-medium">Python</span>
+                                    <span className="px-3 py-1.5 bg-white/10 rounded-full text-sm font-medium">Android</span>
+                                    <span className="px-3 py-1.5 bg-white/10 rounded-full text-sm font-medium">TypeScript</span>
+                                    <span className="px-3 py-1.5 bg-white/10 rounded-full text-sm font-medium">React</span>
                                 </div>
                             </div>
                         </div>

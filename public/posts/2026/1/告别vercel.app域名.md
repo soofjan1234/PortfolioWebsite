@@ -1,24 +1,24 @@
-## 目的
+# 目的
 
 将 xxx.vercel.app 替换为自有域名，实现 国内外均可访问，同时兼顾 隐私保护、成本、稳定性。
 
-## 前言
+# 前言
 
 Vercel 国内无法访问，可以配合Cloudflare的域名解析，和购买好的域名，可以将vercel部署的应用的自带域名代理到我们自己的域名，
 这样就可以在国内访问我们的vercel应用了。并且将域名代理到 CF 之后还能享受到它提供的诸多服务
 
-## 一、购买域名：为什么最终选择了 Spaceship
+# 一、购买域名：为什么最终选择了 Spaceship
 
 在决定使用自有域名之前，我对比了 国内与国外多家域名注册商
 
-### 国内注册商的情况
+## 国内注册商的情况
 
 - 需要 实名认证
 - .com 等域名 涉及备案
 - 审核周期较长
 - 对个人技术博客来说流程偏重
 
-### 国外注册商的优势
+## 国外注册商的优势
 
 - ❌ 不需要备案
 - ❌ 不强制实名验证
@@ -26,7 +26,7 @@ Vercel 国内无法访问，可以配合Cloudflare的域名解析，和购买好
 - 支持 Visa / 支付宝
 - 更适合技术博客和个人项目
 
-### 为什么选择 Spaceship
+## 为什么选择 Spaceship
 
 最终我在 Spaceship 购买了域名：
 
@@ -35,32 +35,32 @@ Vercel 国内无法访问，可以配合Cloudflare的域名解析，和购买好
 - 控制台简洁
 - 价格透明
 
-### 关于一些常见域名后缀的看法
+## 关于一些常见域名后缀的看法
 
-#### .top
+### .top
 
 - 运营成本低、注册量大
 - 首年价格便宜
 - 但历史上被大量滥用，不适合作为长期主站
 
-#### .xyz
+### .xyz
 
 - 曾被大量灰产、博彩站使用
 - 在部分网络环境中信任度较低
 
 👉 最终还是选择了 .com，稳定、省心、长期成本最低。
 
-## 二、将域名接入 Cloudflare（DNS 托管）
+# 二、将域名接入 Cloudflare（DNS 托管）
 
-### 1️⃣ 登录 Cloudflare 控制台
+## 1️⃣ 登录 Cloudflare 控制台
 
 进入 Cloudflare 首页，点击 Add a site，输入你刚购买的域名。
 
-### 2️⃣ 选择套餐
+## 2️⃣ 选择套餐
 
 无特殊需求，直接选择 Free Plan，点击继续即可
 
-### 3️⃣ Cloudflare 会分配两个名称服务器（NS）
+## 3️⃣ Cloudflare 会分配两个名称服务器（NS）
 
 ![](.\image1.png)
 ![](.\image2.png)
@@ -74,7 +74,7 @@ yyyy.ns.cloudflare.com
 
 ⚠️ 这两个 NS 非常重要，下一步要用到
 
-## 三、在 Spaceship 中修改名称服务器
+# 三、在 Spaceship 中修改名称服务器
 
 ![](.\image3.png)
 ![](.\image4.png)
@@ -87,9 +87,9 @@ yyyy.ns.cloudflare.com
 
 稍等几分钟（一般很快），Cloudflare 会显示站点已激活。
 
-## 四、在 Vercel 中绑定自有域名
+# 四、在 Vercel 中绑定自有域名
 
-### 1️⃣ 进入 Vercel 项目 → Domains
+## 1️⃣ 进入 Vercel 项目 → Domains
 
 添加你的自有域名（如 example.com，然后报错vertification nedded，
 
@@ -102,7 +102,7 @@ TXT -> xxx
 
 ![](.\image5.png)
 
-### 2️⃣ 回到 Cloudflare 配置 DNS
+## 2️⃣ 回到 Cloudflare 配置 DNS
 
 在 Cloudflare 的 DNS 页面中：
 
@@ -111,7 +111,42 @@ TXT -> xxx
 
 ![](.\image6.png)
 
-## 五、国内访问测试
+# 五、国内访问测试
 
 配置完成后进行测试：国内网络（非代理）可正常访问
 
+# 六、总结：为什么这样配置就能国内访问了
+
+## 三方角色分工
+
+| 角色 | 职责 | 类比 |
+|------|------|------|
+| Spaceship | 持有域名所有权，指定 NS | "户口本" |
+| Cloudflare | DNS 解析 + CDN 代理 | "导航员 + 快递" |
+| Vercel | 托管网站代码 | "房子" |
+
+## 核心原理
+
+`*.vercel.app` 的 IP 被 GFW 封锁，国内无法直接访问。但通过 Cloudflare 代理后：
+
+```
+❌ 直接访问：用户 ──X──> xxx.vercel.app (被墙)
+
+✅ 代理访问：用户 ──> soofjan.com ──> Cloudflare ──> Vercel
+                    (DNS解析到CF)    (未被墙)     (CF去取内容)
+```
+
+## 配置链路解析
+
+**第一步：Spaceship 设置 NS 指向 Cloudflare**
+
+告诉全球 DNS："想知道 soofjan.com 的信息？去问 Cloudflare"
+
+**第二步：Cloudflare 配置 A 记录和 TXT 记录**
+
+- A 记录：指向 Vercel 的 IP，告诉访问者内容在哪
+- TXT 记录：让 Vercel 验证域名所有权
+
+**访问流程**：用户访问 → Cloudflare 响应（它的 IP 没被墙）→ Cloudflare 替你请求 Vercel → 返回内容
+
+简单类比：Cloudflare 就像一个"没被封的朋友"，帮你访问 Vercel 并把内容转发给你。
