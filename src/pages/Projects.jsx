@@ -140,14 +140,14 @@ const Projects = () => {
             {/* Project Detail Modal */}
             {selectedProject && (
                 <div
-                    className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-start md:items-center justify-center pt-20 md:pt-0 p-4 md:p-8 animate-in fade-in duration-300 overflow-y-auto"
+                    className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-start justify-center pt-24 md:pt-24 p-4 md:p-8 animate-in fade-in duration-300 overflow-y-auto"
                     onClick={() => {
                         setSelectedProject(null)
                         setShowVideoModal(false)
                     }}
                 >
                     <div
-                        className="bg-white rounded-[1.5rem] md:rounded-[2rem] shadow-2xl max-w-4xl w-full max-h-[80vh] md:max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-300 my-4"
+                        className="bg-white rounded-[1.5rem] md:rounded-[2rem] shadow-2xl max-w-4xl w-full max-h-[calc(100vh-8rem)] md:max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide animate-in zoom-in-95 duration-300 my-4"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Header */}

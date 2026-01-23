@@ -57,7 +57,7 @@ const Home = () => {
                         </div>
 
                         {/* 头像容器 */}
-                        <div className="order-1 md:order-2 group pb-8">
+                        <div className="order-1 md:order-2 group pt-24 md:pt-24 pb-8">
                             <div className="relative">
                                 {/* 背景光晕 - 适配矩形 */}
                                 <div className="absolute inset-0 bg-blue-500/10 rounded-3xl blur-3xl group-hover:bg-blue-500/20 transition-colors duration-700" />
