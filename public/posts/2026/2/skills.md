@@ -115,8 +115,9 @@ description: 简要描述该技能的功能以及何时该使用它
 - **官方示例库**：https://github.com/anthropics/skills
 - **github skills收录**：https://skillsmp.com/
 - **安全审计的skill收录**：https://skillstore.io/zh-hans
+- **格式转化**：https://skillstore.io/zh-hans/skills/x-89jobrien-file-converter
 
-## Design Engineers 相关 Skills
+## Design 
 
 - **UI Skills**：https://ui-skills.com
 - **Vercel Agent Skills**：Web interface guidelines 和 React 最佳实践 - https://github.com/vercel-labs/agent-skills
@@ -124,4 +125,7 @@ description: 简要描述该技能的功能以及何时该使用它
 - **RAMS**：主要检查 Accessibility (WCAG 2.1)，安装后使用 `/rams` 运行 - https://rams.ai
 - **UI UX Pro Max**：https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
 
+## 自动化
 
+https://skillstore.io/zh-hans/skills/x-92bilal26-browser-use
+https://skillstore.io/zh-hans/skills/x-21pounder-web-scrape

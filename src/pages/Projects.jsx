@@ -6,11 +6,13 @@ const Projects = () => {
     const [selectedProject, setSelectedProject] = useState(null)
     const [projectDetail, setProjectDetail] = useState(null)
     const [loading, setLoading] = useState(false)
+    const [initialLoading, setInitialLoading] = useState(true)
     const [showVideoModal, setShowVideoModal] = useState(false)
 
     // Load projects data
     useEffect(() => {
         const loadProjects = async () => {
+            setInitialLoading(true)
             const projectDirs = ['ins-robot', 'ContentCreatorHelper', 'hotspotCrawler', 'articlesCrawler']
             const loadedProjects = []
 
@@ -53,6 +55,7 @@ const Projects = () => {
             }
 
             setProjects(loadedProjects)
+            setInitialLoading(false)
         }
 
         loadProjects()
@@ -86,7 +89,19 @@ const Projects = () => {
                 </p>
             </div>
 
-            {/* Projects Grid */}
+            {/* Loading State */}
+            {initialLoading ? (
+                <div className="flex flex-col items-center justify-center py-24">
+                    <div className="relative">
+                        <div className="w-16 h-16 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin"></div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-8 h-8 border-4 border-gray-100 border-b-gray-400 rounded-full animate-spin" style={{ animationDirection: 'reverse' }}></div>
+                        </div>
+                    </div>
+                    <p className="mt-6 text-gray-500 text-sm font-medium animate-pulse">Loading projects...</p>
+                </div>
+            ) : (
+            /* Projects Grid */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 container mx-auto px-4 md:px-0 mb-24">
                 {projects.map((project) => (
                     <div
@@ -136,6 +151,7 @@ const Projects = () => {
                     </div>
                 ))}
             </div>
+            )}
 
             {/* Project Detail Modal */}
             {selectedProject && (
