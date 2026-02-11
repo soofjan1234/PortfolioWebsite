@@ -8,7 +8,7 @@
 
 那哈希表做了什么？将任何内容转为下标：hash(key)，然后取模，接着定位
 
-![IMG_4386.jpeg](IMG_4386.jpeg)
+![IMG_4386.jpeg](./IMG_4386.jpeg)
 
 然后空间是有限的，咱们要存那么多key，必然会有冲突。
 
@@ -23,7 +23,7 @@
 
 缺点：不利于缓存局部性（在链表中，元素是分散存储在内存中的，每次访问一个链表节点时，可能需要加载不相邻的内存地址
 
-![IMG_4375.jpeg](IMG_4375.jpeg)
+![IMG_4375.jpeg](./IMG_4375.jpeg)
 
 **开放寻址/线性探测（`linear probing`）**
 
@@ -33,7 +33,7 @@
 
 缺点：可能退化为 O(n) 时间复杂度（负载因子接近 1）；扩容的次数会比链表法更多
 
-![IMG_4376.jpeg](IMG_4376.jpeg)
+![IMG_4376.jpeg](./IMG_4376.jpeg)
 
 # Go Map原数据存储
 
@@ -53,9 +53,9 @@
     2. 维护两个桶。操作时“搬运”操作的桶。新的只插入新桶
     3. 由 nevacuate 标记迁移进度。查找、删除都比较这个，看去哪里
 
-![IMG_4384.jpeg](IMG_4384.jpeg)
+![IMG_4384.jpeg](./IMG_4384.jpeg)
 
-![IMG_4388.jpeg](IMG_4388.jpeg)
+![IMG_4388.jpeg](./IMG_4388.jpeg)
 
 # **SwissTable**
 
@@ -75,7 +75,7 @@
     4. 再将 Group 的 16 个 Metadata **一次性加载**进另一个寄存器。
     5. 利用 SIMD 指令让这两组数据**一触碰**，就能瞬间筛选出所有匹配的 Slot
 
-![IMG_4358.jpeg](IMG_4358.jpeg)
+![IMG_4358.jpeg](./IMG_4358.jpeg)
 
 Swiss Table 最大优势在 SIMD
 
@@ -83,11 +83,11 @@ Swiss Table 最大优势在 SIMD
 
 做了点适配，首先是一个map有多个table，这样就能避免全局扩容，只是某个table内部进行扩容
 
-![image.png](image.png)
+![image.png](./image.png)
 
 再看看源码
 
-![截屏2026-02-07 11.09.54.png](%E6%88%AA%E5%B1%8F2026-02-07_11.09.54.png)
+![截屏2026-02-07 11.09.54.png](./%E6%88%AA%E5%B1%8F2026-02-07_11.09.54.png)
 
 我们可以看到这里有个Directoy和GlobelDepth，然后分两种情况
 
@@ -102,7 +102,7 @@ Swiss Table 最大优势在 SIMD
     2. 如果编译器没分配，我也不分配
 3. 如果大于8个，进行计算分配，然后实例化目录与表
 
-![IMG_4511.jpeg](IMG_4511.jpeg)
+![IMG_4511.jpeg](./IMG_4511.jpeg)
 
 ## 2. 操作流程
 
@@ -117,7 +117,7 @@ Swiss Table 最大优势在 SIMD
             1. 有则说明探测终止，直接返回未找到
             2. 无空元素，那就根据探测序列跳到下一个Group，继续找
 
-![image.png](image%201.png)
+![image.png](./image%201.png)
 
 **修改、增加流程**
 
@@ -131,7 +131,7 @@ Swiss Table 最大优势在 SIMD
         3. 未找到，并且到达终点，优先填坑墓碑，不行就填坑空位
     3. 没位置则进行扩容
 
-![image.png](image%202.png)
+![image.png](./image%202.png)
 
 **删除流程**
 
@@ -145,7 +145,7 @@ Swiss Table 最大优势在 SIMD
             2. 没有，说明组内满员，不是终点，置为墓碑（ctrlDeleted）
         3. 未找到，则继续，直到到达终点
 
-![image.png](image%203.png)
+![image.png](./image%203.png)
 
 ## 3. 扩容流程
 
@@ -153,7 +153,7 @@ Swiss Table 最大优势在 SIMD
     1. 小于，则翻倍扩容，分配一个两倍大的新表，把旧数据重新哈希搬过去
     2. 否则分裂扩容，创建两个最大容量的新表，数据分流搬迁
 
-![image.png](image%204.png)
+![image.png](./image%204.png)
 
 ## 4. 边遍历边修改
 

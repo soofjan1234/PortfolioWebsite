@@ -56,10 +56,10 @@ const MarkdownRenderer = ({ content }) => {
                     return <p className="text-gray-600 leading-relaxed my-3">{children}</p>
                 },
                 ul({ children }) {
-                    return <ul className="list-disc list-inside my-4 space-y-2 text-gray-600">{children}</ul>
+                    return <ul className="list-disc list-inside my-4 space-y-2 text-gray-600 [&_ul]:ml-[2ch] [&_ol]:ml-[2ch]">{children}</ul>
                 },
                 ol({ children }) {
-                    return <ol className="list-decimal list-inside my-4 space-y-2 text-gray-600">{children}</ol>
+                    return <ol className="list-decimal list-inside my-4 space-y-2 text-gray-600 [&_ul]:ml-[2ch] [&_ol]:ml-[2ch]">{children}</ol>
                 },
                 li({ children }) {
                     return <li className="my-1">{children}</li>
