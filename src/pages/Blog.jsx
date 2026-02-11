@@ -8,7 +8,8 @@ const Blog = () => {
             year: '2026',
             posts: [
                 { title: '告别vercel.app域名', path: '/posts/2026/1/告别vercel.app域名.md' },
-                { title: 'Skills', path: '/posts/2026/2/skills.md' }
+                { title: 'Skills', path: '/posts/2026/2/skills.md' },
+                { title: 'GoMap SwissTable详解', path: '/posts/2026/3/GoMapSwissTable.md' }
             ]
         },
         {
