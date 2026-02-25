@@ -194,7 +194,8 @@ const Home = () => {
 
             {/* Contact Section */}
             <section
-                className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden transition-colors duration-1000 ${isHoveringContact ? 'cursor-none' : ''} bg-gradient-to-b from-blue-600 to-[#f3f4f6] active:scale-[0.99] transition-transform`}
+                className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden transition-colors duration-1000 
+                    ${isHoveringContact ? 'cursor-none' : ''} bg-gradient-to-b from-blue-600 to-[#f3f4f6] active:scale-[0.99] transition-transform`}
                 onMouseMove={handleContactMouseMove}
                 onMouseEnter={() => setIsHoveringContact(true)}
                 onMouseLeave={() => setIsHoveringContact(false)}

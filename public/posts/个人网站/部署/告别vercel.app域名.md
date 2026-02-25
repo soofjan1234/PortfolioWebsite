@@ -1,3 +1,8 @@
+---
+title: 告别 vercel.app 域名
+category: 运维
+---
+
 # 目的
 
 将 xxx.vercel.app 替换为自有域名，实现 国内外均可访问，同时兼顾 隐私保护、成本、稳定性。

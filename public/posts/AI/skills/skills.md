@@ -1,3 +1,8 @@
+---
+title: Skills
+category: AI
+---
+
 # Skills 是什么
 
 Skills 是给 Agent（如 Claude）用的技能包，通过提供专业知识、工作流程和工具来扩展 AI 的能力。可以将它们视为特定领域或任务的"入门指南"。
