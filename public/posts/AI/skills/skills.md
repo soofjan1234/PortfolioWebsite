@@ -134,3 +134,17 @@ description: 简要描述该技能的功能以及何时该使用它
 
 https://skillstore.io/zh-hans/skills/x-92bilal26-browser-use
 https://skillstore.io/zh-hans/skills/x-21pounder-web-scrape
+
+## 其它
+通过从 TopHub 获取热门话题并使用 AI 以流行的 Defou x Stanley 风格生成文章,
+自动创建病毒式内容。在节省数小时研究和写作时间的同时,产出引人入胜、可分享的内容 
+- https://github.com/wangdefou-dev/defou-workflow-agent
+
+自动从主要AI出版物收集新闻,过滤相关性和时效性
+- https://skillstore.io/zh-hans/skills/yyh211-daily-ai-news
+
+从 Twitter/X 提取推文、用户资料或趋势信息
+- https://skillstore.io/zh-hans/skills/x-2025emma-twscrape
+
+剪辑
+- https://github.com/Ceeon/videocut-skills

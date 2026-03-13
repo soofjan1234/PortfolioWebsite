@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "EnglishFonts";
+  src: url("/fonts/Bacchus-Bold-2.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ChineseFonts";
+  src: url("/fonts/jjt.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --primary: 37 99 235;
@@ -14,6 +29,7 @@
 
   body {
     @apply bg-[#f3f4f6] text-gray-900 overflow-x-hidden antialiased;
+    font-family: "EnglishFonts", "ChineseFonts", "Segoe UI";
   }
 }
 
