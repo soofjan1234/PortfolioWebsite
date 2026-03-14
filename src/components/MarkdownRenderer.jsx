@@ -38,7 +38,7 @@ const MarkdownRenderer = ({ content }) => {
                             </SyntaxHighlighter>
                         </div>
                     ) : (
-                        <code className="px-1.5 py-0.5 bg-blue-50 text-blue-600 rounded-md text-sm font-medium" {...props}>
+                        <code className="px-1.5 py-0.5 bg-gray-100 text-gray-800 rounded-md text-sm font-medium" {...props}>
                             {children}
                         </code>
                     )
@@ -70,7 +70,7 @@ const MarkdownRenderer = ({ content }) => {
                             href={href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-blue-600 hover:underline"
+                            className="text-gray-900 hover:underline"
                         >
                             {children}
                         </a>
@@ -78,7 +78,7 @@ const MarkdownRenderer = ({ content }) => {
                 },
                 blockquote({ children }) {
                     return (
-                        <blockquote className="border-l-4 border-blue-500 bg-blue-50/50 py-2 px-4 rounded-r-lg my-4">
+                        <blockquote className="border-l-4 border-gray-400 bg-gray-50/50 py-2 px-4 rounded-r-lg my-4">
                             {children}
                         </blockquote>
                     )

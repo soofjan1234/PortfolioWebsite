@@ -13,7 +13,7 @@ const Home = () => {
             {/* Hero Section */}
             <section className="relative min-h-screen">
                 {/* 背景超大文字 - 移至顶部 */}
-                <div className="absolute inset-x-0 top-0 flex items-start justify-center select-none pointer-events-none z-0">
+                <div className="absolute inset-x-0 top-20 right-20 flex items-start justify-center select-none pointer-events-none z-0 -rotate-12">
                     <h1 className="text-[20vw] md:text-[25vw] font-black text-white leading-none tracking-tighter opacity-80 uppercase italic"
                         style={{ WebkitTextStroke: '1px rgba(0,0,0,0.05)' }}>
                         Soofjan
@@ -60,7 +60,7 @@ const Home = () => {
                         <div className="order-1 md:order-2 group pt-24 md:pt-24 pb-8">
                             <div className="relative">
                                 {/* 背景光晕 - 适配矩形 */}
-                                <div className="absolute inset-0 bg-blue-500/10 rounded-3xl blur-3xl group-hover:bg-blue-500/20 transition-colors duration-700" />
+                                <div className="absolute inset-0 bg-gray-200/50 rounded-3xl blur-3xl group-hover:bg-gray-300/50 transition-colors duration-700" />
 
                                 {/* 头像图片 - 3:4 比例 */}
                                 <div className="relative p-2 bg-white rounded-3xl shadow-2xl border border-gray-100 transform group-hover:rotate-2 group-hover:scale-105 transition-all duration-700 ease-out">
@@ -82,19 +82,17 @@ const Home = () => {
             </section>
 
             {/* Expertise Section - 渐变背景 */}
-            <section className="relative min-h-screen bg-blue-600 text-white overflow-hidden">
-                {/* 顶部渐变过渡 */}
-                <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#f3f4f6] to-blue-600 z-10" />
+            <section className="relative min-h-screen bg-transparent text-gray-900 overflow-hidden">
 
                 <div className="relative z-20 container mx-auto px-6 py-40 md:py-48">
                     {/* 背景标题 - 仿照 Hero 样式 */}
                     <div className="absolute top-30 inset-0 flex flex-col items-center justify-center select-none pointer-events-none opacity-10 leading-none z-0">
                         <h2 className="text-[16vw] font-black tracking-tighter uppercase italic"
-                            style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
+                            style={{ WebkitTextStroke: '1px rgba(0,0,0,0.05)' }}>
                             COLLEGE &
                         </h2>
                         <h2 className="text-[16vw] font-black tracking-tighter uppercase italic -mt-4 md:-mt-12"
-                            style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
+                            style={{ WebkitTextStroke: '1px rgba(0,0,0,0.05)' }}>
                             EXPERTISE
                         </h2>
                     </div>
@@ -103,26 +101,26 @@ const Home = () => {
                     <div className="relative z-10 max-w-7xl mx-auto space-y-12 md:space-y-16 mt-12 md:mt-24">
 
                         {/* 1. 教育背景 - 宽卡片布局 */}
-                        <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-10 md:p-16 rounded-[2.5rem] hover:bg-white/20 transition-all duration-500 shadow-2xl group">
+                        <div className="bg-white border border-gray-100 p-10 md:p-16 rounded-[2.5rem] hover:bg-gray-50 transition-all duration-500 shadow-sm group">
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                                 <div>
                                     <div className="flex items-center gap-4 mb-2">
-                                        <div className="bg-white text-blue-600 p-2 rounded-lg">
+                                        <div className="bg-gray-100 text-gray-900 p-2 rounded-lg">
                                             <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path d="M12 14l9-5-9-5-9 5 9 5z" />
                                                 <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-4xl md:text-6xl font-black tracking-tight">广州大学</h3>
+                                        <h3 className="text-4xl md:text-6xl font-black tracking-tight text-gray-900">广州大学</h3>
                                     </div>
-                                    <p className="text-2xl text-white/90 font-medium ml-1">计算机科学与技术 <span className="text-white/60 text-lg ml-2">/ 学士</span></p>
+                                    <p className="text-2xl text-gray-600 font-medium ml-1">计算机科学与技术 <span className="text-gray-400 text-lg ml-2">/ 学士</span></p>
                                 </div>
                                 <div className="text-left md:text-right">
-                                    <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">2019.09 -- 2023.06</div>
+                                    <div className="text-3xl font-bold text-gray-900">2019.09 -- 2023.06</div>
                                     <div className="mt-3 flex flex-wrap gap-3 justify-start md:justify-end">
-                                        <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium border border-white/10">CET-6 (602分)</span>
-                                        <span className="px-3 py-1 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 rounded-full text-sm font-medium border border-yellow-400/30 text-yellow-100">全国大学生算法设计与编程挑战赛（银奖）</span>
+                                        <span className="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium border border-gray-200 text-gray-700">CET-6 (602分)</span>
+                                        <span className="px-3 py-1 bg-yellow-50 rounded-full text-sm font-medium border border-yellow-200 text-yellow-700">全国大学生算法设计与编程挑战赛（银奖）</span>
                                     </div>
                                 </div>
                             </div>
@@ -131,63 +129,102 @@ const Home = () => {
                         {/* 2. 技能卡片 Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                             {/* Academic */}
-                            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-[2.5rem] hover:bg-white/10 transition-all duration-300 flex flex-col justify-center">
-                                <h3 className="text-xl font-bold mb-2 text-white/60 tracking-widest uppercase">Academic Foundation</h3>
-                                <p className="text-sm text-white/40 mb-6 italic">Almost forgot</p>
+                            <div className="bg-white border border-gray-100 p-8 md:p-10 rounded-[2.5rem] hover:bg-gray-50 transition-all duration-300 flex flex-col justify-center">
+                                <h3 className="text-xl font-bold mb-2 text-gray-600 tracking-widest uppercase">Academic Foundation</h3>
+                                <p className="text-sm text-gray-400 mb-6 italic">Almost forgot</p>
                                 <ul className="space-y-4">
-                                    <li className="flex items-center gap-4 text-2xl font-bold">
-                                        <span className="w-3 h-3 rounded-full bg-blue-300 shadow-[0_0_12px_rgba(147,197,253,0.5)]" />
+                                    <li className="flex items-center gap-4 text-2xl font-bold text-gray-900">
+                                        <span className="w-3 h-3 rounded-full bg-gray-400" />
                                         C++
                                     </li>
-                                    <li className="flex items-center gap-4 text-2xl font-bold">
-                                        <span className="w-3 h-3 rounded-full bg-blue-300 shadow-[0_0_12px_rgba(147,197,253,0.5)]" />
+                                    <li className="flex items-center gap-4 text-2xl font-bold text-gray-900">
+                                        <span className="w-3 h-3 rounded-full bg-gray-400" />
                                         JAVA
                                     </li>
                                 </ul>
                             </div>
 
                             {/* Professional - Highlighted */}
-                            <div className="col-span-1 md:col-span-2 bg-gradient-to-br from-white to-blue-50 text-blue-900 p-10 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <div className="col-span-1 md:col-span-2 bg-gray-900 text-white p-10 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                                     <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
                                 </div>
-                                <h3 className="text-xl font-bold mb-1 text-blue-600 tracking-widest uppercase flex items-center gap-2">
-                                    <span className="w-8 h-1 bg-blue-600 rounded-full"></span>
+                                <h3 className="text-xl font-bold mb-1 text-gray-300 tracking-widest uppercase flex items-center gap-2">
+                                    <span className="w-8 h-1 bg-gray-400 rounded-full"></span>
                                     Professional Stack
                                 </h3>
-                                <p className="text-sm text-blue-600/50 mb-6 italic ml-10">Most frequently used</p>
+                                <p className="text-sm text-gray-400 mb-6 italic ml-10">Most frequently used</p>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <div className="font-black text-4xl">Go/Gin</div>
-                                        <div className="text-base font-medium text-blue-600/70">Backend Core</div>
+                                        <div className="text-base font-medium text-gray-400">Backend Core</div>
                                     </div>
                                     <div className="space-y-2">
                                         <div className="font-black text-4xl">Vue.js</div>
-                                        <div className="text-base font-medium text-blue-600/70">Frontend Modern</div>
+                                        <div className="text-base font-medium text-gray-400">Frontend Modern</div>
                                     </div>
                                     <div className="space-y-2">
                                         <div className="font-black text-4xl">MySQL</div>
-                                        <div className="text-base font-medium text-blue-600/70">Relational DB</div>
+                                        <div className="text-base font-medium text-gray-400">Relational DB</div>
                                     </div>
                                     <div className="space-y-2">
                                         <div className="font-black text-4xl">SQLite</div>
-                                        <div className="text-base font-medium text-blue-600/70">Embedded DB</div>
+                                        <div className="text-base font-medium text-gray-400">Embedded DB</div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Self-Study & Freelance Combined */}
-                            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-[2.5rem] hover:bg-white/10 transition-all duration-300 flex flex-col justify-center">
-                                <h3 className="text-xl font-bold mb-2 text-white/60 tracking-widest uppercase">Self-Study & Freelance</h3>
-                                <p className="text-sm text-white/40 mb-6 italic">Multi-platform adaptability</p>
+                            <div className="bg-white border border-gray-100 p-8 md:p-10 rounded-[2.5rem] hover:bg-gray-50 transition-all duration-300 flex flex-col justify-center">
+                                <h3 className="text-xl font-bold mb-2 text-gray-600 tracking-widest uppercase">Self-Study & Freelance</h3>
+                                <p className="text-sm text-gray-400 mb-6 italic">Multi-platform adaptability</p>
                                 <div className="flex flex-wrap gap-2">
-                                    <span className="px-3 py-1.5 bg-white/10 rounded-full text-sm font-medium">Python</span>
-                                    <span className="px-3 py-1.5 bg-white/10 rounded-full text-sm font-medium">Android</span>
-                                    <span className="px-3 py-1.5 bg-white/10 rounded-full text-sm font-medium">TypeScript</span>
-                                    <span className="px-3 py-1.5 bg-white/10 rounded-full text-sm font-medium">React</span>
+                                    <span className="px-3 py-1.5 bg-gray-100 border border-gray-200 text-gray-700 rounded-full text-sm font-medium">Python</span>
+                                    <span className="px-3 py-1.5 bg-gray-100 border border-gray-200 text-gray-700 rounded-full text-sm font-medium">Android</span>
+                                    <span className="px-3 py-1.5 bg-gray-100 border border-gray-200 text-gray-700 rounded-full text-sm font-medium">TypeScript</span>
+                                    <span className="px-3 py-1.5 bg-gray-100 border border-gray-200 text-gray-700 rounded-full text-sm font-medium">React</span>
                                 </div>
                             </div>
                         </div>
+
+                        {/* 工作经历 (Moved from Experience.jsx) */}
+                        <div className="py-12 md:py-16 w-full mt-12 md:mt-16">
+                            <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">Professional Path</h2>
+                            <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-16">Work Experience</h1>
+
+                            <div className="relative border-l-2 border-gray-200 ml-3 md:ml-6 space-y-12 pl-8 md:pl-12 py-2">
+                                {/* 经历条目 */}
+                                <div className="relative group/exp">
+                                    <span className="absolute -left-[41px] md:-left-[57px] top-0 w-5 h-5 rounded-full bg-gray-900 ring-4 ring-white group-hover/exp:scale-125 transition-transform duration-300" />
+                                    <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                                            <div>
+                                                <h3 className="text-2xl font-bold text-gray-900">Go 后端工程师</h3>
+                                                <p className="text-gray-500 font-medium mt-1">某科技有限公司 · 深圳</p>
+                                            </div>
+                                            <span className="px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm font-bold whitespace-nowrap border border-gray-200">
+                                                2023.07 - 至今
+                                            </span>
+                                        </div>
+                                        <ul className="space-y-3">
+                                            {[
+                                                "私有云存储系统（NAS）开发，涵盖云端、智能文档中心、文件索引同步、AI相册及生态支持等模块",
+                                                "主导 NAT 穿透架构与高并发云端设计，支持 QPS 3 万+ 写入",
+                                                "智能文档中心：Bleve 检索迁移、多格式解析与搜索高亮快照",
+                                                "文件索引同步：BFS+Queue 架构、SQLite 状态机增量同步"
+                                            ].map((item, i) => (
+                                                <li key={i} className="flex items-start text-gray-600">
+                                                    <span className="mr-3 text-gray-400 mt-[6px]">•</span>
+                                                    <span className="leading-relaxed">{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
                     </div>
                 </div>
             </section>
@@ -195,15 +232,15 @@ const Home = () => {
             {/* Contact Section */}
             <section
                 className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden transition-colors duration-1000 
-                    ${isHoveringContact ? 'cursor-none' : ''} bg-gradient-to-b from-blue-600 to-[#f3f4f6] active:scale-[0.99] transition-transform`}
+                    ${isHoveringContact ? 'cursor-none' : ''} bg-transparent active:scale-[0.99] transition-transform`}
                 onMouseMove={handleContactMouseMove}
                 onMouseEnter={() => setIsHoveringContact(true)}
                 onMouseLeave={() => setIsHoveringContact(false)}
                 onClick={() => window.dispatchEvent(new CustomEvent('open-contact-modal'))}
             >
                 {/* 背景大字 */}
-                <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden">
-                    <h1 className="text-[16vw] font-black text-white/10 uppercase tracking-tighter whitespace-nowrap italic">
+                <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden z-0">
+                    <h1 className="text-[16vw] font-black text-black/5 uppercase tracking-tighter whitespace-nowrap italic">
                         Contact Me
                     </h1>
                 </div>

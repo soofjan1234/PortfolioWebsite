@@ -19,8 +19,8 @@
 
 @layer base {
   :root {
-    --primary: 37 99 235;
-    /* Blue 600 */
+    --primary: 17 24 39;
+    /* Gray 900 */
     --background: 243 244 246;
     /* Gray 100 */
     --text: 17 24 39;
