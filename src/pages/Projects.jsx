@@ -131,12 +131,12 @@ const Projects = () => {
     }
 
     return (
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 min-h-screen">
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 min-h-screen bg-black text-white">
             {/* Header */}
             <div className="text-center mb-16 pt-12">
-                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500 mb-4"><TextAnimate animation="blurInUp" by="character" once>Code & Knowledge</TextAnimate></h2>
-                <h1 className="text-4xl md:text-6xl font-black text-gray-900"><TextAnimate animation="blurInUp" by="character" once delay={0.2}>Tech Hub</TextAnimate></h1>
-                <p className="mt-6 text-gray-500 max-w-2xl mx-auto">
+                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-400 mb-4"><TextAnimate animation="blurInUp" by="character" once>Code & Knowledge</TextAnimate></h2>
+                <h1 className="text-4xl md:text-6xl font-black text-white"><TextAnimate animation="blurInUp" by="character" once delay={0.2}>Tech Hub</TextAnimate></h1>
+                <p className="mt-6 text-gray-400 max-w-2xl mx-auto">
                     A collection of my exploring automation, web scraping, tech blog posts, and codebase.
                 </p>
             </div>
@@ -159,8 +159,8 @@ const Projects = () => {
                     {/* 1. Knowledge Section */}
                     <section>
                         <div className="mb-8 md:mb-10 text-left">
-                            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-2 flex items-center gap-3">
-                                <span className="bg-gray-100 p-2 rounded-xl text-2xl">🧠</span>
+                            <h2 className="text-3xl md:text-4xl font-black text-white mb-2 flex items-center gap-3">
+                                <span className="bg-white/10 p-2 rounded-xl text-2xl">🧠</span>
                                 <TextAnimate animation="blurInUp" by="character" once delay={0.1}>Knowledge</TextAnimate>
                             </h2>
                             <p className="text-gray-500 font-medium ml-14">Tech blogs, architecture designs, and engineering notes</p>

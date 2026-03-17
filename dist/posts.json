@@ -53,15 +53,5 @@
         "category": "AI"
       }
     ]
-  },
-  {
-    "category": "Go",
-    "posts": [
-      {
-        "title": "GoMap SwissTable 详解",
-        "path": "/posts/Go/map/GoMap1.25.md",
-        "category": "Go"
-      }
-    ]
   }
 ]

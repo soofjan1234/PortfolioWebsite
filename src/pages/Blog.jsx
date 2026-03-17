@@ -104,7 +104,7 @@ const Blog = () => {
     const contentPl = '3rem'
 
     return (
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 min-h-screen flex flex-col lg:flex-row">
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 min-h-screen flex flex-col lg:flex-row bg-black text-white">
 
             {/* 目录：aside 全高 + justify-center，内层卡片定高 50vh 居中 */}
             <aside
@@ -116,12 +116,12 @@ const Blog = () => {
                     width: sidebarOpen ? (isDesktop ? '12rem' : '18rem') : HAMBURGER_STRIP_W,
                 }}
             >
-                <div className="h-[50vh] w-full min-w-0 flex flex-col rounded-r-2xl border border-l-0 border-gray-200 bg-white shadow-xl overflow-hidden shrink-0">
-                    <div className="p-2 border-b border-gray-100 shrink-0 flex items-center gap-3">
+                <div className="h-[50vh] w-full min-w-0 flex flex-col rounded-r-2xl border border-l-0 border-white/10 bg-black/80 shadow-xl overflow-hidden shrink-0">
+                    <div className="p-2 border-b border-white/10 shrink-0 flex items-center gap-3">
                         <button
                             type="button"
                             onClick={() => setSidebarOpen((v) => !v)}
-                            className="flex items-center justify-center w-9 h-9 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors shrink-0"
+                            className="flex items-center justify-center w-9 h-9 rounded-lg text-gray-300 hover:bg-white/10 transition-colors shrink-0"
                             aria-label={sidebarOpen ? '收起目录' : '打开目录'}
                         >
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -129,7 +129,7 @@ const Blog = () => {
                             </svg>
                         </button>
                         {sidebarOpen && (
-                            <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider flex items-center">
+                            <h3 className="text-sm font-bold text-gray-200 uppercase tracking-wider flex items-center">
                                 Posts
                             </h3>
                         )}
@@ -138,11 +138,11 @@ const Blog = () => {
                         <div className="flex-1 min-h-0 overflow-y-auto p-3 space-y-1">
                             {articlesLoading && (
                                 <div className="flex justify-center py-8">
-                                    <div className="w-6 h-6 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin" />
+                                    <div className="w-6 h-6 border-2 border-gray-700 border-t-white rounded-full animate-spin" />
                                 </div>
                             )}
                             {articlesError && (
-                                <p className="text-sm text-red-500 py-4">{articlesError}</p>
+                                <p className="text-sm text-red-400 py-4">{articlesError}</p>
                             )}
                             {!articlesLoading && !articlesError && articles.map((categoryGroup) => {
                                 const expanded = expandedCategories.has(categoryGroup.category)
@@ -151,7 +151,7 @@ const Blog = () => {
                                         <button
                                             type="button"
                                             onClick={() => toggleCategory(categoryGroup.category)}
-                                            className="w-full text-left flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold text-gray-500 uppercase tracking-wider hover:bg-gray-100 transition-colors"
+                                            className="w-full text-left flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold text-gray-400 uppercase tracking-wider hover:bg-white/5 transition-colors"
                                         >
                                             <span>{categoryGroup.category}</span>
                                             <svg
@@ -173,9 +173,9 @@ const Blog = () => {
                                                                 loadArticle(post)
                                                                 if (!isDesktop) setSidebarOpen(false)
                                                             }}
-                                                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 flex items-center justify-between ${selectedArticle?.path === post.path
-                                                                ? 'bg-gray-200 text-gray-900 font-medium'
-                                                                : 'text-gray-600 hover:bg-gray-200/70 hover:text-gray-900'
+                                                className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 flex items-center justify-between ${selectedArticle?.path === post.path
+                                                                ? 'bg-white/10 text-white font-medium'
+                                                                : 'text-gray-300 hover:bg-white/5 hover:text-white'
                                                                 }`}
                                                         >
                                                             <span className="truncate">{post.title}</span>
@@ -211,9 +211,9 @@ const Blog = () => {
                 style={{ paddingLeft: contentPl }}
             >
                 <header className="text-center mb-12 pt-12 px-4">
-                    <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500 mb-4"><TextAnimate animation="blurInUp" by="character" once>Writing & Thoughts</TextAnimate></h2>
-                    <h1 className="text-4xl md:text-6xl font-black text-gray-900"><TextAnimate animation="blurInUp" by="character" once delay={0.2}>Technical Blog</TextAnimate></h1>
-                    <p className="mt-6 text-gray-500 max-w-2xl mx-auto">
+                    <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-400 mb-4"><TextAnimate animation="blurInUp" by="character" once>Writing & Thoughts</TextAnimate></h2>
+                    <h1 className="text-4xl md:text-6xl font-black text-white"><TextAnimate animation="blurInUp" by="character" once delay={0.2}>Technical Blog</TextAnimate></h1>
+                    <p className="mt-6 text-gray-400 max-w-2xl mx-auto">
                         Exploring code, architecture, and the journey of building software.
                     </p>
                 </header>
@@ -221,22 +221,22 @@ const Blog = () => {
                 <main className="flex-1 w-full flex flex-col items-center px-4 md:px-6 lg:px-10 pb-24">
                     <div className="w-full max-w-4xl">
                         {loading ? (
-                            <div className="flex flex-col items-center justify-center h-96 bg-white rounded-2xl border border-gray-100">
-                                <div className="w-10 h-10 border-4 border-gray-200 border-t-gray-900 rounded-full animate-spin mb-4"></div>
+                            <div className="flex flex-col items-center justify-center h-96 bg-black/60 rounded-2xl border border-white/10">
+                                <div className="w-10 h-10 border-4 border-gray-700 border-t-white rounded-full animate-spin mb-4"></div>
                                 <p className="text-gray-400 text-sm font-medium">Loading content...</p>
                             </div>
-                        ) : selectedArticle ? (
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 md:p-12 min-h-[60vh] transition-all duration-500">
-                                <div className="mb-10 pb-8 border-b border-gray-100">
+                            ) : selectedArticle ? (
+                            <div className="bg-black/60 rounded-2xl border border-white/10 shadow-sm p-8 md:p-12 min-h-[60vh] transition-all duration-500">
+                                <div className="mb-10 pb-8 border-b border-white/10">
                                     <div className="flex items-center gap-2 mb-4">
-                                        <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold uppercase tracking-wider">
+                                        <span className="px-3 py-1 bg-white/10 text-gray-200 rounded-full text-xs font-bold uppercase tracking-wider">
                                             Note
                                         </span>
-                                        <span className="text-gray-400 text-xs font-medium">
+                                        <span className="text-gray-500 text-xs font-medium">
                                             / posts / {selectedArticle.category ?? selectedArticle.path.split('/')[3]}
                                         </span>
                                     </div>
-                                    <h1 className="text-3xl md:text-5xl font-black text-gray-900 leading-tight">
+                                    <h1 className="text-3xl md:text-5xl font-black text-white leading-tight">
                                         {selectedArticle.title}
                                     </h1>
                                 </div>
@@ -246,14 +246,14 @@ const Blog = () => {
                                 </article>
                             </div>
                         ) : (
-                            <div className="flex flex-col items-center justify-center h-[50vh] bg-white border border-gray-100 rounded-2xl p-12 text-center border-dashed hover:border-gray-200 transition-colors group cursor-default">
-                                <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                    <svg className="w-8 h-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <div className="flex flex-col items-center justify-center h-[50vh] bg-black/60 border border-white/10 rounded-2xl p-12 text-center border-dashed hover:border-white/20 transition-colors group cursor-default">
+                                <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <svg className="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                     </svg>
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2"><TextAnimate animation="blurInUp" by="character" once>Select an Article</TextAnimate></h3>
-                                <p className="text-gray-500 max-w-sm">
+                                <h3 className="text-xl font-bold text-white mb-2"><TextAnimate animation="blurInUp" by="character" once>Select an Article</TextAnimate></h3>
+                                <p className="text-gray-400 max-w-sm">
                                     Choose a topic from the sidebar to start reading.
                                 </p>
                             </div>

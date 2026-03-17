@@ -44,22 +44,22 @@ const MarkdownRenderer = ({ content }) => {
                     )
                 },
                 h1({ children }) {
-                    return <h1 className="text-3xl font-bold text-gray-900 mt-8 mb-4">{children}</h1>
+                    return <h1 className="text-3xl font-bold text-white mt-8 mb-4">{children}</h1>
                 },
                 h2({ children }) {
-                    return <h2 className="text-2xl font-bold text-gray-900 mt-6 mb-3">{children}</h2>
+                    return <h2 className="text-2xl font-bold text-white mt-6 mb-3">{children}</h2>
                 },
                 h3({ children }) {
-                    return <h3 className="text-xl font-bold text-gray-900 mt-4 mb-2">{children}</h3>
+                    return <h3 className="text-xl font-bold text-white mt-4 mb-2">{children}</h3>
                 },
                 p({ children }) {
-                    return <p className="text-gray-600 leading-relaxed my-3">{children}</p>
+                    return <p className="text-gray-200 leading-relaxed my-3">{children}</p>
                 },
                 ul({ children }) {
-                    return <ul className="list-disc list-inside my-4 space-y-2 text-gray-600 [&_ul]:ml-[2ch] [&_ol]:ml-[2ch]">{children}</ul>
+                    return <ul className="list-disc list-inside my-4 space-y-2 text-gray-200 [&_ul]:ml-[2ch] [&_ol]:ml-[2ch]">{children}</ul>
                 },
                 ol({ children }) {
-                    return <ol className="list-decimal list-inside my-4 space-y-2 text-gray-600 [&_ul]:ml-[2ch] [&_ol]:ml-[2ch]">{children}</ol>
+                    return <ol className="list-decimal list-inside my-4 space-y-2 text-gray-200 [&_ul]:ml-[2ch] [&_ol]:ml-[2ch]">{children}</ol>
                 },
                 li({ children }) {
                     return <li className="my-1">{children}</li>
@@ -70,7 +70,7 @@ const MarkdownRenderer = ({ content }) => {
                             href={href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-gray-900 hover:underline"
+                            className="text-purple-300 hover:underline"
                         >
                             {children}
                         </a>
@@ -78,7 +78,7 @@ const MarkdownRenderer = ({ content }) => {
                 },
                 blockquote({ children }) {
                     return (
-                        <blockquote className="border-l-4 border-gray-400 bg-gray-50/50 py-2 px-4 rounded-r-lg my-4">
+                        <blockquote className="border-l-4 border-purple-500/70 bg-white/5 py-2 px-4 rounded-r-lg my-4 text-gray-100">
                             {children}
                         </blockquote>
                     )
@@ -101,25 +101,25 @@ const MarkdownRenderer = ({ content }) => {
                 table({ children }) {
                     return (
                         <div className="overflow-x-auto my-4">
-                            <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+                            <table className="min-w-full border border-white/20 rounded-lg overflow-hidden">
                                 {children}
                             </table>
                         </div>
                     )
                 },
                 thead({ children }) {
-                    return <thead className="bg-gray-50">{children}</thead>
+                    return <thead className="bg-white/10">{children}</thead>
                 },
                 th({ children }) {
                     return (
-                        <th className="px-4 py-2 text-left text-sm font-bold text-gray-900 border-b border-gray-200">
+                        <th className="px-4 py-2 text-left text-sm font-bold text-white border-b border-white/20">
                             {children}
                         </th>
                     )
                 },
                 td({ children }) {
                     return (
-                        <td className="px-4 py-2 text-sm text-gray-600 border-b border-gray-200">
+                        <td className="px-4 py-2 text-sm text-gray-200 border-b border-white/20">
                             {children}
                         </td>
                     )

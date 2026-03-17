@@ -30,24 +30,24 @@ function App() {
     ]
 
     return (
-        <div className="min-h-screen bg-transparent text-text selection:bg-primary/30 selection:text-white">
-            {/* 固定顶部导航栏 */}
-            <header className="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-12 bg-white/80 backdrop-blur-md border-b border-gray-50 transition-all duration-300">
+        <div className="min-h-screen bg-black text-white selection:bg-primary/40 selection:text-white">
+            {/* 固定顶部导航栏 - 深色主题 */}
+            <header className="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-12 bg-black/80 backdrop-blur-md border-b border-white/10 transition-all duration-300">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     {/* Logo */}
-                    <Link to="/" className="text-2xl font-black text-gray-900 tracking-tighter uppercase z-50">
+                    <Link to="/" className="text-2xl font-black text-white tracking-tighter uppercase z-50">
                         Soofjan
                     </Link>
 
                     {/* Centered Pill Nav */}
-                    <nav className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center bg-white/80 backdrop-blur-md border border-gray-200/50 rounded-full px-2 py-1 shadow-sm">
+                    <nav className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center bg-white/5 backdrop-blur-md border border-white/20 rounded-full px-2 py-1 shadow-sm">
                         {navItems.map((item) => (
                             <Link
                                 key={item.label}
                                 to={item.path}
                                 className={`px-6 py-2 rounded-full text-xs font-bold tracking-widest transition-all ${(location.pathname === item.path) || (item.path !== '/' && location.pathname.startsWith(item.path))
-                                    ? 'bg-gray-900 text-white shadow-lg'
-                                    : 'text-gray-500 hover:text-gray-900'
+                                    ? 'bg-white text-black shadow-lg'
+                                    : 'text-gray-300 hover:text-white'
                                     }`}
                             >
                                 {item.label}
@@ -59,7 +59,7 @@ function App() {
                     <div className="flex items-center gap-4 z-50">
                         {/* Mobile hamburger button */}
                         <button
-                            className="md:hidden text-gray-900 p-2"
+                            className="md:hidden text-white p-2"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,16 +73,16 @@ function App() {
 
                         <button
                             onClick={() => setShowContactModal(true)}
-                            className="px-6 py-2.5 bg-gray-900 text-white rounded-full text-xs font-bold tracking-widest hover:bg-gray-800 transition-all shadow-lg active:scale-95"
+                            className="px-6 py-2.5 bg-white text-black rounded-full text-xs font-bold tracking-widest hover:bg-gray-200 transition-all shadow-lg active:scale-95"
                         >
                             Contact
                         </button>
                     </div>
                 </div>
 
-                {/* Mobile menu */}
+                {/* Mobile menu - 深色 */}
                 {mobileMenuOpen && (
-                    <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 py-4 px-4 shadow-lg">
+                    <div className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-b border-white/10 py-4 px-4 shadow-lg">
                         <div className="flex flex-col space-y-2">
                             {navItems.map((item) => (
                                 <Link
@@ -90,8 +90,8 @@ function App() {
                                     to={item.path}
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`py-3 px-4 rounded-xl text-sm font-bold tracking-wide transition-all ${(location.pathname === item.path) || (item.path !== '/' && location.pathname.startsWith(item.path))
-                                        ? 'bg-gray-900 text-white'
-                                        : 'text-gray-700 hover:bg-gray-100'
+                                        ? 'bg-white text-black'
+                                        : 'text-gray-300 hover:bg-white/10'
                                         }`}
                                 >
                                     {item.label}
@@ -124,13 +124,13 @@ function App() {
                 </Routes>
             </main>
 
-            {/* 页脚 */}
-            <footer className="py-12 bg-[#f3f4f6] border-t border-gray-200">
+            {/* 页脚 - 深色 */}
+            <footer className="py-12 bg-black border-t border-white/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-gray-500 text-sm flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div className="text-gray-400 text-sm flex flex-col sm:flex-row justify-between items-center gap-4">
                         <p>&copy; {new Date().getFullYear()} HouWenzheng. All rights reserved.</p>
                         <div className="flex space-x-6">
-                            <a href="https://github.com/soofjan1234" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">GitHub</a>
+                            <a href="https://github.com/soofjan1234" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
                         </div>
                     </div>
                 </div>
