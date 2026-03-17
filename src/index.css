@@ -9,6 +9,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "ChineseFonts";
   src: url("/fonts/jjt.ttf") format("truetype");
@@ -19,8 +20,8 @@
 
 @layer base {
   :root {
-    --primary: 37 99 235;
-    /* Blue 600 */
+    --primary: 17 24 39;
+    /* Gray 900 */
     --background: 243 244 246;
     /* Gray 100 */
     --text: 17 24 39;
@@ -121,16 +122,19 @@
   }
 }
 
-  .animate-float-delayed {
-    animation: float-delayed 8s ease-in-out infinite;
-  }
+.animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite;
+}
 
-  /* Hide scrollbar but keep scroll functionality */
-  .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
 
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
-  }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
+}

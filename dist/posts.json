@@ -1,0 +1,67 @@
+[
+  {
+    "category": "个人网站",
+    "posts": [
+      {
+        "title": "如何做一个好的个人网站",
+        "path": "/posts/个人网站/学习/如何做一个好的个人网站.md",
+        "category": "个人网站"
+      },
+      {
+        "title": "告别 vercel.app 域名",
+        "path": "/posts/个人网站/部署/告别vercel.app域名.md",
+        "category": "个人网站"
+      }
+    ]
+  },
+  {
+    "category": "爬虫",
+    "posts": [
+      {
+        "title": "爬虫入门",
+        "path": "/posts/爬虫/爬虫入门.md",
+        "category": "爬虫"
+      },
+      {
+        "title": "爬虫进阶",
+        "path": "/posts/爬虫/爬虫进阶.md",
+        "category": "爬虫"
+      }
+    ]
+  },
+  {
+    "category": "其他",
+    "posts": [
+      {
+        "title": "存储知识",
+        "path": "/posts/其他/存储知识.md",
+        "category": "其他"
+      },
+      {
+        "title": "摄像头协议",
+        "path": "/posts/其他/摄像头协议.md",
+        "category": "其他"
+      }
+    ]
+  },
+  {
+    "category": "AI",
+    "posts": [
+      {
+        "title": "Skills",
+        "path": "/posts/AI/skills/skills.md",
+        "category": "AI"
+      }
+    ]
+  },
+  {
+    "category": "Go",
+    "posts": [
+      {
+        "title": "GoMap SwissTable 详解",
+        "path": "/posts/Go/map/GoMap1.25.md",
+        "category": "Go"
+      }
+    ]
+  }
+]
