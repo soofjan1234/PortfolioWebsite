@@ -1,8 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 const Home = () => {
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
     const [isHoveringContact, setIsHoveringContact] = useState(false)
+    const [heroTransform, setHeroTransform] = useState({ rotateX: 0, rotateY: 0, scale: 1 })
+    const heroRef = useRef(null)
+
+    useEffect(() => {
+        const handleMove = (e) => {
+            if (!heroRef.current) return
+            const rect = heroRef.current.getBoundingClientRect()
+            const centerX = rect.left + rect.width / 2
+            const centerY = rect.top + rect.height / 2
+
+            const dx = (e.clientX - centerX) / rect.width  // -0.5 ~ 0.5
+            const dy = (e.clientY - centerY) / rect.height // -0.5 ~ 0.5
+
+            const maxRotate = 10
+            const rotateY = -dx * maxRotate
+            const rotateX = dy * maxRotate
+            const scale = 1 + Math.max(Math.min((Math.abs(dx) + Math.abs(dy)) * 0.1, 0.15), 0)
+
+            setHeroTransform({ rotateX, rotateY, scale })
+        }
+
+        window.addEventListener('mousemove', handleMove, { passive: true })
+        return () => window.removeEventListener('mousemove', handleMove)
+    }, [])
 
     const handleContactMouseMove = (e) => {
         setCursorPosition({ x: e.clientX, y: e.clientY })
@@ -12,10 +36,16 @@ const Home = () => {
         <div className="relative bg-transparent overflow-x-hidden">
             {/* Hero Section */}
             <section className="relative min-h-screen">
-                {/* 背景超大文字 - 移至顶部 */}
-                <div className="absolute inset-x-0 top-0 flex items-start justify-center select-none pointer-events-none z-0">
-                    <h1 className="text-[20vw] md:text-[25vw] font-black text-white leading-none tracking-tighter opacity-80 uppercase italic"
-                        style={{ WebkitTextStroke: '1px rgba(0,0,0,0.05)' }}>
+                {/* 背景超大文字 - Text Pressure 风格 */}
+                <div className="absolute inset-x-0 top-1/2 right-20 md:top-20 flex items-center md:items-start justify-center select-none pointer-events-none z-0 transform -translate-y-1/2 md:translate-y-0">
+                    <h1
+                        ref={heroRef}
+                        className="text-[18vw] md:text-[25vw] font-black text-white leading-none tracking-tighter opacity-80 uppercase italic transition-transform duration-150 ease-out will-change-transform"
+                        style={{
+                            WebkitTextStroke: '1px rgba(0,0,0,0.05)',
+                            transform: `perspective(1200px) rotateX(${heroTransform.rotateX}deg) rotateY(${heroTransform.rotateY}deg) scale(${heroTransform.scale})`
+                        }}
+                    >
                         Soofjan
                     </h1>
                 </div>
