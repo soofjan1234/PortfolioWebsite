@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import MarkdownRenderer from '../components/MarkdownRenderer'
+import { TextAnimate } from "@/registry/magicui/text-animate"
 
 const SIDEBAR_W = '12rem'       // w-48 desktop
 const SIDEBAR_W_MOBILE = '18rem'
@@ -210,8 +211,8 @@ const Blog = () => {
                 style={{ paddingLeft: contentPl }}
             >
                 <header className="text-center mb-12 pt-12 px-4">
-                    <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">Writing & Thoughts</h2>
-                    <h1 className="text-4xl md:text-6xl font-black text-gray-900">Technical Blog</h1>
+                    <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500 mb-4"><TextAnimate animation="blurInUp" by="character" once>Writing & Thoughts</TextAnimate></h2>
+                    <h1 className="text-4xl md:text-6xl font-black text-gray-900"><TextAnimate animation="blurInUp" by="character" once delay={0.2}>Technical Blog</TextAnimate></h1>
                     <p className="mt-6 text-gray-500 max-w-2xl mx-auto">
                         Exploring code, architecture, and the journey of building software.
                     </p>
@@ -251,7 +252,7 @@ const Blog = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                     </svg>
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">Select an Article</h3>
+                                <h3 className="text-xl font-bold text-gray-900 mb-2"><TextAnimate animation="blurInUp" by="character" once>Select an Article</TextAnimate></h3>
                                 <p className="text-gray-500 max-w-sm">
                                     Choose a topic from the sidebar to start reading.
                                 </p>

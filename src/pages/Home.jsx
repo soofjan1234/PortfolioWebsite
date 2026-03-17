@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { TextAnimate } from "@/registry/magicui/text-animate"
 
 const Home = () => {
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
@@ -14,7 +15,7 @@ const Home = () => {
             <section className="relative min-h-screen">
                 {/* 背景超大文字 - 移至顶部 */}
                 <div className="absolute inset-x-0 top-20 right-20 flex items-start justify-center select-none pointer-events-none z-0 -rotate-12">
-                    <h1 className="text-[20vw] md:text-[25vw] font-black text-white leading-none tracking-tighter opacity-80 uppercase italic"
+                    <h1 className="text-[18vw] md:text-[25vw] font-black text-white leading-none tracking-tighter opacity-80 uppercase italic"
                         style={{ WebkitTextStroke: '1px rgba(0,0,0,0.05)' }}>
                         Soofjan
                     </h1>
@@ -25,24 +26,31 @@ const Home = () => {
                     <div className="flex flex-col md:flex-row items-center md:items-end gap-16 w-full max-w-full md:max-w-[95vw]">
                         {/* 文字内容容器 */}
                         <div className="text-center md:text-right space-y-6 md:space-y-10 order-2 md:order-1 w-full md:w-auto">
-                            <div className="space-y-4">
-                                <h2 className="text-base font-semibold uppercase tracking-widest text-primary">About Me</h2>
+                            <div className="space-y-4 flex flex-col items-center md:items-end">
+                                <h2 className="text-base font-semibold uppercase tracking-widest text-primary">
+                                    <TextAnimate animation="blurInUp" by="character" once>About Me</TextAnimate>
+                                </h2>
                                 <h1 className="text-4xl md:text-8xl font-black text-gray-900 leading-tight">
                                     Hou <span className="text-gray-400 text-2xl md:text-5xl font-normal md:ml-6">| 全栈工程师</span>
                                 </h1>
                             </div>
 
-                            <div className="md:ml-auto max-w-full">
-                                <p className="text-lg md:text-4xl text-gray-600 font-medium">
-                                    深耕 <span className="text-primary font-bold">Go 后端开发</span> 与
-                                    <span className="text-primary font-bold mx-1 md:mx-2">私有云存储（NAS）</span> 领域，同时具备
-                                    <span className="text-primary font-bold ml-1 md:ml-2">全栈开发能力</span>。
-                                </p>
-                                <p className="text-base md:text-2xl text-gray-400 mt-4 md:mt-6">
-                                    擅长通过技术手段解决业务痛点，如
-                                    <span className="text-gray-900 font-semibold mx-1 md:mx-2">NAT 穿透</span>、
-                                    <span className="text-gray-800 font-semibold mx-1 md:mx-2">文件索引同步</span> 等核心模块。
-                                </p>
+                            <div className="md:ml-auto max-w-full space-y-4 md:space-y-6">
+                                <div className="text-lg md:text-4xl text-gray-600 font-medium leading-relaxed flex flex-wrap justify-center md:justify-end items-center">
+                                    <TextAnimate animation="blurInUp" by="character" once delay={0.3}>深耕</TextAnimate>
+                                    <TextAnimate className="text-primary font-bold mx-1 md:mx-2" animation="blurInUp" by="character" once delay={0.5}>Go 后端开发</TextAnimate>
+                                    <TextAnimate animation="blurInUp" by="character" once delay={0.8}>与</TextAnimate>
+                                    <TextAnimate className="text-primary font-bold mx-1 md:mx-2" animation="blurInUp" by="character" once delay={1.0}>私有云存储（NAS）</TextAnimate>
+                                    <TextAnimate animation="blurInUp" by="character" once delay={1.5}>领域，同时具备</TextAnimate>
+                                    <TextAnimate className="text-primary font-bold ml-1 md:ml-2" animation="blurInUp" by="character" once delay={2.0}>全栈开发能力。</TextAnimate>
+                                </div>
+                                <div className="text-base md:text-2xl text-gray-400 mt-4 md:mt-6 leading-relaxed flex flex-wrap justify-center md:justify-end items-center">
+                                    <TextAnimate animation="blurInUp" by="character" once delay={2.3}>擅长通过技术手段解决业务痛点，如</TextAnimate>
+                                    <TextAnimate className="text-gray-900 font-semibold mx-1 md:mx-2" animation="blurInUp" by="character" once delay={3.0}>NAT 穿透</TextAnimate>
+                                    <TextAnimate animation="blurInUp" by="character" once delay={3.4}>、</TextAnimate>
+                                    <TextAnimate className="text-gray-800 font-semibold mx-1 md:mx-2" animation="blurInUp" by="character" once delay={3.5}>文件索引同步</TextAnimate>
+                                    <TextAnimate animation="blurInUp" by="character" once delay={4.0}>等核心模块。</TextAnimate>
+                                </div>
                             </div>
 
                             <div className="flex flex-col md:flex-row justify-center md:justify-end gap-3 md:gap-4 pb-8 w-full md:w-auto">
@@ -81,7 +89,7 @@ const Home = () => {
                 />
             </section>
 
-            {/* Expertise Section - 渐变背景 */}
+            {/* Expertise Section */}
             <section className="relative min-h-screen bg-transparent text-gray-900 overflow-hidden">
 
                 <div className="relative z-20 container mx-auto px-6 py-40 md:py-48">
@@ -89,11 +97,11 @@ const Home = () => {
                     <div className="absolute top-30 inset-0 flex flex-col items-center justify-center select-none pointer-events-none opacity-10 leading-none z-0">
                         <h2 className="text-[16vw] font-black tracking-tighter uppercase italic"
                             style={{ WebkitTextStroke: '1px rgba(0,0,0,0.05)' }}>
-                            COLLEGE &
+                            <TextAnimate animation="blurInUp" by="character" once>COLLEGE &</TextAnimate>
                         </h2>
                         <h2 className="text-[16vw] font-black tracking-tighter uppercase italic -mt-4 md:-mt-12"
                             style={{ WebkitTextStroke: '1px rgba(0,0,0,0.05)' }}>
-                            EXPERTISE
+                            <TextAnimate animation="blurInUp" by="character" once delay={0.3}>EXPERTISE</TextAnimate>
                         </h2>
                     </div>
 
@@ -112,7 +120,7 @@ const Home = () => {
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-4xl md:text-6xl font-black tracking-tight text-gray-900">广州大学</h3>
+                                        <h3 className="text-4xl md:text-6xl font-black tracking-tight text-gray-900"><TextAnimate animation="blurInUp" by="character" once>广州大学</TextAnimate></h3>
                                     </div>
                                     <p className="text-2xl text-gray-600 font-medium ml-1">计算机科学与技术 <span className="text-gray-400 text-lg ml-2">/ 学士</span></p>
                                 </div>
@@ -130,7 +138,7 @@ const Home = () => {
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                             {/* Academic */}
                             <div className="bg-white border border-gray-100 p-8 md:p-10 rounded-[2.5rem] hover:bg-gray-50 transition-all duration-300 flex flex-col justify-center">
-                                <h3 className="text-xl font-bold mb-2 text-gray-600 tracking-widest uppercase">Academic Foundation</h3>
+                                <h3 className="text-xl font-bold mb-2 text-gray-600 tracking-widest uppercase"><TextAnimate animation="blurInUp" by="character" once delay={0.1}>Academic Foundation</TextAnimate></h3>
                                 <p className="text-sm text-gray-400 mb-6 italic">Almost forgot</p>
                                 <ul className="space-y-4">
                                     <li className="flex items-center gap-4 text-2xl font-bold text-gray-900">
@@ -151,7 +159,7 @@ const Home = () => {
                                 </div>
                                 <h3 className="text-xl font-bold mb-1 text-gray-300 tracking-widest uppercase flex items-center gap-2">
                                     <span className="w-8 h-1 bg-gray-400 rounded-full"></span>
-                                    Professional Stack
+                                    <TextAnimate animation="blurInUp" by="character" once delay={0.2}>Professional Stack</TextAnimate>
                                 </h3>
                                 <p className="text-sm text-gray-400 mb-6 italic ml-10">Most frequently used</p>
                                 <div className="grid grid-cols-2 gap-4">
@@ -176,7 +184,7 @@ const Home = () => {
 
                             {/* Self-Study & Freelance Combined */}
                             <div className="bg-white border border-gray-100 p-8 md:p-10 rounded-[2.5rem] hover:bg-gray-50 transition-all duration-300 flex flex-col justify-center">
-                                <h3 className="text-xl font-bold mb-2 text-gray-600 tracking-widest uppercase">Self-Study & Freelance</h3>
+                                <h3 className="text-xl font-bold mb-2 text-gray-600 tracking-widest uppercase"><TextAnimate animation="blurInUp" by="character" once delay={0.3}>Self-Study & Freelance</TextAnimate></h3>
                                 <p className="text-sm text-gray-400 mb-6 italic">Multi-platform adaptability</p>
                                 <div className="flex flex-wrap gap-2">
                                     <span className="px-3 py-1.5 bg-gray-100 border border-gray-200 text-gray-700 rounded-full text-sm font-medium">Python</span>
@@ -189,8 +197,8 @@ const Home = () => {
 
                         {/* 工作经历 (Moved from Experience.jsx) */}
                         <div className="py-12 md:py-16 w-full mt-12 md:mt-16">
-                            <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">Professional Path</h2>
-                            <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-16">Work Experience</h1>
+                            <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500 mb-4"><TextAnimate animation="blurInUp" by="character" once>Professional Path</TextAnimate></h2>
+                            <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-16"><TextAnimate animation="blurInUp" by="character" once delay={0.2}>Work Experience</TextAnimate></h1>
 
                             <div className="relative border-l-2 border-gray-200 ml-3 md:ml-6 space-y-12 pl-8 md:pl-12 py-2">
                                 {/* 经历条目 */}
@@ -199,7 +207,7 @@ const Home = () => {
                                     <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
                                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                                             <div>
-                                                <h3 className="text-2xl font-bold text-gray-900">Go 后端工程师</h3>
+                                                <h3 className="text-2xl font-bold text-gray-900"><TextAnimate animation="blurInUp" by="word" once>Go 后端工程师</TextAnimate></h3>
                                                 <p className="text-gray-500 font-medium mt-1">某科技有限公司 · 深圳</p>
                                             </div>
                                             <span className="px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm font-bold whitespace-nowrap border border-gray-200">
@@ -224,7 +232,7 @@ const Home = () => {
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </section>
@@ -241,14 +249,15 @@ const Home = () => {
                 {/* 背景大字 */}
                 <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden z-0">
                     <h1 className="text-[16vw] font-black text-black/5 uppercase tracking-tighter whitespace-nowrap italic">
-                        Contact Me
+                        <TextAnimate animation="blurInUp" by="character" once>Contact Me</TextAnimate>
                     </h1>
                 </div>
 
                 {/* 内容 */}
                 <div className="relative z-10 text-center px-4">
-                    <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight">
-                        Always open for new projects<br />and collaborations
+                    <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight flex flex-col items-center">
+                        <TextAnimate animation="blurInUp" by="word" once delay={0.1}>Always open for new projects</TextAnimate>
+                        <TextAnimate animation="blurInUp" by="word" once delay={0.4}>and collaborations</TextAnimate>
                     </h2>
                 </div>
 

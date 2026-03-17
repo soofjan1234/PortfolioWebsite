@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import MarkdownRenderer from '../components/MarkdownRenderer'
+import { TextAnimate } from "@/registry/magicui/text-animate"
 
 const Projects = () => {
     const [projects, setProjects] = useState([])
@@ -133,8 +134,8 @@ const Projects = () => {
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 min-h-screen">
             {/* Header */}
             <div className="text-center mb-16 pt-12">
-                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">Code & Knowledge</h2>
-                <h1 className="text-4xl md:text-6xl font-black text-gray-900">Tech Hub</h1>
+                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500 mb-4"><TextAnimate animation="blurInUp" by="character" once>Code & Knowledge</TextAnimate></h2>
+                <h1 className="text-4xl md:text-6xl font-black text-gray-900"><TextAnimate animation="blurInUp" by="character" once delay={0.2}>Tech Hub</TextAnimate></h1>
                 <p className="mt-6 text-gray-500 max-w-2xl mx-auto">
                     A collection of my exploring automation, web scraping, tech blog posts, and codebase.
                 </p>
@@ -160,7 +161,7 @@ const Projects = () => {
                         <div className="mb-8 md:mb-10 text-left">
                             <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-2 flex items-center gap-3">
                                 <span className="bg-gray-100 p-2 rounded-xl text-2xl">🧠</span>
-                                Knowledge
+                                <TextAnimate animation="blurInUp" by="character" once delay={0.1}>Knowledge</TextAnimate>
                             </h2>
                             <p className="text-gray-500 font-medium ml-14">Tech blogs, architecture designs, and engineering notes</p>
                         </div>
@@ -210,7 +211,7 @@ const Projects = () => {
                         <div className="mb-8 md:mb-10 text-left">
                             <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-2 flex items-center gap-3">
                                 <span className="bg-gray-100 p-2 rounded-xl text-2xl">💻</span>
-                                Source Code
+                                <TextAnimate animation="blurInUp" by="character" once delay={0.2}>Source Code</TextAnimate>
                             </h2>
                             <p className="text-gray-500 font-medium ml-14">Open source scripts, components, and code snippets</p>
                         </div>
@@ -260,7 +261,7 @@ const Projects = () => {
                         <div className="mb-8 md:mb-10 text-left">
                             <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-2 flex items-center gap-3">
                                 <span className="bg-gray-100 p-2 rounded-xl text-2xl">🚀</span>
-                                Projects
+                                <TextAnimate animation="blurInUp" by="character" once delay={0.3}>Projects</TextAnimate>
                             </h2>
                             <p className="text-gray-500 font-medium ml-14">Complete applications, tools, and side projects.</p>
                         </div>
