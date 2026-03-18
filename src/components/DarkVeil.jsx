@@ -74,6 +74,9 @@ void main(){
 }
 `
 
+/** 形状预设: full=全屏(默认) | circle=圆形 | blob=椭圆/有机 | rounded=大圆角 | wave=底部波浪 */
+const SHAPES = ['full', 'circle', 'blob', 'rounded', 'wave']
+
 export default function DarkVeil({
   hueShift = 0,
   noiseIntensity = 0,
@@ -81,9 +84,11 @@ export default function DarkVeil({
   speed = 0.5,
   scanlineFrequency = 0,
   warpAmount = 0,
-  resolutionScale = 1
+  resolutionScale = 1,
+  shape = 'full'
 }) {
   const ref = useRef(null)
+  const shapeClass = SHAPES.includes(shape) ? `darkveil-wrapper--${shape}` : 'darkveil-wrapper--full'
   useEffect(() => {
     const canvas = ref.current
     const parent = canvas.parentElement
@@ -143,7 +148,11 @@ export default function DarkVeil({
       cancelAnimationFrame(frame)
       window.removeEventListener('resize', resize)
     }
-  }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale])
+  }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale, shape])
 
-  return <canvas ref={ref} className="darkveil-canvas" />
+  return (
+    <div className={`darkveil-wrapper ${shapeClass}`}>
+      <canvas ref={ref} className="darkveil-canvas" />
+    </div>
+  )
 }

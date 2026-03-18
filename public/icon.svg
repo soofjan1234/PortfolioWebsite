@@ -1,0 +1,49 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 背景渐变 -->
+    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e9edf2" />
+    </radialGradient>
+
+    <!-- 玻璃主体渐变（用 stop-opacity 替代 rgba，兼容性更好） -->
+    <linearGradient id="glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- 彩虹边缘 -->
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7ad9" />
+      <stop offset="25%" stop-color="#7afcff" />
+      <stop offset="50%" stop-color="#7affb2" />
+      <stop offset="75%" stop-color="#ffe97a" />
+      <stop offset="100%" stop-color="#ff7a7a" />
+    </linearGradient>
+
+    <!-- 阴影 -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="20" stdDeviation="20" flood-color="#000" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- 背景：透明（移除填充矩形） -->
+
+  <!-- S 形路径 -->
+  <path
+    d="
+      M320 140
+      C260 100, 180 120, 180 180
+      C180 230, 260 240, 300 260
+      C350 280, 350 350, 260 360
+      C200 370, 160 340, 140 310
+    "
+    stroke="url(#rainbow)"
+    stroke-width="60"
+    fill="none"
+    stroke-linecap="round"
+    filter="url(#shadow)"
+    opacity="0.9"
+  />
+</svg>

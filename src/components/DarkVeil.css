@@ -1,9 +1,39 @@
+.darkveil-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.darkveil-wrapper--full {
+  clip-path: none;
+}
+
+.darkveil-wrapper--circle {
+  clip-path: circle(65% at 50% 45%);
+}
+
+.darkveil-wrapper--blob {
+  clip-path: ellipse(75% 60% at 50% 50%);
+}
+
+.darkveil-wrapper--rounded {
+  border-radius: 1.5rem;
+  clip-path: inset(0 round 1.5rem);
+}
+
+.darkveil-wrapper--wave {
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+}
+
 .darkveil-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   display: block;
-  z-index: 0;
   pointer-events: none;
 }

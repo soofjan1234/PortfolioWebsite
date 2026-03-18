@@ -1,6 +1,76 @@
 import { useState, useEffect } from 'react'
 import MarkdownRenderer from '../components/MarkdownRenderer'
-import { TextAnimate } from "@/registry/magicui/text-animate"
+import { TextAnimate } from "@/components/magicui/text-animate"
+import { cn } from "@/lib/utils"
+import { Marquee } from "@/components/magicui/marquee"
+import { TextHoverEffect } from "@/components/ui/text-hover-effect"
+
+const MarqueeCard = ({ item, onClick }) => {
+    const linkTitle = (() => {
+        if (item?.kind !== 'link' || !item?.href) return null
+        try {
+            const u = new URL(item.href)
+            return `/${u.hostname}`
+        } catch {
+            return item.href
+        }
+    })()
+
+    return (
+        <div className={cn("group relative w-fit")}>
+            {linkTitle && (
+                <div
+                    className={cn(
+                        "pointer-events-none absolute left-1/2 -top-10 -translate-x-1/2",
+                        "opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                    )}
+                    style={{
+                        transform:
+                            "translateX(-50%) rotateZ(-10deg) rotateY(20deg) rotateX(-10deg)",
+                        transformOrigin: "center",
+                    }}
+                >
+                    <div className="mx-auto w-fit rounded-full border border-white/10 bg-black/60 px-3 py-1 text-[15px] font-semibold tracking-wide text-white/90 backdrop-blur max-w-[18rem] truncate">
+                        {item.href}
+                    </div>
+                    <div className="mx-auto mt-2 h-10 w-px bg-gradient-to-b from-cyan-400/80 to-transparent" />
+                </div>
+            )}
+
+            <figure
+                onClick={onClick}
+                className={cn(
+                    "relative h-full w-fit cursor-pointer overflow-hidden rounded-xl border p-5 sm:w-64",
+                    "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
+                    "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
+                )}
+            >
+                <div className="flex flex-row items-center gap-3.5 mb-3">
+                    {item.icon && (
+                        <div className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-2xl">
+                            <span>{item.icon}</span>
+                        </div>
+                    )}
+                    <div className="flex flex-col min-w-0">
+                        <figcaption className="text-[15px] font-semibold text-white truncate">
+                            <TextHoverEffect text={item.title} />
+                        </figcaption>
+                        {item.meta && (
+                            <p className="text-xs font-medium text-white/50 uppercase tracking-wide truncate">
+                                {item.meta}
+                            </p>
+                        )}
+                    </div>
+                </div>
+                {item.description && (
+                    <blockquote className="mt-1 text-sm text-gray-200 line-clamp-3 max-w-[260px]">
+                        {item.description}
+                    </blockquote>
+                )}
+            </figure>
+        </div>
+    )
+}
 
 const Projects = () => {
     const [projects, setProjects] = useState([])
@@ -11,6 +81,10 @@ const Projects = () => {
     const [loading, setLoading] = useState(false)
     const [initialLoading, setInitialLoading] = useState(true)
     const [showVideoModal, setShowVideoModal] = useState(false)
+    const [viewMode, setViewMode] = useState('highlight')
+    // Highlight mode columns: desktop 4, small-screen client 3.
+    const [highlightColumns, setHighlightColumns] = useState(4)
+    const [featuredRows, setFeaturedRows] = useState([[], [], [], []])
 
     // Load projects data
     useEffect(() => {
@@ -113,6 +187,113 @@ const Projects = () => {
         loadProjects()
     }, [])
 
+    useEffect(() => {
+        const updateColumns = () => {
+            // Tailwind md breakpoint is 768px
+            const cols = window.innerWidth < 768 ? 3 : 4
+            setHighlightColumns(cols)
+        }
+
+        updateColumns()
+        window.addEventListener('resize', updateColumns)
+        return () => window.removeEventListener('resize', updateColumns)
+    }, [])
+
+    useEffect(() => {
+        if (initialLoading) return
+
+        const allItems = [
+            ...projects.map(p => ({
+                id: `project-${p.id}`,
+                title: p.name,
+                description: p.intro,
+                meta: 'Project',
+                icon: '🚀',
+                kind: 'project',
+                projectId: p.id,
+            })),
+            ...knowledges.map(k => ({
+                id: `knowledge-${k.id}`,
+                title: k.name,
+                description: k.intro,
+                meta: 'Knowledge',
+                icon: '🧠',
+                kind: 'knowledge',
+                categoryId: k.id,
+            })),
+            ...knowledges.flatMap(k =>
+                (k.items ?? []).map((it, idx) => ({
+                    id: `knowledge-${k.id}-item-${idx}`,
+                    title: it.title,
+                    description: k.name,
+                    meta: 'Knowledge',
+                    icon: '🧠',
+                    kind: 'link',
+                    href: it.link,
+                }))
+            ),
+            ...sourceCodes.map(s => ({
+                id: `source-${s.id}`,
+                title: s.name,
+                description: s.intro,
+                meta: 'Source',
+                icon: '💻',
+                kind: 'source',
+                categoryId: s.id,
+            })),
+            ...sourceCodes.flatMap(s =>
+                (s.items ?? []).map((it, idx) => ({
+                    id: `source-${s.id}-item-${idx}`,
+                    title: it.title,
+                    description: s.name,
+                    meta: 'Source',
+                    icon: '💻',
+                    kind: 'link',
+                    href: it.link,
+                }))
+            ),
+        ]
+
+        if (!allItems.length) {
+            setFeaturedRows(Array.from({ length: highlightColumns }, () => []))
+            return
+        }
+
+        const shuffled = [...allItems].sort(() => Math.random() - 0.5)
+        // Double the highlight wall length (more cards).
+        const maxItems = Math.min(shuffled.length, 60)
+        const selected = shuffled.slice(0, maxItems)
+
+        const rows = Array.from({ length: highlightColumns }, () => [])
+        selected.forEach((item, index) => {
+            rows[index % rows.length].push(item)
+        })
+
+        setFeaturedRows(rows)
+    }, [initialLoading, projects, knowledges, sourceCodes, highlightColumns])
+
+    const handleFeaturedClick = (item) => {
+        if (!item) return
+        if (item.kind === 'link' && item.href) {
+            window.open(item.href, '_blank', 'noopener,noreferrer')
+            return
+        }
+        if (item.kind === 'project' && item.projectId) {
+            const p = projects.find(x => x.id === item.projectId)
+            if (p) handleProjectClick(p)
+            return
+        }
+        if (item.kind === 'knowledge' && item.categoryId) {
+            const k = knowledges.find(x => x.id === item.categoryId)
+            if (k) handleProjectClick({ ...k, type: 'knowledge' })
+            return
+        }
+        if (item.kind === 'source' && item.categoryId) {
+            const s = sourceCodes.find(x => x.id === item.categoryId)
+            if (s) handleProjectClick({ ...s, type: 'source' })
+        }
+    }
+
     const formatProjectName = (dir) => {
         const names = {
             'ins-robot': 'Instagram Robot',
@@ -133,10 +314,42 @@ const Projects = () => {
     return (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 min-h-screen bg-black text-white">
             {/* Header */}
-            <div className="text-center mb-16 pt-12">
-                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-400 mb-4"><TextAnimate animation="blurInUp" by="character" once>Code & Knowledge</TextAnimate></h2>
-                <h1 className="text-4xl md:text-6xl font-black text-white"><TextAnimate animation="blurInUp" by="character" once delay={0.2}>Tech Hub</TextAnimate></h1>
-                <p className="mt-6 text-gray-400 max-w-2xl mx-auto">
+            <div className="text-center mb-10 pt-12">
+                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-400 mb-4">
+                    <TextAnimate animation="blurInUp" by="character" once>Code & Knowledge</TextAnimate>
+                </h2>
+                <div className="flex items-center justify-center gap-4 mb-4">
+                    <h1 className="text-4xl md:text-6xl font-black text-white">
+                        <TextAnimate animation="blurInUp" by="character" once delay={0.2}>Tech Hub</TextAnimate>
+                    </h1>
+                    <div className="inline-flex items-center rounded-full bg-white/5 border border-white/10 p-1 text-xs font-semibold backdrop-blur">
+                        <button
+                            type="button"
+                            onClick={() => setViewMode('highlight')}
+                            className={cn(
+                                "px-3 py-1.5 rounded-full transition-all",
+                                viewMode === 'highlight'
+                                    ? "bg-white text-black shadow-sm"
+                                    : "text-gray-300 hover:text-white"
+                            )}
+                        >
+                            Highlight
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setViewMode('classic')}
+                            className={cn(
+                                "px-3 py-1.5 rounded-full transition-all",
+                                viewMode === 'classic'
+                                    ? "bg-white text-black shadow-sm"
+                                    : "text-gray-300 hover:text-white"
+                            )}
+                        >
+                            Classic
+                        </button>
+                    </div>
+                </div>
+                <p className="mt-2 text-gray-400 max-w-2xl mx-auto">
                     A collection of my exploring automation, web scraping, tech blog posts, and codebase.
                 </p>
             </div>
@@ -156,165 +369,221 @@ const Projects = () => {
                 /* Content Layout */
                 <div className="container mx-auto px-4 md:px-0 mb-24 space-y-24">
 
-                    {/* 1. Knowledge Section */}
-                    <section>
-                        <div className="mb-8 md:mb-10 text-left">
-                            <h2 className="text-3xl md:text-4xl font-black text-white mb-2 flex items-center gap-3">
-                                <span className="bg-white/10 p-2 rounded-xl text-2xl">🧠</span>
-                                <TextAnimate animation="blurInUp" by="character" once delay={0.1}>Knowledge</TextAnimate>
-                            </h2>
-                            <p className="text-gray-500 font-medium ml-14">Tech blogs, architecture designs, and engineering notes</p>
-                        </div>
-                        {knowledges.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                {knowledges.map(cat => (
-                                    <div key={cat.id}
-                                        onClick={() => handleProjectClick({ ...cat, type: 'knowledge' })}
-                                        className="group cursor-pointer">
-                                        <div className="bg-white/50 backdrop-blur-md border border-white/50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                                            <div className="aspect-video relative overflow-hidden bg-gray-100 flex items-center justify-center">
-                                                {cat.image ? (
-                                                    <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onError={(e) => e.target.style.display = 'none'} />
-                                                ) : null}
-                                                <div className="absolute inset-0 bg-gray-900/10 group-hover:bg-gray-900/0 transition-colors duration-300" />
-                                                <span className="absolute text-5xl drop-shadow-lg scale-90 group-hover:scale-110 transition-transform duration-500">{!cat.image && cat.icon}</span>
-                                            </div>
-                                            <div className="p-6">
-                                                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-900 transition-colors">
-                                                    {cat.name}
-                                                </h3>
-                                                <p className="text-sm text-gray-600 line-clamp-2 mb-4">
-                                                    {cat.intro}
-                                                </p>
-                                                <div className="flex items-center justify-between">
-                                                    <span className="text-xs text-gray-900 font-semibold uppercase tracking-wider">
-                                                        Browse Collection
-                                                    </span>
-                                                    <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
+                    {/* Highlight Mode - Tech Hub Marquee */}
+                    {viewMode === 'highlight' && featuredRows.some(row => row.length > 0) && (
+                        <section className="relative px-0 py-8 md:py-12 overflow-hidden">
+                            <div className="relative flex flex-col gap-6 md:flex-row md:items-start md:justify-between mb-8">
+                                <div className="text-left">
+                                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-2">
+                                        Highlight Mode
+                                    </p>
+                                    <h2 className="text-2xl md:text-3xl font-black text-white mb-3">
+                                        Recent explorations & picks
+                                    </h2>
+                                    <p className="text-sm md:text-base text-gray-300 max-w-md">
+                                        A rotating wall of selected projects, knowledge notes, and source dives. Switch to Classic to browse everything.
+                                    </p>
+                                </div>
                             </div>
-                        ) : (
-                            <div className="text-center py-16 bg-white/50 backdrop-blur-sm border-2 border-dashed border-gray-200 rounded-3xl hover:border-gray-300 transition-colors">
-                                <p className="text-gray-400 font-medium">Documentation and notes coming soon...</p>
-                            </div>
-                        )}
-                    </section>
-
-                    {/* 2. Source Code Section */}
-                    <section>
-                        <div className="mb-8 md:mb-10 text-left">
-                            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-2 flex items-center gap-3">
-                                <span className="bg-gray-100 p-2 rounded-xl text-2xl">💻</span>
-                                <TextAnimate animation="blurInUp" by="character" once delay={0.2}>Source Code</TextAnimate>
-                            </h2>
-                            <p className="text-gray-500 font-medium ml-14">Open source scripts, components, and code snippets</p>
-                        </div>
-                        {sourceCodes.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                {sourceCodes.map(cat => (
-                                    <div key={cat.id}
-                                        onClick={() => handleProjectClick({ ...cat, type: 'source' })}
-                                        className="group cursor-pointer">
-                                        <div className="bg-white/50 backdrop-blur-md border border-white/50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                                            <div className="aspect-video relative overflow-hidden bg-gray-100 flex items-center justify-center">
-                                                {cat.image ? (
-                                                    <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onError={(e) => e.target.style.display = 'none'} />
-                                                ) : null}
-                                                <div className="absolute inset-0 bg-gray-900/10 group-hover:bg-gray-900/0 transition-colors duration-300" />
-                                                <span className="absolute text-5xl drop-shadow-lg scale-90 group-hover:scale-110 transition-transform duration-500">{!cat.image && cat.icon}</span>
-                                            </div>
-                                            <div className="p-6">
-                                                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-900 transition-colors">
-                                                    {cat.name}
-                                                </h3>
-                                                <p className="text-sm text-gray-600 line-clamp-2 mb-4">
-                                                    {cat.intro}
-                                                </p>
-                                                <div className="flex items-center justify-between">
-                                                    <span className="text-xs text-gray-900 font-semibold uppercase tracking-wider">
-                                                        Browse Snippets
-                                                    </span>
-                                                    <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="text-center py-16 bg-white/50 backdrop-blur-sm border-2 border-dashed border-gray-200 rounded-3xl hover:border-gray-300 transition-colors">
-                                <p className="text-gray-400 font-medium">Repositories and snippets coming soon...</p>
-                            </div>
-                        )}
-                    </section>
-
-                    {/* 3. Projects Section */}
-                    <section>
-                        <div className="mb-8 md:mb-10 text-left">
-                            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-2 flex items-center gap-3">
-                                <span className="bg-gray-100 p-2 rounded-xl text-2xl">🚀</span>
-                                <TextAnimate animation="blurInUp" by="character" once delay={0.3}>Projects</TextAnimate>
-                            </h2>
-                            <p className="text-gray-500 font-medium ml-14">Complete applications, tools, and side projects.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {projects.map((project) => (
+                            <div className="relative flex h-[42rem] md:h-[56rem] w-full flex-row items-center justify-center gap-4 overflow-hidden [perspective:420px]">
                                 <div
-                                    key={project.id}
-                                    onClick={() => handleProjectClick(project)}
-                                    className="group cursor-pointer"
+                                    className="flex flex-row items-center gap-4"
+                                    style={{
+                                        transform:
+                                            "translateX(-80px) translateY(0px) translateZ(-80px) rotateX(18deg) rotateY(-10deg) rotateZ(16deg)",
+                                    }}
                                 >
-                                    {/* Card */}
-                                    <div className="bg-white/50 backdrop-blur-md border border-white/50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                                        {/* Image Preview - All projects show image */}
-                                        <div className="aspect-video relative overflow-hidden">
-                                            <img
-                                                src={project.image}
-                                                alt={project.name}
-                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                            />
-                                            {/* Video Indicator for projects with video */}
-                                            {project.hasVideo && (
-                                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                                                    <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-50 group-hover:scale-100">
-                                                        <svg className="w-5 h-5 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path d="M8 5v14l11-7z" />
+                                    {featuredRows.map((row, rowIndex) => (
+                                        <Marquee
+                                            key={rowIndex}
+                                            pauseOnHover
+                                            vertical
+                                            reverse={rowIndex % 2 === 1}
+                                            className="[--duration:44s]"
+                                        >
+                                            {row.map(item => (
+                                                <MarqueeCard
+                                                    key={item.id}
+                                                    item={item}
+                                                    onClick={() => handleFeaturedClick(item)}
+                                                />
+                                            ))}
+                                        </Marquee>
+                                    ))}
+                                </div>
+
+                                <div className="from-black to-transparent pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b" />
+                                <div className="from-black to-transparent pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t" />
+                                <div className="from-black to-transparent pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r" />
+                                <div className="from-black to-transparent pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l" />
+                            </div>
+                        </section>
+                    )}
+
+                    {/* Classic Mode Sections */}
+                    {viewMode === 'classic' && (
+                        <>
+                            {/* 1. Knowledge Section */}
+                            <section>
+                                <div className="mb-8 md:mb-10 text-left">
+                                    <h2 className="text-3xl md:text-4xl font-black text-white mb-2 flex items-center gap-3">
+                                        <span className="bg-white/10 p-2 rounded-xl text-2xl">🧠</span>
+                                        <TextAnimate animation="blurInUp" by="character" once delay={0.1}>Knowledge</TextAnimate>
+                                    </h2>
+                                    <p className="text-gray-500 font-medium ml-14">Tech blogs, architecture designs, and engineering notes</p>
+                                </div>
+                                {knowledges.length > 0 ? (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                        {knowledges.map(cat => (
+                                            <div key={cat.id}
+                                                onClick={() => handleProjectClick({ ...cat, type: 'knowledge' })}
+                                                className="group cursor-pointer">
+                                        <div className="bg-white/85 backdrop-blur-md border border-white/70 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                                                    <div className="aspect-video relative overflow-hidden bg-gray-100 flex items-center justify-center">
+                                                        {cat.image ? (
+                                                            <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onError={(e) => e.target.style.display = 'none'} />
+                                                        ) : null}
+                                                        <div className="absolute inset-0 bg-gray-900/10 group-hover:bg-gray-900/0 transition-colors duration-300" />
+                                                        <span className="absolute text-5xl drop-shadow-lg scale-90 group-hover:scale-110 transition-transform duration-500">{!cat.image && cat.icon}</span>
+                                                    </div>
+                                                    <div className="p-6">
+                                                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-900 transition-colors">
+                                                            {cat.name}
+                                                        </h3>
+                                                        <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                                                            {cat.intro}
+                                                        </p>
+                                                        <div className="flex items-center justify-between">
+                                                            <span className="text-xs text-gray-900 font-semibold uppercase tracking-wider">
+                                                                Browse Collection
+                                                            </span>
+                                                            <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-16 bg-white/50 backdrop-blur-sm border-2 border-dashed border-gray-200 rounded-3xl hover:border-gray-300 transition-colors">
+                                        <p className="text-gray-400 font-medium">Documentation and notes coming soon...</p>
+                                    </div>
+                                )}
+                            </section>
+
+                            {/* 2. Source Code Section */}
+                            <section>
+                                <div className="mb-8 md:mb-10 text-left">
+                                    <h2 className="text-3xl md:text-4xl font-black text-white mb-2 flex items-center gap-3">
+                                        <span className="bg-gray-100 p-2 rounded-xl text-2xl">💻</span>
+                                        <TextAnimate animation="blurInUp" by="character" once delay={0.2}>Source Code</TextAnimate>
+                                    </h2>
+                                    <p className="text-gray-500 font-medium ml-14">Open source scripts, components, and code snippets</p>
+                                </div>
+                                {sourceCodes.length > 0 ? (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                        {sourceCodes.map(cat => (
+                                            <div key={cat.id}
+                                                onClick={() => handleProjectClick({ ...cat, type: 'source' })}
+                                                className="group cursor-pointer">
+                                        <div className="bg-white/85 backdrop-blur-md border border-white/70 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                                                    <div className="aspect-video relative overflow-hidden bg-gray-100 flex items-center justify-center">
+                                                        {cat.image ? (
+                                                            <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onError={(e) => e.target.style.display = 'none'} />
+                                                        ) : null}
+                                                        <div className="absolute inset-0 bg-gray-900/10 group-hover:bg-gray-900/0 transition-colors duration-300" />
+                                                        <span className="absolute text-5xl drop-shadow-lg scale-90 group-hover:scale-110 transition-transform duration-500">{!cat.image && cat.icon}</span>
+                                                    </div>
+                                                    <div className="p-6">
+                                                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-900 transition-colors">
+                                                            {cat.name}
+                                                        </h3>
+                                                        <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                                                            {cat.intro}
+                                                        </p>
+                                                        <div className="flex items-center justify-between">
+                                                            <span className="text-xs text-gray-900 font-semibold uppercase tracking-wider">
+                                                                Browse Snippets
+                                                            </span>
+                                                            <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-16 bg-white/50 backdrop-blur-sm border-2 border-dashed border-gray-200 rounded-3xl hover:border-gray-300 transition-colors">
+                                        <p className="text-gray-400 font-medium">Repositories and snippets coming soon...</p>
+                                    </div>
+                                )}
+                            </section>
+
+                            {/* 3. Projects Section */}
+                            <section>
+                                <div className="mb-8 md:mb-10 text-left">
+                                    <h2 className="text-3xl md:text-4xl font-black text-white mb-2 flex items-center gap-3">
+                                        <span className="bg-gray-100 p-2 rounded-xl text-2xl">🚀</span>
+                                        <TextAnimate animation="blurInUp" by="character" once delay={0.3}>Projects</TextAnimate>
+                                    </h2>
+                                    <p className="text-gray-500 font-medium ml-14">Complete applications, tools, and side projects.</p>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                    {projects.map((project) => (
+                                        <div
+                                            key={project.id}
+                                            onClick={() => handleProjectClick(project)}
+                                            className="group cursor-pointer"
+                                        >
+                                            {/* Card */}
+                                    <div className="bg-white/85 backdrop-blur-md border border-white/70 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                                                {/* Image Preview - All projects show image */}
+                                                <div className="aspect-video relative overflow-hidden">
+                                                    <img
+                                                        src={project.image}
+                                                        alt={project.name}
+                                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                                    />
+                                                    {/* Video Indicator for projects with video */}
+                                                    {project.hasVideo && (
+                                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                                                            <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-50 group-hover:scale-100">
+                                                                <svg className="w-5 h-5 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                                                    <path d="M8 5v14l11-7z" />
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+
+                                                {/* Content */}
+                                                <div className="p-6">
+                                                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-900 transition-colors">
+                                                        {project.name}
+                                                    </h3>
+                                                    <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                                                        {project.intro}
+                                                    </p>
+                                                    <div className="flex items-center justify-between">
+                                                        <span className="text-xs text-gray-900 font-semibold uppercase tracking-wider">
+                                                            Click to view
+                                                        </span>
+                                                        <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                         </svg>
                                                     </div>
                                                 </div>
-                                            )}
-                                        </div>
-
-                                        {/* Content */}
-                                        <div className="p-6">
-                                            <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-900 transition-colors">
-                                                {project.name}
-                                            </h3>
-                                            <p className="text-sm text-gray-600 line-clamp-2 mb-4">
-                                                {project.intro}
-                                            </p>
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-xs text-gray-900 font-semibold uppercase tracking-wider">
-                                                    Click to view
-                                                </span>
-                                                <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                </svg>
                                             </div>
                                         </div>
-                                    </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    </section>
+                            </section>
+                        </>
+                    )}
                 </div>
             )}
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import MarkdownRenderer from '../components/MarkdownRenderer'
-import { TextAnimate } from "@/registry/magicui/text-animate"
+import { TextAnimate } from "@/components/magicui/text-animate"
+import DarkVeil from '@/components/DarkVeil'
 
 const SIDEBAR_W = '12rem'       // w-48 desktop
 const SIDEBAR_W_MOBILE = '18rem'
@@ -104,7 +105,20 @@ const Blog = () => {
     const contentPl = '3rem'
 
     return (
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 min-h-screen flex flex-col lg:flex-row bg-black text-white">
+        <div className="relative animate-in fade-in slide-in-from-bottom-4 duration-700 min-h-screen flex flex-col lg:flex-row bg-black text-white overflow-hidden">
+            {/* Blog 页 DarkVeil 全屏背景，相同配色但形状略有差异 */}
+            <div className="absolute inset-0 z-0">
+                <DarkVeil
+                    shape="blob"
+                    hueShift={0}
+                    noiseIntensity={0}
+                    scanlineIntensity={0}
+                    speed={0.5}
+                    scanlineFrequency={0}
+                    warpAmount={0}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none" aria-hidden />
+            </div>
 
             {/* 目录：aside 全高 + justify-center，内层卡片定高 50vh 居中 */}
             <aside
@@ -205,9 +219,9 @@ const Blog = () => {
                 />
             )}
 
-            {/* 右侧内容区：根据目录展开状态留出左边距 */}
+            {/* 右侧内容区：根据目录展开状态留出左边距；内容整体下移避免被导航遮挡 */}
             <div
-                className="flex-1 min-w-0 w-full order-1 flex flex-col transition-[padding-left] duration-250 ease-out"
+                className="relative z-10 flex-1 min-w-0 w-full order-1 flex flex-col transition-[padding-left] duration-250 ease-out pt-24"
                 style={{ paddingLeft: contentPl }}
             >
                 <header className="text-center mb-12 pt-12 px-4">

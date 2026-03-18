@@ -1,0 +1,48 @@
+.magicui-marquee {
+  --duration: 20s;
+  position: relative;
+  overflow: hidden;
+}
+
+.magicui-marquee__inner {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  will-change: transform;
+  animation: magicui-marquee-x var(--duration) linear infinite;
+}
+
+.magicui-marquee-vertical .magicui-marquee__inner {
+  flex-direction: column;
+  animation-name: magicui-marquee-y;
+}
+
+.magicui-marquee-reverse .magicui-marquee__inner {
+  animation-direction: reverse;
+}
+
+.magicui-marquee-pause-hover:hover .magicui-marquee__inner {
+  animation-play-state: paused;
+}
+
+@keyframes magicui-marquee-x {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes magicui-marquee-y {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { TextAnimate } from "@/registry/magicui/text-animate"
+import { TextAnimate } from "@/components/magicui/text-animate"
 import Antigravity from '@/components/Antigravity'
 import SectionSpotlight from '@/components/SectionSpotlight'
 import ParticleCard from '@/components/ParticleCard'
@@ -77,7 +77,7 @@ const Home = () => {
                         {/* 文字内容容器 */}
                         <div className="text-center md:text-right space-y-6 md:space-y-10 order-2 md:order-1 w-full md:w-auto">
                             <div className="space-y-4 flex flex-col items-center md:items-end">
-                                <h2 className="text-base font-semibold uppercase tracking-widest text-purple-400">
+                                <h2 className="text-base font-semibold uppercase tracking-widest text-[#5227FF]">
                                     <TextAnimate animation="blurInUp" by="character" once>About Me</TextAnimate>
                                 </h2>
                                 <h1 className="text-4xl md:text-8xl font-black text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
@@ -88,11 +88,11 @@ const Home = () => {
                             <div className="md:ml-auto max-w-full space-y-4 md:space-y-6">
                                 <div className="text-lg md:text-4xl text-gray-200 font-medium leading-relaxed flex flex-wrap justify-center md:justify-end items-center drop-shadow-[0_1px_4px_rgba(0,0,0,0.25)]">
                                     <TextAnimate animation="blurInUp" by="character" once delay={0.3}>深耕</TextAnimate>
-                                    <TextAnimate className="text-purple-400 font-bold mx-1 md:mx-2" animation="blurInUp" by="character" once delay={0.5}>Go 后端开发</TextAnimate>
+                                    <TextAnimate className="text-[#5227FF] font-bold mx-1 md:mx-2" animation="blurInUp" by="character" once delay={0.5}>Go 后端开发</TextAnimate>
                                     <TextAnimate animation="blurInUp" by="character" once delay={0.8}>与</TextAnimate>
-                                    <TextAnimate className="text-purple-400 font-bold mx-1 md:mx-2" animation="blurInUp" by="character" once delay={1.0}>私有云存储（NAS）</TextAnimate>
+                                    <TextAnimate className="text-[#5227FF] font-bold mx-1 md:mx-2" animation="blurInUp" by="character" once delay={1.0}>私有云存储（NAS）</TextAnimate>
                                     <TextAnimate animation="blurInUp" by="character" once delay={1.5}>领域，同时具备</TextAnimate>
-                                    <TextAnimate className="text-purple-400 font-bold ml-1 md:ml-2" animation="blurInUp" by="character" once delay={2.0}>全栈开发能力。</TextAnimate>
+                                    <TextAnimate className="text-[#5227FF] font-bold ml-1 md:ml-2" animation="blurInUp" by="character" once delay={2.0}>全栈开发能力。</TextAnimate>
                                 </div>
                                 <div className="text-base md:text-2xl text-gray-300 mt-4 md:mt-6 leading-relaxed flex flex-wrap justify-center md:justify-end items-center drop-shadow-[0_1px_4px_rgba(0,0,0,0.2)]">
                                     <TextAnimate animation="blurInUp" by="character" once delay={2.3}>擅长通过技术手段解决业务痛点，如</TextAnimate>
