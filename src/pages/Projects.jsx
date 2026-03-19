@@ -190,7 +190,7 @@ const Projects = () => {
     useEffect(() => {
         const updateColumns = () => {
             // Tailwind md breakpoint is 768px
-            const cols = window.innerWidth < 768 ? 3 : 4
+            const cols = window.innerWidth < 768 ? 2 : 4
             setHighlightColumns(cols)
         }
 

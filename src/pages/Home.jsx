@@ -72,7 +72,7 @@ const Home = () => {
                 </div> */}
 
                 {/* 自我介绍内容 - 浅色字在 DarkVeil 上清晰可见 */}
-                <div className="relative z-30 min-h-screen flex flex-col justify-end items-end p-8 md:p-24 pb-48">
+                <div className="relative z-30 min-h-screen flex flex-col justify-end items-end p-8 md:p-24">
                     <div className="flex flex-col md:flex-row items-center md:items-end gap-16 w-full max-w-full md:max-w-[95vw]">
                         {/* 文字内容容器 */}
                         <div className="text-center md:text-right space-y-6 md:space-y-10 order-2 md:order-1 w-full md:w-auto">
@@ -147,7 +147,7 @@ const Home = () => {
                     glowColor="132, 0, 255"
                 />
 
-                <div className="relative z-20 container mx-auto px-6 py-40 md:py-48">
+                <div className="relative z-20 container mx-auto px-6">
                     {/* 背景标题 - 黑底用浅色 */}
                     <div className="absolute top-30 inset-0 flex flex-col items-center justify-center select-none pointer-events-none opacity-[0.07] leading-none z-0">
                         <h2 className="text-[16vw] font-black tracking-tighter uppercase italic text-white">
@@ -333,7 +333,7 @@ const Home = () => {
                 onClick={() => window.dispatchEvent(new CustomEvent('open-contact-modal'))}
             >
                 {/* Antigravity 全屏：粒子环跟随光标（与 reactbits 一致参数） */}
-                <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 z-0 hidden md:block">
                     <Antigravity
                         count={300}
                         magnetRadius={35}
