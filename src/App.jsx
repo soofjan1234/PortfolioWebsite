@@ -26,8 +26,7 @@ function App() {
 
     const navItems = [
         { label: 'ABOUT', path: '/' },
-        { label: 'TECH HUB', path: '/projects' },
-        { label: 'BLOG', path: '/blog' }
+        { label: 'TECH HUB', path: '/projects' }
     ]
 
     return (
@@ -115,11 +114,12 @@ function App() {
                             <Projects />
                         </div>
                     } />
-                    <Route path="/blog" element={
+                    {/*博客页面暂时隐藏*/}
+                    {/*<Route path="/blog" element={
                         <div className="min-h-screen w-full">
                             <Blog />
                         </div>
-                    } />
+                    } />*/}
                     <Route path="/experience" element={
                         <div className="pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <Experience />

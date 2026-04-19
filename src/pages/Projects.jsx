@@ -73,123 +73,101 @@ const MarqueeCard = ({ item, onClick }) => {
 }
 
 const Projects = () => {
-    const [projects, setProjects] = useState([])
     const [knowledges, setKnowledges] = useState([])
     const [sourceCodes, setSourceCodes] = useState([])
     const [selectedProject, setSelectedProject] = useState(null)
     const [projectDetail, setProjectDetail] = useState(null)
     const [loading, setLoading] = useState(false)
     const [initialLoading, setInitialLoading] = useState(true)
-    const [showVideoModal, setShowVideoModal] = useState(false)
     const [viewMode, setViewMode] = useState('highlight')
     // Highlight mode columns: desktop 4, small-screen client 3.
     const [highlightColumns, setHighlightColumns] = useState(4)
     const [featuredRows, setFeaturedRows] = useState([[], [], [], []])
 
-    // Load projects data
     useEffect(() => {
-        const loadProjects = async () => {
+        const loadData = async () => {
             setInitialLoading(true)
-            const projectDirs = ['ins-robot', 'ContentCreatorHelper', 'hotspotCrawler', 'articlesCrawler']
-            const loadedProjects = []
 
-            for (const dir of projectDirs) {
+            // Fetch Knowledge Data (Multiple categories)
+            const categories = [
+                { id: 'go', name: 'Go 语言基础与进阶', icon: '🐹', intro: '深入探索Go语言核心机制与运行流程。', file: 'go.md' },
+                { id: 'mysql', name: 'MySQL 入门与进阶', icon: '🐬', intro: '精通 MySQL 核心原理、索引优化与存储逻辑。', file: 'mysql.md' },
+                { id: 'redis', name: 'Redis 高性能应用', icon: '🔴', intro: 'Redis 核心数据结构与高可用架构。', file: 'redis.md' }
+            ]
+
+            const loadedKnowledges = []
+            for (const cat of categories) {
                 try {
-                    // Try to load markdown file
-                    const response = await fetch(`/projects/${dir}/1.md`)
-                    if (response.ok) {
-                        const content = await response.text()
-                        const lines = content.split('\n')
-
-                        let github = ''
-                        let intro = ''
-                        let details = []
-
-                        // Parse markdown content
-                        lines.forEach(line => {
-                            if (line.startsWith('github')) {
-                                github = line.replace('github：', '').trim()
-                            } else if (line.startsWith('简介')) {
-                                intro = line.replace('简介：', '').trim()
-                            } else if (line.trim()) {
-                                details.push(line.trim())
-                            }
-                        })
-
-                        loadedProjects.push({
-                            id: dir,
-                            name: formatProjectName(dir),
-                            github,
-                            intro,
-                            details: details.join('\n'),
-                            image: `/projects/${dir}/image.png`,
-                            hasVideo: ['ins-robot', 'ContentCreatorHelper'].includes(dir)
-                        })
+                    const res = await fetch(`/knowledge/${cat.file}`)
+                    if (res.ok) {
+                        const content = await res.text()
+                        const lines = content.split('\n').filter(Boolean)
+                        const items = lines.map(line => {
+                            const parts = line.split('http')
+                            return { title: parts[0].trim(), link: parts.length > 1 ? 'http' + parts[1].trim() : '' }
+                        }).filter(item => item.link)
+                        
+                        if (items.length > 0) {
+                            loadedKnowledges.push({
+                                ...cat,
+                                items
+                            })
+                        }
                     }
-                } catch (err) {
-                    console.error(`Failed to load project ${dir}:`, err)
+                } catch (err) { 
+                    console.log(`Knowledge ${cat.id} not found or empty`)
                 }
             }
+            setKnowledges(loadedKnowledges)
 
-            setProjects(loadedProjects)
+            // Fetch Source Code Data (Multiple categories)
+            const sourceFiles = [
+                { id: 'map', name: 'Map 源码剖析', icon: '🔍', intro: '深入解析 SwissTable 与 sync.Map 实现。', file: 'map.md' },
+                { id: 'memory', name: '内存管理源码', icon: '🧠', intro: 'Go 内存分配器与垃圾回收（GC）源码深度解读。', file: '内存.md' },
+                { id: 'concurrency', name: '并发调度源码分析', icon: '⚙️', intro: 'GMP 模型、Channel及同步原语源码实现。', file: '并发.md' },
+                { id: 'lock', name: '锁源码剖析', icon: '🔒', intro: 'Mutex 与 RWMutex 源码深度解读。', file: '锁.md' },
+                { id: 'other', name: '其他源码', icon: '📚', intro: 'Context、Select、Interface 源码深度解读。', file: '其他.md' },
+            ]
 
-            // Fetch Knowledge Data
-            try {
-                const res = await fetch('/knowledge/go/1.md')
-                if (res.ok) {
-                    const content = await res.text()
-                    const lines = content.split('\n').filter(Boolean)
-                    const items = lines.map(line => {
-                        const parts = line.split('http')
-                        return { title: parts[0].trim(), link: parts.length > 1 ? 'http' + parts[1].trim() : '' }
-                    }).filter(item => item.link)
-                    setKnowledges([{
-                        id: 'go',
-                        name: 'Go 语言基础与进阶',
-                        icon: '🐹',
-                        intro: '深入探索Go语言的底层架构实现。',
-                        image: '/knowledge/go/IMG_4730.JPG',
-                        items
-                    }])
-                }
-            } catch (err) { console.error('Load knowledge err:', err) }
+            const loadedSourceCodes = []
+            for (const s of sourceFiles) {
+                try {
+                    const res = await fetch(`/sourceCode/${s.file}`)
+                    if (res.ok) {
+                        const content = await res.text()
+                        const lines = content.split('\n').filter(Boolean)
+                        let name = s.name
+                        if (lines.length > 0 && !lines[0].includes('http')) {
+                            name = lines[0].trim()
+                            lines.shift()
+                        }
+                        const items = lines.map(line => {
+                            const parts = line.split('http')
+                            return { title: parts[0].trim(), link: parts.length > 1 ? 'http' + parts[1].trim() : '' }
+                        }).filter(item => item.link)
 
-            // Fetch Source Code Data
-            try {
-                const res = await fetch('/sourceCode/map.md')
-                if (res.ok) {
-                    const content = await res.text()
-                    const lines = content.split('\n').filter(Boolean)
-                    let name = 'Source Code'
-                    if (lines.length > 0 && !lines[0].includes('http')) {
-                        name = lines[0].trim()
-                        lines.shift()
+                        if (items.length > 0) {
+                            loadedSourceCodes.push({
+                                ...s,
+                                name, // Use name from file if available
+                                items
+                            })
+                        }
                     }
-                    const items = lines.map(line => {
-                        const parts = line.split('http')
-                        return { title: parts[0].trim(), link: parts.length > 1 ? 'http' + parts[1].trim() : '' }
-                    }).filter(item => item.link)
-
-                    setSourceCodes([{
-                        id: 'map',
-                        name,
-                        icon: '🔍',
-                        intro: '原理解析与源码级剖析记录，探讨探针调度、哈希策略及扩容机制。',
-                        image: '/sourceCode/IMG_4734.JPG',
-                        items
-                    }])
+                } catch (err) {
+                    console.log(`Source code ${s.id} not found or empty`)
                 }
-            } catch (err) { console.error('Load source code err:', err) }
+            }
+            setSourceCodes(loadedSourceCodes)
 
             setInitialLoading(false)
         }
 
-        loadProjects()
+        loadData()
     }, [])
 
     useEffect(() => {
         const updateColumns = () => {
-            // Tailwind md breakpoint is 768px
             const cols = window.innerWidth < 768 ? 2 : 4
             setHighlightColumns(cols)
         }
@@ -203,15 +181,6 @@ const Projects = () => {
         if (initialLoading) return
 
         const allItems = [
-            ...projects.map(p => ({
-                id: `project-${p.id}`,
-                title: p.name,
-                description: p.intro,
-                meta: 'Project',
-                icon: '🚀',
-                kind: 'project',
-                projectId: p.id,
-            })),
             ...knowledges.map(k => ({
                 id: `knowledge-${k.id}`,
                 title: k.name,
@@ -260,7 +229,6 @@ const Projects = () => {
         }
 
         const shuffled = [...allItems].sort(() => Math.random() - 0.5)
-        // Double the highlight wall length (more cards).
         const maxItems = Math.min(shuffled.length, 60)
         const selected = shuffled.slice(0, maxItems)
 
@@ -270,17 +238,12 @@ const Projects = () => {
         })
 
         setFeaturedRows(rows)
-    }, [initialLoading, projects, knowledges, sourceCodes, highlightColumns])
+    }, [initialLoading, knowledges, sourceCodes, highlightColumns])
 
     const handleFeaturedClick = (item) => {
         if (!item) return
         if (item.kind === 'link' && item.href) {
             window.open(item.href, '_blank', 'noopener,noreferrer')
-            return
-        }
-        if (item.kind === 'project' && item.projectId) {
-            const p = projects.find(x => x.id === item.projectId)
-            if (p) handleProjectClick(p)
             return
         }
         if (item.kind === 'knowledge' && item.categoryId) {
@@ -294,16 +257,6 @@ const Projects = () => {
         }
     }
 
-    const formatProjectName = (dir) => {
-        const names = {
-            'ins-robot': 'Instagram Robot',
-            'ContentCreatorHelper': 'Content Creator Helper',
-            'hotspotCrawler': 'Hotspot Crawler',
-            'articlesCrawler': 'Articles Crawler'
-        }
-        return names[dir] || dir
-    }
-
     const handleProjectClick = async (project) => {
         setSelectedProject(project)
         setLoading(true)
@@ -313,7 +266,6 @@ const Projects = () => {
 
     return (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 min-h-screen bg-black text-white">
-            {/* Header */}
             <div className="text-center mb-10 pt-12">
                 <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-400 mb-4">
                     <TextAnimate animation="blurInUp" by="character" once>Code & Knowledge</TextAnimate>
@@ -350,11 +302,10 @@ const Projects = () => {
                     </div>
                 </div>
                 <p className="mt-2 text-gray-400 max-w-2xl mx-auto">
-                    A collection of my exploring automation, web scraping, tech blog posts, and codebase.
+                    A collection of tech blog posts and codebase exploration.
                 </p>
             </div>
 
-            {/* Loading State */}
             {initialLoading ? (
                 <div className="flex flex-col items-center justify-center py-24">
                     <div className="relative">
@@ -366,10 +317,7 @@ const Projects = () => {
                     <p className="mt-6 text-gray-500 text-sm font-medium animate-pulse">Loading contents...</p>
                 </div>
             ) : (
-                /* Content Layout */
                 <div className="container mx-auto px-4 md:px-0 mb-24 space-y-24">
-
-                    {/* Highlight Mode - Tech Hub Marquee */}
                     {viewMode === 'highlight' && featuredRows.some(row => row.length > 0) && (
                         <section className="relative px-0 py-8 md:py-12 overflow-hidden">
                             <div className="relative flex flex-col gap-6 md:flex-row md:items-start md:justify-between mb-8">
@@ -381,7 +329,7 @@ const Projects = () => {
                                         Recent explorations & picks
                                     </h2>
                                     <p className="text-sm md:text-base text-gray-300 max-w-md">
-                                        A rotating wall of selected projects, knowledge notes, and source dives. Switch to Classic to browse everything.
+                                        A rotating wall of tech notes and source dives. Switch to Classic to browse everything.
                                     </p>
                                 </div>
                             </div>
@@ -420,10 +368,8 @@ const Projects = () => {
                         </section>
                     )}
 
-                    {/* Classic Mode Sections */}
                     {viewMode === 'classic' && (
                         <>
-                            {/* 1. Knowledge Section */}
                             <section>
                                 <div className="mb-8 md:mb-10 text-left">
                                     <h2 className="text-3xl md:text-4xl font-black text-white mb-2 flex items-center gap-3">
@@ -437,23 +383,19 @@ const Projects = () => {
                                         {knowledges.map(cat => (
                                             <div key={cat.id}
                                                 onClick={() => handleProjectClick({ ...cat, type: 'knowledge' })}
-                                                className="group cursor-pointer">
-                                        <div className="bg-white/85 backdrop-blur-md border border-white/70 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                                                    <div className="aspect-video relative overflow-hidden bg-gray-100 flex items-center justify-center">
-                                                        {cat.image ? (
-                                                            <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onError={(e) => e.target.style.display = 'none'} />
-                                                        ) : null}
-                                                        <div className="absolute inset-0 bg-gray-900/10 group-hover:bg-gray-900/0 transition-colors duration-300" />
-                                                        <span className="absolute text-5xl drop-shadow-lg scale-90 group-hover:scale-110 transition-transform duration-500">{!cat.image && cat.icon}</span>
-                                                    </div>
-                                                    <div className="p-6">
-                                                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-900 transition-colors">
-                                                            {cat.name}
-                                                        </h3>
-                                                        <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                                                className="group cursor-pointer h-full">
+                                                <div className="bg-white/85 backdrop-blur-md border border-white/70 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
+                                                    <div className="p-6 flex-1 flex flex-col">
+                                                        <div className="flex items-center gap-3 mb-4">
+                                                            <span className="text-3xl">{cat.icon}</span>
+                                                            <h3 className="text-lg font-bold text-gray-900 group-hover:text-gray-900 transition-colors">
+                                                                {cat.name}
+                                                            </h3>
+                                                        </div>
+                                                        <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
                                                             {cat.intro}
                                                         </p>
-                                                        <div className="flex items-center justify-between">
+                                                        <div className="flex items-center justify-between mt-auto pt-4 border-gray-100">
                                                             <span className="text-xs text-gray-900 font-semibold uppercase tracking-wider">
                                                                 Browse Collection
                                                             </span>
@@ -473,7 +415,6 @@ const Projects = () => {
                                 )}
                             </section>
 
-                            {/* 2. Source Code Section */}
                             <section>
                                 <div className="mb-8 md:mb-10 text-left">
                                     <h2 className="text-3xl md:text-4xl font-black text-white mb-2 flex items-center gap-3">
@@ -487,23 +428,19 @@ const Projects = () => {
                                         {sourceCodes.map(cat => (
                                             <div key={cat.id}
                                                 onClick={() => handleProjectClick({ ...cat, type: 'source' })}
-                                                className="group cursor-pointer">
-                                        <div className="bg-white/85 backdrop-blur-md border border-white/70 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                                                    <div className="aspect-video relative overflow-hidden bg-gray-100 flex items-center justify-center">
-                                                        {cat.image ? (
-                                                            <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onError={(e) => e.target.style.display = 'none'} />
-                                                        ) : null}
-                                                        <div className="absolute inset-0 bg-gray-900/10 group-hover:bg-gray-900/0 transition-colors duration-300" />
-                                                        <span className="absolute text-5xl drop-shadow-lg scale-90 group-hover:scale-110 transition-transform duration-500">{!cat.image && cat.icon}</span>
-                                                    </div>
-                                                    <div className="p-6">
-                                                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-900 transition-colors">
-                                                            {cat.name}
-                                                        </h3>
-                                                        <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                                                className="group cursor-pointer h-full">
+                                                <div className="bg-white/85 backdrop-blur-md border border-white/70 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
+                                                    <div className="p-6 flex-1 flex flex-col">
+                                                        <div className="flex items-center gap-3 mb-4">
+                                                            <span className="text-3xl">{cat.icon}</span>
+                                                            <h3 className="text-lg font-bold text-gray-900 group-hover:text-gray-900 transition-colors">
+                                                                {cat.name}
+                                                            </h3>
+                                                        </div>
+                                                        <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
                                                             {cat.intro}
                                                         </p>
-                                                        <div className="flex items-center justify-between">
+                                                        <div className="flex items-center justify-between mt-auto pt-4 border-gray-100">
                                                             <span className="text-xs text-gray-900 font-semibold uppercase tracking-wider">
                                                                 Browse Snippets
                                                             </span>
@@ -521,66 +458,6 @@ const Projects = () => {
                                         <p className="text-gray-400 font-medium">Repositories and snippets coming soon...</p>
                                     </div>
                                 )}
-                            </section>
-
-                            {/* 3. Projects Section */}
-                            <section>
-                                <div className="mb-8 md:mb-10 text-left">
-                                    <h2 className="text-3xl md:text-4xl font-black text-white mb-2 flex items-center gap-3">
-                                        <span className="bg-gray-100 p-2 rounded-xl text-2xl">🚀</span>
-                                        <TextAnimate animation="blurInUp" by="character" once delay={0.3}>Projects</TextAnimate>
-                                    </h2>
-                                    <p className="text-gray-500 font-medium ml-14">Complete applications, tools, and side projects.</p>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                    {projects.map((project) => (
-                                        <div
-                                            key={project.id}
-                                            onClick={() => handleProjectClick(project)}
-                                            className="group cursor-pointer"
-                                        >
-                                            {/* Card */}
-                                    <div className="bg-white/85 backdrop-blur-md border border-white/70 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                                                {/* Image Preview - All projects show image */}
-                                                <div className="aspect-video relative overflow-hidden">
-                                                    <img
-                                                        src={project.image}
-                                                        alt={project.name}
-                                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                                    />
-                                                    {/* Video Indicator for projects with video */}
-                                                    {project.hasVideo && (
-                                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                                                            <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-50 group-hover:scale-100">
-                                                                <svg className="w-5 h-5 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                                                    <path d="M8 5v14l11-7z" />
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                    )}
-                                                </div>
-
-                                                {/* Content */}
-                                                <div className="p-6">
-                                                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-900 transition-colors">
-                                                        {project.name}
-                                                    </h3>
-                                                    <p className="text-sm text-gray-600 line-clamp-2 mb-4">
-                                                        {project.intro}
-                                                    </p>
-                                                    <div className="flex items-center justify-between">
-                                                        <span className="text-xs text-gray-900 font-semibold uppercase tracking-wider">
-                                                            Click to view
-                                                        </span>
-                                                        <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
                             </section>
                         </>
                     )}
@@ -600,19 +477,13 @@ const Projects = () => {
                         className="bg-white rounded-[1.5rem] md:rounded-[2rem] shadow-2xl max-w-4xl w-full max-h-[calc(100vh-8rem)] md:max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide animate-in zoom-in-95 duration-300 my-4"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        {/* Header */}
-                        <div className="relative bg-gray-100">
-                            <img
-                                src={selectedProject.image}
-                                alt={selectedProject.name}
-                                className="w-full aspect-video object-cover rounded-t-[1.5rem] md:rounded-t-[2rem]"
-                            />
+                        {/* Header - Simple with Close Button Only */}
+                        <div className="flex justify-end p-4">
                             <button
                                 onClick={() => {
                                     setSelectedProject(null)
-                                    setShowVideoModal(false)
                                 }}
-                                className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg"
+                                className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
                             >
                                 <svg className="w-5 h-5 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -711,35 +582,6 @@ const Projects = () => {
                 </div>
             )}
 
-            {/* Video Fullscreen Modal */}
-            {showVideoModal && selectedProject && (
-                <div
-                    className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[60] flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-300"
-                    onClick={() => setShowVideoModal(false)}
-                >
-                    <div
-                        className="w-full max-w-6xl aspect-video relative animate-in zoom-in-95 duration-300"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <video
-                            src={`/projects/${selectedProject.id}/video.mp4`}
-                            controls
-                            autoPlay
-                            className="w-full h-full object-contain rounded-2xl shadow-2xl"
-                        >
-                            您的浏览器不支持视频播放。
-                        </video>
-                        <button
-                            onClick={() => setShowVideoModal(false)}
-                            className="absolute -top-4 -right-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-xl"
-                        >
-                            <svg className="w-6 h-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            )}
         </div>
     )
 }
