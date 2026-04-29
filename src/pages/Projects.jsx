@@ -186,7 +186,7 @@ const Projects = () => {
                 title: k.name,
                 description: k.intro,
                 meta: 'Knowledge',
-                icon: '🧠',
+                icon: k.icon,
                 kind: 'knowledge',
                 categoryId: k.id,
             })),
@@ -196,7 +196,7 @@ const Projects = () => {
                     title: it.title,
                     description: k.name,
                     meta: 'Knowledge',
-                    icon: '🧠',
+                    icon: k.icon,
                     kind: 'link',
                     href: it.link,
                 }))
@@ -206,7 +206,7 @@ const Projects = () => {
                 title: s.name,
                 description: s.intro,
                 meta: 'Source',
-                icon: '💻',
+                icon: s.icon,
                 kind: 'source',
                 categoryId: s.id,
             })),
@@ -216,7 +216,7 @@ const Projects = () => {
                     title: it.title,
                     description: s.name,
                     meta: 'Source',
-                    icon: '💻',
+                    icon: s.icon,
                     kind: 'link',
                     href: it.link,
                 }))
@@ -494,7 +494,7 @@ const Projects = () => {
                         {/* Content */}
                         <div className="p-6 md:p-12">
                             <div className="mb-6 md:mb-8">
-                                <h2 className="text-2xl md:text-4xl font-black text-gray-900 mb-3 md:mb-4">
+                                <h2 className="text-2xl md:text-4xl font-medium text-gray-900 mb-3 md:mb-4">
                                     {selectedProject.name}
                                 </h2>
                                 <p className="text-base md:text-xl text-gray-600 mb-4 md:mb-6">
@@ -507,7 +507,7 @@ const Projects = () => {
                                     {selectedProject.hasVideo && (
                                         <button
                                             onClick={() => setShowVideoModal(true)}
-                                            className="inline-flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 bg-gray-900 text-white rounded-xl text-sm md:text-base font-semibold hover:bg-gray-800 transition-colors"
+                                            className="inline-flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 bg-gray-900 text-white rounded-xl text-sm md:text-base font-normal hover:bg-gray-800 transition-colors"
                                         >
                                             <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M8 5v14l11-7z" />
@@ -522,7 +522,7 @@ const Projects = () => {
                                             href={selectedProject.github}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 bg-gray-900 text-white rounded-xl text-sm md:text-base font-semibold hover:bg-gray-800 transition-colors"
+                                            className="inline-flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 bg-gray-900 text-white rounded-xl text-sm md:text-base font-normal hover:bg-gray-800 transition-colors"
                                         >
                                             <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
                                                 <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
@@ -547,7 +547,7 @@ const Projects = () => {
                             {/* Details for Knowledge/Source Code Type (Links Modal) */}
                             {selectedProject.type && selectedProject.items && (
                                 <div className="mt-8 space-y-4">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <h3 className="text-xl font-medium text-gray-900 mb-6 flex items-center gap-2">
                                         <span className="bg-gray-100 p-2 rounded-lg text-lg">📑</span>
                                         Collection Index
                                     </h3>
@@ -561,13 +561,13 @@ const Projects = () => {
                                                 className="group flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white border border-gray-200 rounded-2xl hover:border-gray-900 hover:shadow-lg transition-all duration-300"
                                             >
                                                 <div className="flex items-start gap-4 mb-3 sm:mb-0">
-                                                    <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center text-sm font-bold text-gray-500 group-hover:bg-gray-900 group-hover:text-white transition-colors">
+                                                    <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center text-sm font-normal text-gray-500 group-hover:bg-gray-900 group-hover:text-white transition-colors">
                                                         {idx + 1}
                                                     </div>
-                                                    <span className="font-semibold text-gray-800 group-hover:text-gray-900 text-lg leading-snug pt-0.5">{item.title}</span>
+                                                    <span className="font-normal text-gray-800 group-hover:text-gray-900 text-lg leading-snug pt-0.5">{item.title}</span>
                                                 </div>
                                                 <div className="flex items-center gap-2 pl-12 sm:pl-0">
-                                                    <span className="text-sm font-bold text-gray-400 group-hover:text-gray-900 transition-colors uppercase tracking-wider">Read Full</span>
+                                                    <span className="text-sm font-normal text-gray-400 group-hover:text-gray-900 transition-colors uppercase tracking-wider">Read Full</span>
                                                     <svg className="w-5 h-5 text-gray-300 group-hover:text-gray-900 transform -rotate-45 transition-all group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                                     </svg>
