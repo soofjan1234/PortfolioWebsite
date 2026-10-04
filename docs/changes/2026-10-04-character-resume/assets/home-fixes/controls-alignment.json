@@ -1,0 +1,125 @@
+{
+  "executedAt": "2026-10-04T14:54:30.899Z",
+  "desktop": [
+    {
+      "bottom": 72,
+      "height": 34,
+      "left": 1074,
+      "name": "回到顶部",
+      "right": 1108,
+      "top": 38,
+      "width": 34,
+      "x": 1074,
+      "y": 38
+    },
+    {
+      "bottom": 72,
+      "height": 34,
+      "left": 1124,
+      "name": "打开导航菜单",
+      "right": 1158,
+      "top": 38,
+      "width": 34,
+      "x": 1124,
+      "y": 38
+    },
+    {
+      "bottom": 72,
+      "height": 34,
+      "left": 1174,
+      "name": "Contact",
+      "right": 1246,
+      "top": 38,
+      "width": 72,
+      "x": 1174,
+      "y": 38
+    },
+    {
+      "bottom": 72.140625,
+      "height": 34,
+      "left": 974,
+      "name": "上一组Tech Hub",
+      "right": 1008,
+      "top": 38.140625,
+      "width": 34,
+      "x": 974,
+      "y": 38.140625
+    },
+    {
+      "bottom": 72.140625,
+      "height": 34,
+      "left": 1024,
+      "name": "下一组Tech Hub",
+      "right": 1058,
+      "top": 38.140625,
+      "width": 34,
+      "x": 1024,
+      "y": 38.140625
+    }
+  ],
+  "mobile": {
+    "buttons": [
+      {
+        "bottom": 71,
+        "height": 34,
+        "left": 122,
+        "name": "回到顶部",
+        "right": 156,
+        "top": 37,
+        "width": 34,
+        "x": 122,
+        "y": 37
+      },
+      {
+        "bottom": 71,
+        "height": 34,
+        "left": 172,
+        "name": "打开导航菜单",
+        "right": 206,
+        "top": 37,
+        "width": 34,
+        "x": 172,
+        "y": 37
+      },
+      {
+        "bottom": 71,
+        "height": 34,
+        "left": 222,
+        "name": "Contact",
+        "right": 294,
+        "top": 37,
+        "width": 72,
+        "x": 222,
+        "y": 37
+      },
+      {
+        "bottom": 70.984375,
+        "height": 34,
+        "left": 22.0078125,
+        "name": "上一组Tech Hub",
+        "right": 56.0078125,
+        "top": 36.984375,
+        "width": 34,
+        "x": 22.0078125,
+        "y": 36.984375
+      },
+      {
+        "bottom": 70.984375,
+        "height": 34,
+        "left": 72.0078125,
+        "name": "下一组Tech Hub",
+        "right": 106.0078125,
+        "top": 36.984375,
+        "width": 34,
+        "x": 72.0078125,
+        "y": 36.984375
+      }
+    ],
+    "pageWidth": 314,
+    "width": 314
+  },
+  "mobileAfterNext": {
+    "offset": 278,
+    "previousEnabled": true
+  }
+}

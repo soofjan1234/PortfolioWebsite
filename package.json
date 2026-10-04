@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "node scripts/generate-posts-manifest.js && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:browser": "node scripts/check-home-browser.mjs",
+    "character:static": "node scripts/capture-character-static.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^8.18.0",
@@ -26,12 +29,17 @@
     "three": "^0.183.2"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.3.3",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.17",
+    "gltf-validator": "^2.0.0-dev.3.10",
+    "jsdom": "^25.0.1",
+    "playwright": "^1.63.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "vitest": "^2.1.9"
   }
 }

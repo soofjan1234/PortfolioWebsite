@@ -1,0 +1,88 @@
+{
+  "valid": true,
+  "stage": "eyes",
+  "bytes": 8291716,
+  "sha256": "8daa123876b152a6cf179b69806f6eede75744da3554308648591def99b3481e",
+  "counts": {
+    "nodes": 14,
+    "meshes": 8,
+    "materials": 12,
+    "textures": 13,
+    "cameras": 1,
+    "animations": 1,
+    "vertices": 48524,
+    "triangles": 80658,
+    "primitives": 12
+  },
+  "structural": {
+    "errors": 0,
+    "warnings": 0,
+    "firstIssue": {
+      "code": "UNUSED_MESH_TANGENT",
+      "message": "Tangents are not used because the material has no normal texture.",
+      "severity": 2,
+      "pointer": "/meshes/4/primitives/0/attributes/TANGENT"
+    }
+  },
+  "contract": {
+    "valid": true,
+    "issues": []
+  },
+  "sourceSha256": "f74f3a6b0e8ffd7a6c19268a54b965647096a1d63a0eb1d0564c2ae11babc23f",
+  "details": {
+    "skin": {
+      "skinLoopCoverage": 0.7004,
+      "blushMax": 0.5139,
+      "maskImage": "skin-mask"
+    },
+    "eyes": [
+      {
+        "name": "eyelid-left",
+        "boundaryVertices": 150,
+        "maxBridge": 0.01712,
+        "eyeCenter": [
+          -0.09961097687482834,
+          -0.210422083735466,
+          0.32274872064590454
+        ],
+        "eyeRotation": [
+          -0.13962633907794952,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "eyelid-right",
+        "boundaryVertices": 138,
+        "maxBridge": 0.01846,
+        "eyeCenter": [
+          0.10940664261579514,
+          -0.20398637652397156,
+          0.30617979168891907
+        ],
+        "eyeRotation": [
+          -0.13962633907794952,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "generationSeconds": 1.92
+  },
+  "exported": [
+    "character-head",
+    "character-shirt",
+    "character-hair",
+    "character-glasses",
+    "eye-left",
+    "eye-right",
+    "ResumeCamera",
+    "focus-start",
+    "focus-1",
+    "focus-2",
+    "focus-works",
+    "focus-tech-hub",
+    "eyelid-left",
+    "eyelid-right"
+  ]
+}

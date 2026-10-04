@@ -1,0 +1,86 @@
+{
+  "executedAt": "2026-10-04T13:13:11.013Z",
+  "timezone": "Asia/Shanghai",
+  "baseURL": "http://127.0.0.1:4173",
+  "checks": [
+    {
+      "name": "桌面首屏、模型加载及完整内容",
+      "passed": true
+    },
+    {
+      "name": "桌面独立眼球跟随",
+      "passed": true
+    },
+    {
+      "name": "履历镜头、焦点同步与反向恢复",
+      "passed": true
+    },
+    {
+      "name": "作品和 Tech Hub 横向首尾、退出与反向浏览",
+      "passed": true
+    },
+    {
+      "name": "八类真实文章、键盘关闭与焦点恢复",
+      "passed": true
+    },
+    {
+      "name": "文章请求失败、重试和原页面入口",
+      "passed": true
+    },
+    {
+      "name": "作品入口、邮件和微信联系可操作",
+      "passed": true
+    },
+    {
+      "name": "原 /projects 与 /experience 路由可访问并能返回主页",
+      "passed": true
+    },
+    {
+      "name": "运行中切换减少动态效果，三维清理及恢复无重复画布",
+      "passed": true
+    },
+    {
+      "name": "mobile 首屏、完整浏览与无页面溢出",
+      "passed": true
+    },
+    {
+      "name": "small-mobile 首屏、完整浏览与无页面溢出",
+      "passed": true
+    },
+    {
+      "name": "short-desktop 首屏、完整浏览与无页面溢出",
+      "passed": true
+    },
+    {
+      "name": "减少动态效果不请求 GLB，静态人物和横滑阅读完整",
+      "passed": true
+    },
+    {
+      "name": "model-download 降级仍可阅读和打开文章",
+      "passed": true
+    },
+    {
+      "name": "model-parse 降级仍可阅读和打开文章",
+      "passed": true
+    },
+    {
+      "name": "webgl 降级仍可阅读和打开文章",
+      "passed": true
+    },
+    {
+      "name": "context-loss 降级仍可阅读和打开文章",
+      "passed": true
+    },
+    {
+      "name": "model-timeout 降级仍可阅读和打开文章",
+      "passed": true
+    },
+    {
+      "name": "scene-module 降级仍可阅读和打开文章",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "articleCount": 63,
+  "passed": true
+}

@@ -1,0 +1,39 @@
+{
+  "valid": true,
+  "stage": "ready",
+  "bytes": 7287648,
+  "sha256": "201ed284f620168eea57346660116adfd9b07440edf29786e468d60c22d33534",
+  "counts": {
+    "nodes": 12,
+    "meshes": 6,
+    "materials": 5,
+    "textures": 3,
+    "cameras": 1,
+    "animations": 1,
+    "vertices": 47558,
+    "triangles": 79506,
+    "primitives": 10
+  },
+  "structural": {
+    "errors": 0,
+    "warnings": 0,
+    "firstIssue": {
+      "code": "NODE_EMPTY",
+      "message": "Empty node encountered.",
+      "severity": 2,
+      "pointer": "/nodes/7"
+    }
+  },
+  "contract": {
+    "valid": true,
+    "issues": []
+  },
+  "verified": {
+    "independentMeshes": 6,
+    "eyePivots": "centered",
+    "animationSeconds": 8.333333333333334,
+    "normalMapTangents": true,
+    "sourceUnchanged": true,
+    "blendBytes": 11756380
+  }
+}

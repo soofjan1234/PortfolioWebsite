@@ -1,0 +1,54 @@
+{
+  "valid": true,
+  "stage": "skin",
+  "bytes": 7641380,
+  "sha256": "341af40271c4f85f1638c19744063724737f13b21ef6de71aa8dcbf28125edeb",
+  "counts": {
+    "nodes": 12,
+    "meshes": 6,
+    "materials": 7,
+    "textures": 7,
+    "cameras": 1,
+    "animations": 1,
+    "vertices": 47558,
+    "triangles": 79506,
+    "primitives": 10
+  },
+  "structural": {
+    "errors": 0,
+    "warnings": 0,
+    "firstIssue": {
+      "code": "NODE_EMPTY",
+      "message": "Empty node encountered.",
+      "severity": 2,
+      "pointer": "/nodes/7"
+    }
+  },
+  "contract": {
+    "valid": true,
+    "issues": []
+  },
+  "sourceSha256": "f74f3a6b0e8ffd7a6c19268a54b965647096a1d63a0eb1d0564c2ae11babc23f",
+  "details": {
+    "skin": {
+      "skinLoopCoverage": 0.7004,
+      "blushMax": 0.3854,
+      "maskImage": "skin-mask"
+    },
+    "generationSeconds": 1.67
+  },
+  "exported": [
+    "character-head",
+    "character-shirt",
+    "character-hair",
+    "character-glasses",
+    "eye-left",
+    "eye-right",
+    "ResumeCamera",
+    "focus-start",
+    "focus-1",
+    "focus-2",
+    "focus-works",
+    "focus-tech-hub"
+  ]
+}

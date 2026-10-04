@@ -1,0 +1,46 @@
+{
+  "transforms": [
+    {
+      "name": "eye-left",
+      "centerAndScaleEqual": true,
+      "outwardRadians": -0.12,
+      "rotationErrorRadians": 4.2146848510894035e-8,
+      "expectedPose": true
+    },
+    {
+      "name": "eye-right",
+      "centerAndScaleEqual": true,
+      "outwardRadians": 0.12,
+      "rotationErrorRadians": 4.2146848510894035e-8,
+      "expectedPose": true
+    },
+    {
+      "name": "ResumeCamera",
+      "equal": true
+    },
+    {
+      "name": "focus-start",
+      "equal": true
+    },
+    {
+      "name": "focus-1",
+      "equal": true
+    },
+    {
+      "name": "focus-2",
+      "equal": true
+    },
+    {
+      "name": "focus-works",
+      "equal": true
+    },
+    {
+      "name": "focus-tech-hub",
+      "equal": true
+    }
+  ],
+  "animationMaxAbsoluteDifference": 0,
+  "timingEqual": true,
+  "baselineSha256": "201ed284f620168eea57346660116adfd9b07440edf29786e468d60c22d33534",
+  "candidateSha256": "c2147c0a767a131d2a652a2bd399aeaa1afc9f68902739353439848d5f0a464e"
+}

@@ -1,0 +1,127 @@
+{
+  "generatedAt": "2026-10-04T13:45:37.982Z",
+  "count": 15,
+  "totalBytes": 657896,
+  "files": [
+    {
+      "name": "article-failure.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 22189,
+      "width": 1280,
+      "height": 720,
+      "sha256": "f44994e2254146001252f3d2f6b586b260260168ff8fa7783fe0c18b76bd4801"
+    },
+    {
+      "name": "contact.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 36978,
+      "width": 390,
+      "height": 844,
+      "sha256": "20803f24a9a2b6b52bbb456fbefcd67efd6ed2c0d2ec4c33082060cc4db12ba7"
+    },
+    {
+      "name": "desktop-articles.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 54033,
+      "width": 1440,
+      "height": 1000,
+      "sha256": "bde19bc2e2698ccffa31a2382030b50784711cd6811ff12cc95a2138b72fab4b"
+    },
+    {
+      "name": "desktop-hero.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 72622,
+      "width": 1274,
+      "height": 717,
+      "sha256": "e4f50cd8a35bd6b31cf761411a4de93ac3a03d3b73a1e41fa24f2b03121399ce"
+    },
+    {
+      "name": "desktop-resume.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 95747,
+      "width": 1434,
+      "height": 996,
+      "sha256": "67129efebb7154e7fcc025ccab02f9df831b853e5d3cf50512611d2f764ff789"
+    },
+    {
+      "name": "desktop-tech-hub.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 46881,
+      "width": 1434,
+      "height": 996,
+      "sha256": "3ec2a603f09caaf1cc5458f325c7fc29b3de387fac6590b62c5042ddea224fba"
+    },
+    {
+      "name": "desktop-works-entry.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 53074,
+      "width": 1434,
+      "height": 996,
+      "sha256": "936f613d9327b16c0adb3c2979475643bcc0e3c3485c5148d1f0512e44fd1d12"
+    },
+    {
+      "name": "desktop-works.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 49119,
+      "width": 1434,
+      "height": 996,
+      "sha256": "bfde5f60aa66e7006b32520457fcd35dbd5b8d7c53f2218ba0e823313b731cfb"
+    },
+    {
+      "name": "mobile-articles.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 18543,
+      "width": 390,
+      "height": 844,
+      "sha256": "6dde1d490c87f9ab36d017bedfdcb77744db113e40e55b2720b9b48075188e2b"
+    },
+    {
+      "name": "mobile-hero.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 17953,
+      "width": 384,
+      "height": 831,
+      "sha256": "5169e8ffb72694b1f533ef78d032fdca0c862c4f622cdd839c67b781da37214e"
+    },
+    {
+      "name": "mobile-landscape.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 28691,
+      "width": 838,
+      "height": 387,
+      "sha256": "413803ff68b7eba3b152ef936cfec30475e3e7769a29fb3c14987c96811d6599"
+    },
+    {
+      "name": "mobile-resume.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 32767,
+      "width": 384,
+      "height": 831,
+      "sha256": "8544284925d0a090c17968c8a14f0cdf2ec020e36e9e29dbb6dd53464e4ae13a"
+    },
+    {
+      "name": "mobile-works.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 30176,
+      "width": 384,
+      "height": 831,
+      "sha256": "b9f8f033441b7604ca2e55af1821310330529dff61da01f4495f65f32b95c97e"
+    },
+    {
+      "name": "model-failure-readable.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 28234,
+      "width": 1280,
+      "height": 720,
+      "sha256": "96b405bda8eb02db46ea8027416fdc062f8255c3b3733de6a8f21a25cf851d3e"
+    },
+    {
+      "name": "model-failure.jpg",
+      "mimeType": "image/jpeg",
+      "bytes": 70889,
+      "width": 1274,
+      "height": 717,
+      "sha256": "0a0eb21e664990a8298ce23193b4be2aae753305c23f6dbb15c70a17780062cc"
+    }
+  ]
+}

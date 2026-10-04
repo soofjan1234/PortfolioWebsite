@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hou · 人物模型预览</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#dcd9d3;color:#242628;font:14px/1.5 system-ui,sans-serif}canvas{display:block;width:100vw;height:100vh;touch-action:none}header{position:fixed;left:28px;top:22px;pointer-events:none}h1{font-size:22px;margin:0 0 6px;font-weight:600}p{margin:0;color:#55595b}.panel{position:fixed;left:24px;right:24px;bottom:24px;max-width:760px;padding:16px 20px;background:#f8f7f2ed;border:1px solid #ffffff90;border-radius:16px;backdrop-filter:blur(16px)}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.row+.row{margin-top:10px}button{background:#e5e3dd;color:#292c2e;border:0;border-radius:8px;padding:7px 12px;cursor:pointer;font:inherit}button[aria-pressed=true]{background:#292c2e;color:#f8f7f2}input[type=range]{width:100%;margin:12px 0 0;accent-color:#343739}label{cursor:pointer}#status{position:fixed;right:28px;top:24px;color:#55595b;font-size:12px;max-width:240px;text-align:right}small{display:block;margin-top:8px;color:#64686a;font-size:11px}@media(max-width:600px){header{left:20px;top:18px}#status{top:76px;left:20px;text-align:left}.panel{left:12px;right:12px;bottom:12px;padding:12px}h1{font-size:19px}button{padding:6px 10px}small{font-size:10px}}
+  </style>
+  <style>
+    /* 宽屏控制面板留在人物左侧，特写时仍可看清嘴部与下巴。 */
+    @media(min-width:1000px){.panel{max-width:400px}}
+  </style>
+</head>
+<body>
+  <header><h1>Hou · 人物模型预览</h1><p>正式模型 · 拖动旋转 / 滚轮缩放</p></header>
+  <div id="status" role="status">正式模型加载中…</div>
+  <section class="panel" aria-label="模型预览控制">
+    <div class="row">
+      <button id="front" aria-pressed="true">正面</button><button id="side" aria-pressed="false">侧面</button><button id="back" aria-pressed="false">背面</button><button id="close" aria-pressed="false">面部特写</button>
+    </div>
+    <div class="row"><button id="orbit" aria-pressed="true">自由观察</button><button id="camera" aria-pressed="false">相机动画</button><label><input id="eyes" type="checkbox" checked> 目光跟随</label><label><input id="dof" type="checkbox"> 景深</label></div>
+    <input id="timeline" aria-label="相机动画进度" type="range" min="0" max="1" step="0.001" value="0">
+    <small>3D base generated with Meshy (CC BY 4.0), customized for Hou · 已完成模型验收</small>
+  </section>
+  <script type="module">
+    import * as THREE from 'three';
+    import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+    import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+    import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+    import {RectAreaLightUniformsLib} from 'three/addons/lights/RectAreaLightUniformsLib.js';
+    import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
+    import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+    import {BokehPass} from 'three/addons/postprocessing/BokehPass.js';
+    import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
+
+    // 已验收模型默认沿用精修布光；候选仅允许固定资源路径。
+    // 对照布光参数保留，用于隔离材质与灯光的影响。
+    const query = new URLSearchParams(location.search);
+    const candidate = query.get('quality') === 'candidate';
+    const refinedLighting = query.get('lighting') !== 'baseline';
+    const version = candidate ? '质感精修候选' : '正式模型';
+    document.querySelector('header p').textContent = `${version} · 拖动旋转 / 滚轮缩放`;
+    document.querySelector('small').textContent = `3D base generated with Meshy (CC BY 4.0), customized for Hou · ${version}`;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(refinedLighting ? '#aebdac' : '#dcd9d3');
+    const renderer = new THREE.WebGLRenderer({antialias:true});
+    // device=touch 仅供验收触屏降级分支，实际设备仍由媒体查询自动判断。
+    const touch = matchMedia('(pointer: coarse)').matches || query.get('device') === 'touch';
+    renderer.setPixelRatio(Math.min(devicePixelRatio, touch ? 1.25 : 2));
+    renderer.setSize(innerWidth,innerHeight);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = refinedLighting ? .86 : .9;
+    renderer.shadowMap.enabled = !touch;
+    renderer.shadowMap.type = THREE.VSMShadowMap;
+    document.body.prepend(renderer.domElement);
+    // 内置房间环境生成免费 IBL，不需要下载 HDRI 或请求外部服务。
+    const room = new RoomEnvironment();
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const environment = pmrem.fromScene(room,.04);
+    scene.environment = environment.texture;
+    scene.environmentIntensity = refinedLighting ? .32 : .45;
+    room.dispose();
+    pmrem.dispose();
+    scene.add(new THREE.HemisphereLight(refinedLighting ? '#eef2dd' : '#fff1df','#586979',refinedLighting ? .42 : .3));
+    const key = new THREE.DirectionalLight(refinedLighting ? '#ffe2cb' : '#ffead5',refinedLighting ? .65 : 1.5);
+    key.position.set(...(refinedLighting ? [3,3.5,4] : [-3,4,5]));
+    key.castShadow = !touch;
+    key.shadow.mapSize.set(2048,2048);
+    Object.assign(key.shadow.camera,{left:-1.3,right:1.3,top:1.5,bottom:-1.3,near:.1,far:12});
+    key.shadow.bias = -.0001;
+    key.shadow.normalBias = .006;
+    key.shadow.radius = refinedLighting ? 14 : 4;
+    key.shadow.blurSamples = refinedLighting ? 12 : 8;
+    scene.add(key);
+    // 大面积柔光承担主要明暗，低强度方向光仅提供接触阴影。
+    if(refinedLighting){
+      RectAreaLightUniformsLib.init();
+      const softbox = new THREE.RectAreaLight('#ffe8d8',4.5,4,4);
+      softbox.position.set(2.5,2.5,3.5);
+      softbox.lookAt(0,.2,0);
+      scene.add(softbox);
+    }
+    const fill = new THREE.DirectionalLight(refinedLighting ? '#b3d5ec' : '#d8e8ff',refinedLighting ? .6 : .65);
+    fill.position.set(...(refinedLighting ? [-3,1,2] : [3,1,3]));
+    scene.add(fill);
+    const rim = new THREE.DirectionalLight(refinedLighting ? '#a8d4ed' : '#d1dff1',refinedLighting ? 2.2 : 1.2);
+    rim.position.set(...(refinedLighting ? [-2,3,-2] : [2,3,-3]));
+    scene.add(rim);
+    const view = new THREE.PerspectiveCamera(36,innerWidth/innerHeight,.01,100);
+    view.position.set(0,.06,3.5);
+    const controls = new OrbitControls(view,renderer.domElement);
+    controls.target.set(0,.03,0);
+    controls.minDistance = 1.2;
+    controls.maxDistance = 6;
+    controls.enableDamping = true;
+    const composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene,view);
+    const bokeh = new BokehPass(scene,view,{focus:3.2,aperture:.003,maxblur:.003});
+    composer.addPass(renderPass);
+    composer.addPass(bokeh);
+    composer.addPass(new OutputPass());
+    const status = document.querySelector('#status');
+    status.textContent = `${version}加载中…`;
+    const timeline = document.querySelector('#timeline');
+    const eyeToggle = document.querySelector('#eyes');
+    const dofToggle = document.querySelector('#dof');
+    eyeToggle.checked = !touch;
+    eyeToggle.disabled = touch;
+    dofToggle.disabled = touch;
+    const pointer = new THREE.Vector2();
+    // 约 22° 水平、13° 垂直的转动范围；输入限幅，避免移出窗口时继续转入眼窝。
+    const gazeRange = {horizontal:.38,vertical:.22};
+    const loader = new GLTFLoader();
+    const gaze = new THREE.Quaternion();
+    const gazeEuler = new THREE.Euler();
+    const focus = new THREE.Vector3();
+    const direction = new THREE.Vector3();
+    let current, cameraMode = false;
+    // 显式验收参数才采样帧间隔；数据留在画布属性中，不加入用户控制面板。
+    const measure = query.get('measure') === '1';
+    const intervals = [];
+    let previousFrame = 0;
+
+    /** 在动画视角与观察视角间切换，不重置时间轴。 */
+    function setMode(value){
+      cameraMode = value && Boolean(current);
+      controls.enabled = !cameraMode;
+      document.querySelector('#orbit').setAttribute('aria-pressed',String(!cameraMode));
+      document.querySelector('#camera').setAttribute('aria-pressed',String(cameraMode));
+    }
+
+    /** 加载正式模型或精修候选，并初始化目光、相机动画和阴影。 */
+    async function loadModel(){
+      try {
+        const modelPath = candidate ? '/models/me-quality-candidate.glb' : '/models/me.glb';
+        const gltf = await loader.loadAsync(modelPath);
+        const model = gltf.scene;
+        const eyes = ['eye-left','eye-right'].map(name => model.getObjectByName(name));
+        const rests = eyes.map(eye => eye.quaternion.clone());
+        const mixer = new THREE.AnimationMixer(model);
+        const clip = gltf.animations.find(clip => clip.name === 'CameraAction');
+        mixer.clipAction(clip).play();
+        model.traverse(obj => {if(obj.isMesh){obj.castShadow = true;obj.receiveShadow = true;}});
+        current = {model,eyes,rests,mixer,clip,camera:gltf.cameras[0]};
+        scene.add(current.model);
+        status.textContent = `${version} · 已加载`;
+      } catch(error){
+        status.textContent = '模型加载失败，请刷新重试';
+        console.error(error);
+      }
+    }
+
+    /** 用固定观察角度核对轮廓，近景仍可继续拖动和缩放。 */
+    function setView(id){
+      setMode(false);
+      const poses = {front:[0,.06,3.5],side:[3.5,.06,0],back:[0,.06,-3.5],close:[0,.35,2.05]};
+      controls.target.set(0,id === 'close' ? .32 : .03,0);
+      view.position.set(...poses[id]);
+      // 清掉上一次拖动的惯性，确保固定视角能用于严格对照。
+      controls.enableDamping = false;
+      controls.update();
+      controls.enableDamping = true;
+      for(const key of Object.keys(poses)) document.querySelector(`#${key}`).setAttribute('aria-pressed',String(key === id));
+    }
+    for(const id of ['front','side','back','close']) document.querySelector(`#${id}`).onclick = () => setView(id);
+    document.querySelector('#orbit').onclick = () => setMode(false);
+    document.querySelector('#camera').onclick = () => setMode(true);
+    timeline.oninput = () => setMode(true);
+    addEventListener('pointermove',event => pointer.set(
+      THREE.MathUtils.clamp(event.clientX/innerWidth*2-1,-1,1),
+      THREE.MathUtils.clamp(event.clientY/innerHeight*2-1,-1,1)));
+    addEventListener('resize',() => {
+      renderer.setSize(innerWidth,innerHeight);
+      composer.setSize(innerWidth,innerHeight);
+      view.aspect = innerWidth/innerHeight;
+      view.updateProjectionMatrix();
+    });
+
+    /** 眼球只在中心原点旋转；景深对焦随实际相机变化，可关闭以检查几何。 */
+    function render(timestamp){
+      requestAnimationFrame(render);
+      if(measure && current && previousFrame && !document.hidden){
+        intervals.push(timestamp-previousFrame);
+        if(intervals.length === 120){
+          const ordered = intervals.slice().sort((a,b) => a-b);
+          renderer.domElement.dataset.frameMedianMs = ordered[60].toFixed(2);
+          renderer.domElement.dataset.frameP95Ms = ordered[114].toFixed(2);
+          renderer.domElement.dataset.renderTriangles = String(renderer.info.render.triangles);
+          intervals.length = 0;
+        }
+      }
+      previousFrame = timestamp;
+      controls.update();
+      if(current){
+        current.mixer.setTime(Math.min(Number(timeline.value)*current.clip.duration,current.clip.duration-.000001));
+        current.eyes.forEach((eye,index) => {
+          gazeEuler.set(eyeToggle.checked ? pointer.y*gazeRange.vertical : 0,
+            eyeToggle.checked ? pointer.x*gazeRange.horizontal : 0,0);
+          gaze.setFromEuler(gazeEuler);
+          eye.quaternion.copy(current.rests[index]).multiply(gaze);
+        });
+      }
+      const camera = cameraMode && current ? current.camera : view;
+      camera.aspect = innerWidth/innerHeight;
+      camera.updateProjectionMatrix();
+      if(dofToggle.checked && !touch && current){
+        scene.updateMatrixWorld();
+        camera.updateMatrixWorld();
+        focus.set(0,.32,.30);
+        direction.copy(focus).sub(camera.position);
+        bokeh.uniforms.focus.value = Math.max(.1,direction.dot(camera.getWorldDirection(new THREE.Vector3())));
+        bokeh.uniforms.aspect.value = camera.aspect;
+        bokeh.uniforms.nearClip.value = camera.near;
+        bokeh.uniforms.farClip.value = camera.far;
+        bokeh.camera = camera;
+        renderPass.camera = camera;
+        composer.render();
+      } else renderer.render(scene,camera);
+    }
+    loadModel();
+    render();
+  </script>
+</body>
+</html>

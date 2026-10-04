@@ -1,0 +1,62 @@
+{
+  "source": "hou-textured-v1.glb",
+  "output": "public/models/me.glb",
+  "resumeCount": 2,
+  "eyes": [
+    {
+      "name": "eye-left",
+      "center": [
+        -0.09961097385876491,
+        -0.21042208866119194,
+        0.32274871710180697
+      ],
+      "radius": 0.11381103413847118
+    },
+    {
+      "name": "eye-right",
+      "center": [
+        0.10940664399978439,
+        -0.20398638046741163,
+        0.30617977804896795
+      ],
+      "radius": 0.10919559941541661
+    }
+  ],
+  "meshes": [
+    {
+      "name": "character-head",
+      "vertices": 12655,
+      "faces": 21599
+    },
+    {
+      "name": "character-shirt",
+      "vertices": 4323,
+      "faces": 7810
+    },
+    {
+      "name": "character-hair",
+      "vertices": 14539,
+      "faces": 26851
+    },
+    {
+      "name": "character-glasses",
+      "vertices": 2316,
+      "faces": 4430
+    },
+    {
+      "name": "eye-left",
+      "vertices": 4706,
+      "faces": 4800
+    },
+    {
+      "name": "eye-right",
+      "vertices": 4706,
+      "faces": 4800
+    }
+  ],
+  "fps": 24,
+  "frames": [
+    0,
+    200
+  ]
+}

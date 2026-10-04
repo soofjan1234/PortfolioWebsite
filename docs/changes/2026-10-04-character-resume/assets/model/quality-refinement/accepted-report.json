@@ -1,0 +1,31 @@
+{
+  "valid": true,
+  "stage": "ready",
+  "bytes": 9764808,
+  "sha256": "c2147c0a767a131d2a652a2bd399aeaa1afc9f68902739353439848d5f0a464e",
+  "counts": {
+    "nodes": 14,
+    "meshes": 8,
+    "materials": 12,
+    "textures": 11,
+    "cameras": 1,
+    "animations": 1,
+    "vertices": 58290,
+    "triangles": 81244,
+    "primitives": 12
+  },
+  "structural": {
+    "errors": 0,
+    "warnings": 0,
+    "firstIssue": {
+      "code": "UNUSED_OBJECT",
+      "message": "This object may be unused.",
+      "severity": 2,
+      "pointer": "/meshes/4/primitives/0/attributes/TEXCOORD_0"
+    }
+  },
+  "contract": {
+    "valid": true,
+    "issues": []
+  }
+}

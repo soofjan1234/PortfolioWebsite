@@ -1,0 +1,397 @@
+[
+  {
+    "name": "accepted-preview.jpg",
+    "bytes": 53019,
+    "sha256": "a8917c88bc116fc7358a08e8ec98826145ed90a5be57d625da73e86c12b898c1"
+  },
+  {
+    "name": "accepted-report.json",
+    "bytes": 646,
+    "sha256": "7aaaaa2a9a3ce2ffe196501fbd48eefbb6103709a7b80046a98bab94ca0cdbfe"
+  },
+  {
+    "name": "baseline-back.jpg",
+    "bytes": 32758,
+    "sha256": "0e3ad989219b61090f2103634cbf4c60c2f18360e4fcdc0ed3e557d2cb7488a7"
+  },
+  {
+    "name": "baseline-close.jpg",
+    "bytes": 53190,
+    "sha256": "84fe8845807bd0be6d1fd16f086e981b42d16b8a0cf6d772821a6fb6e8c2fa14"
+  },
+  {
+    "name": "baseline-front.jpg",
+    "bytes": 40842,
+    "sha256": "d52deaed84128a2ed48d7bd88fbd0909c4139416e23acb80301af1982b13cd17"
+  },
+  {
+    "name": "baseline-preview.html",
+    "bytes": 9939,
+    "sha256": "74eb14713eba8581afb369ba6933f81d6c80566c967dc0e871ef357b5765f38b"
+  },
+  {
+    "name": "baseline-side.jpg",
+    "bytes": 35431,
+    "sha256": "d9077c07718f1265755c3728446d6f39a79d8f9953eb729f4c3ad11bc5664a99"
+  },
+  {
+    "name": "baseline.glb",
+    "bytes": 7287648,
+    "sha256": "201ed284f620168eea57346660116adfd9b07440edf29786e468d60c22d33534"
+  },
+  {
+    "name": "baseline.json",
+    "bytes": 759,
+    "sha256": "3d1283a647f828bae3173b92de535d2034d2d439946a54c0292171a92c0e3ffd"
+  },
+  {
+    "name": "browser-checks.json",
+    "bytes": 789,
+    "sha256": "7db349df5d6c60eb2231bfb81c6573c6b2c07b55ec4b9ee4131add3fb4101040"
+  },
+  {
+    "name": "candidate-back.jpg",
+    "bytes": 32363,
+    "sha256": "9aa552d9c6b6846cfca589ffa85171ab39b142818210fcfa77bb18c683285cfd"
+  },
+  {
+    "name": "candidate-camera-end.jpg",
+    "bytes": 42245,
+    "sha256": "7d809f11dc4f31f7fbea397f20d43f74bcb9486101d14e359dd65487d8f1488c"
+  },
+  {
+    "name": "candidate-camera-start.jpg",
+    "bytes": 42055,
+    "sha256": "7fc2cd6cf342fe537af246981848297c4e764ef4418fd7c617579a7a89d1997e"
+  },
+  {
+    "name": "candidate-close.jpg",
+    "bytes": 52173,
+    "sha256": "3cecc01c2f5d0bb4de2a9249623097347fe99d6820100c3958c9fbf087854c4f"
+  },
+  {
+    "name": "candidate-delivery.jpg",
+    "bytes": 43194,
+    "sha256": "f161c45b82bf157f958d0b789951f6309cef6c47b5551b079e715aa2e8f11651"
+  },
+  {
+    "name": "candidate-dof.jpg",
+    "bytes": 52179,
+    "sha256": "d89aa8777e8078915894f5c259ff8f11becf3991b2e490a84f54c2eb7e62de25"
+  },
+  {
+    "name": "candidate-front.jpg",
+    "bytes": 40288,
+    "sha256": "0fb6f0892e829d3a6db4b337e38d139850cf89a2df57003b49a96cbacb4e9ee1"
+  },
+  {
+    "name": "candidate-load-failure.jpg",
+    "bytes": 22847,
+    "sha256": "f4526708b5b17d1451bccfef0117cc2759a38f5f424bc1913fb7adaeb0f0a17d"
+  },
+  {
+    "name": "candidate-look-left.jpg",
+    "bytes": 52209,
+    "sha256": "e9579bfc82f59d7b221aa508521fe3878e85834a53ba065bfc7aded63d036c55"
+  },
+  {
+    "name": "candidate-look-right.jpg",
+    "bytes": 52160,
+    "sha256": "590491c79a8011cb7e53ba43d95b73c91caf812965e4f73e90901798548201d3"
+  },
+  {
+    "name": "candidate-mobile.jpg",
+    "bytes": 35146,
+    "sha256": "142cdecbe40c8a85cf0802621434a8e51945873e0bcca5ec8bea3394ac4333a3"
+  },
+  {
+    "name": "candidate-side.jpg",
+    "bytes": 34973,
+    "sha256": "b4e1b821de29e61a61b5d6d01c593dcb91ca34783f9274592504b4bef8b03091"
+  },
+  {
+    "name": "color-probe-neutral-fill.jpg",
+    "bytes": 73667,
+    "sha256": "2f0d5e31089978f4648ab8b0d6f320a5f80e08073f55d9724dac5702c66888b2"
+  },
+  {
+    "name": "comparison-baseline-close.jpg",
+    "bytes": 51903,
+    "sha256": "723ccb48f79b7d02a77cbec8a11f13b870e9db035c3d7968b9c48c77650f7135"
+  },
+  {
+    "name": "comparison-same-light-close.jpg",
+    "bytes": 52774,
+    "sha256": "793aea21af7460cf9b809e81fb49102d7c702b40370a5c439b609d1d6bda24ab"
+  },
+  {
+    "name": "compatibility.json",
+    "bytes": 1002,
+    "sha256": "878405b2bb0978abe41d4e09d6604ec831eb22b9113ea12e2a7c522706bb2cfa"
+  },
+  {
+    "name": "corner-before.jpg",
+    "bytes": 73694,
+    "sha256": "420ee8388d143ff7399f02b8981ce9ab283fa9c99455fa53e8015fc9233a0d8b"
+  },
+  {
+    "name": "corner-repair-close.jpg",
+    "bytes": 73517,
+    "sha256": "d50a2e0a8fbad4218d0ea54e43ab4d1d6801eabfc54bf811d04073c9a04cb2c1"
+  },
+  {
+    "name": "corner-repair-detail.jpg",
+    "bytes": 19491,
+    "sha256": "57ae5fab4c4b2af27588fa390ed0242b982f57ef2003041f3220185ac9bc46b0"
+  },
+  {
+    "name": "corner-repair-look-upper-right.jpg",
+    "bytes": 72228,
+    "sha256": "0b66f431845383ad084bdddec379302b1a637e8ad90df483cf07685415316bad"
+  },
+  {
+    "name": "corner-repair-oblique-right.jpg",
+    "bytes": 68730,
+    "sha256": "62576d5038fa1172f6ca7cb2ae1e787f6b1c0ff0b3dae8cf7c1bb48807ea6ed7"
+  },
+  {
+    "name": "corner-repair.json",
+    "bytes": 7178,
+    "sha256": "8b18ef1de387f436e417d0c3008f4dd2a31b1d41e7e389e90dc89492117dfe23"
+  },
+  {
+    "name": "eye-repair-before.jpg",
+    "bytes": 54592,
+    "sha256": "1c5d7561c57a8f998e83b50abcd4ddf11573923572b75580624c968502c84d17"
+  },
+  {
+    "name": "eye-repair-close.jpg",
+    "bytes": 66577,
+    "sha256": "fea4c523c5e4dd86065ff5133c1ed07ba51cf1ade8895af9fd973b2431d40784"
+  },
+  {
+    "name": "eye-repair-delivery.jpg",
+    "bytes": 53789,
+    "sha256": "aad0ba0055fed588542bc1325713f4dcb95723a92f55eefb8932df617d73d184"
+  },
+  {
+    "name": "eye-repair-gaze-lower-left.jpg",
+    "bytes": 65687,
+    "sha256": "ab955f44201100ab28cd49277be9aedd332fa881eabae4251b83900b6191102b"
+  },
+  {
+    "name": "eye-repair-gaze-lower-right.jpg",
+    "bytes": 65966,
+    "sha256": "6b10f9a2bc31d2169eda6d30d0423113fe602aed5da63e84e0c6c401ba686b62"
+  },
+  {
+    "name": "eye-repair-gaze-upper-left.jpg",
+    "bytes": 65959,
+    "sha256": "e5e980689f512cb6fe7e340fa47a75f6bf58d4604bbe1daddd5a920d4a62c45a"
+  },
+  {
+    "name": "eye-repair-gaze-upper-right.jpg",
+    "bytes": 65821,
+    "sha256": "0ebd72b2a4de05ee7d265787440a95aff13ad63d61aa8cf3ac6c6ea05be317df"
+  },
+  {
+    "name": "eye-repair-oblique.jpg",
+    "bytes": 58261,
+    "sha256": "f6f2bb29effe097bc6c0c827e0b194d95fa54e998a1b0f14990ac9a46e888436"
+  },
+  {
+    "name": "eye-repair.json",
+    "bytes": 1423,
+    "sha256": "825d29fd1dd7ae7f116df9952e49a6199cbc1591e6f912e558290e2babeae482"
+  },
+  {
+    "name": "eyes-close.jpg",
+    "bytes": 52468,
+    "sha256": "0103314d3a57b0bef0a9f8d134894892c3f4abb07c53c8e88bd291d105e165d5"
+  },
+  {
+    "name": "eyes-report.json",
+    "bytes": 1917,
+    "sha256": "6e3b0c079666d8f332c496191586f3b7de9da26f9b5604a1e880ef600e64ba98"
+  },
+  {
+    "name": "final-report.json",
+    "bytes": 2564,
+    "sha256": "6220e857ce2e0c87219499aa0aafca15e079391eae65454f958b10861bfe677b"
+  },
+  {
+    "name": "hair-basecolor.png",
+    "bytes": 427200,
+    "sha256": "1d2c28262cf1e81bb831a552a3112ce54c73057d6f4581f579c36d432ab957e3"
+  },
+  {
+    "name": "hair-close.jpg",
+    "bytes": 52634,
+    "sha256": "348029576316ff39822c204116fe030fe64364b9fc0ae6bdc94bb2d4ff78d093"
+  },
+  {
+    "name": "hair-report.json",
+    "bytes": 2056,
+    "sha256": "d2b6c61787a9454001174452b5d284ddf5758ab9bd2bcf3ab365710bdd05b73d"
+  },
+  {
+    "name": "hair-roughness.png",
+    "bytes": 411330,
+    "sha256": "9a547acaa86ff5fe743c493a192513ea25623db0d0fb6c97b98b5f35d22ae5d5"
+  },
+  {
+    "name": "hou-quality-candidate.blend",
+    "bytes": 21111274,
+    "sha256": "aba044203d166c42251c1b0010c30dd05f997b9c373eec705ba1bece0280a392"
+  },
+  {
+    "name": "iris-eye-left.png",
+    "bytes": 175409,
+    "sha256": "33e55c74a2a8c6a370336535371095da523de3dd4bf35de5af6ffa044e7491b1"
+  },
+  {
+    "name": "iris-eye-right.png",
+    "bytes": 175409,
+    "sha256": "33e55c74a2a8c6a370336535371095da523de3dd4bf35de5af6ffa044e7491b1"
+  },
+  {
+    "name": "mask-front.png",
+    "bytes": 483912,
+    "sha256": "b0802257492dfa7d495d197b82aaf282814f8acecabe5c9d17922181664c07c9"
+  },
+  {
+    "name": "mask-side.png",
+    "bytes": 462292,
+    "sha256": "92e39fa255903786eda37c338a967784ce6dd4bb07d312f88cabb8ebbfa3cfd4"
+  },
+  {
+    "name": "reference-target.png",
+    "bytes": 2650734,
+    "sha256": "1669577447801ae68e959a24509c96f8ea577366559400102ee3959c8e476ec7"
+  },
+  {
+    "name": "seam-repair-close.jpg",
+    "bytes": 73682,
+    "sha256": "fb8fc896f1184d20cc2a3d71a7a930007a96ffe0d659fc765052951082294d44"
+  },
+  {
+    "name": "seam-repair-detail.jpg",
+    "bytes": 32822,
+    "sha256": "346d630ac9f327c9ba47477fc3239af58a216e2c9e8311354642b9e3273a39a4"
+  },
+  {
+    "name": "seam-repair-lower-left.jpg",
+    "bytes": 72384,
+    "sha256": "176ae672ffbb6d343ad438909701127487111ee7d445c29310340b0a4702870a"
+  },
+  {
+    "name": "seam-repair-lower-right.jpg",
+    "bytes": 72633,
+    "sha256": "b51109fb23b55f6bedf9f99df239443b6bb46e8d0d47d3cda713f82210b24f1f"
+  },
+  {
+    "name": "seam-repair-oblique-left.jpg",
+    "bytes": 65339,
+    "sha256": "1894eca0bc259923f4937e153afda35e6504a2cee2d2d653706f9b1d8b1c0e5a"
+  },
+  {
+    "name": "seam-repair-oblique-right.jpg",
+    "bytes": 67353,
+    "sha256": "cf66f07c245bb32b2515c1f35c57584f1933786150d4f83be16bb49e7b6a4f9d"
+  },
+  {
+    "name": "seam-repair-upper-left.jpg",
+    "bytes": 72363,
+    "sha256": "d9736237ce4bc8accbb4fbd8e0121f62232ade2e7e3548a52c378be68dd0b7e1"
+  },
+  {
+    "name": "seam-repair-upper-right.jpg",
+    "bytes": 72383,
+    "sha256": "a695bf24464b64bbd27b13c46589eb034b55331b0589966bb0ae6148ff521736"
+  },
+  {
+    "name": "seam-repair.json",
+    "bytes": 1806,
+    "sha256": "2e023ed8f6e0580ddbd81ad8af0394cfa0179537388aa21778a740ad5d49b868"
+  },
+  {
+    "name": "skin-basecolor.png",
+    "bytes": 1635374,
+    "sha256": "ff7c43c5157238c731923d59978ab3b146b3d0c5d8e71f3fea947a67ecece115"
+  },
+  {
+    "name": "skin-close.jpg",
+    "bytes": 59649,
+    "sha256": "9924d6cc85d069c08e1624a29aba3df6fa0f9c2bd05ead063cc9242d3bb102f1"
+  },
+  {
+    "name": "skin-front.jpg",
+    "bytes": 41783,
+    "sha256": "9e0636d8c266fc8ba15f63dd885df2249e5c43de27da58c8356d7885cd6336f7"
+  },
+  {
+    "name": "skin-mask.png",
+    "bytes": 249514,
+    "sha256": "ee5a4824554dd77c80d7ff57021c8f97b1ad75d457b7295caeb8e6177ddd0e7a"
+  },
+  {
+    "name": "skin-report.json",
+    "bytes": 1104,
+    "sha256": "573112e135b89e4774edc5610be7738fcbf22230a543253d0ad28036916751be"
+  },
+  {
+    "name": "skin-roughness.png",
+    "bytes": 170422,
+    "sha256": "2d22a293477e4344d3c9250ed61a8dbd04adb04c65e60498c2a612f4e85d1e8c"
+  },
+  {
+    "name": "surface-before-left.jpg",
+    "bytes": 24889,
+    "sha256": "98014f6feafb73910aba36a383bb4eb6dddc409cf8e17706623f5906c14d1f37"
+  },
+  {
+    "name": "surface-before-right.jpg",
+    "bytes": 36031,
+    "sha256": "f3d97b1dbc052e79f924842563762575434095946f4015150b592e9782ba8586"
+  },
+  {
+    "name": "surface-repair-back.jpg",
+    "bytes": 32791,
+    "sha256": "3dfe02b09c21de5a02ed044093917fd2d5fdaa753bc8f5f3831c89fdf3c84e31"
+  },
+  {
+    "name": "surface-repair-front-close.jpg",
+    "bytes": 73364,
+    "sha256": "c46d9d76e34b1a17eca06288d54494430bd0eba8abe6d719f8e185df16eff5ff"
+  },
+  {
+    "name": "surface-repair-left-detail.jpg",
+    "bytes": 13560,
+    "sha256": "b1190aea9f02fd1f4489bf1bfbd9e504f374e77af59e7b72fc64467e91f25297"
+  },
+  {
+    "name": "surface-repair-left.jpg",
+    "bytes": 35584,
+    "sha256": "4d44b5c35159ad1006057e35ca4356545adf2c499273e043c32341fef634d8fd"
+  },
+  {
+    "name": "surface-repair-right-detail.jpg",
+    "bytes": 13633,
+    "sha256": "1ebf6e4c4904baac654057a3f7478ce9da26607f5e584d8fc0b57c46daf4a6c9"
+  },
+  {
+    "name": "surface-repair-right.jpg",
+    "bytes": 35852,
+    "sha256": "e815935fac195449301f726366c8cb800cfb35c5926f12677f18388602d513b8"
+  },
+  {
+    "name": "surface-repair.json",
+    "bytes": 2191,
+    "sha256": "35db0dd3a6d2d0ecffaf7d64b05c401d4d516e179765b0c7a4fd1a82b0513531"
+  },
+  {
+    "name": "verification.md",
+    "bytes": 12563,
+    "sha256": "6d6651883e653d1ea85579510dd8d45830f2dcd73502b7c2367a1d88bf484a02"
+  }
+]

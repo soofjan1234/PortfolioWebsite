@@ -1,0 +1,90 @@
+{
+  "count": 17,
+  "artifacts": [
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/browser-checks.json",
+      "bytes": 2037,
+      "sha256": "c87aec2ea0c7ec19fbe81c8484c186889a08b484baad0e068616da8863cd8afb"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/contact-landscape.jpg",
+      "bytes": 22202,
+      "sha256": "983cf8066530be2f99956bbb947fe6790d239f2022e52e00c4e32fd24136318a"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/controls-aligned-desktop.jpg",
+      "bytes": 37887,
+      "sha256": "ede4ae60c5fa4ffc92ed7bbfc06ac36f2bccfb57bfbfc7cbc3a1052f4e18e321"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/controls-aligned-detail.jpg",
+      "bytes": 614,
+      "sha256": "b31335e3ea252876a7aba3d6d0beed42257d253339cc46060cc79869dc529dd6"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/controls-aligned-mobile.jpg",
+      "bytes": 14675,
+      "sha256": "f1c83a64b155d5c6cdf927c74ef3c3c616bb4a33eafbba4eadcfb47f688bfc86"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/controls-alignment.json",
+      "bytes": 2373,
+      "sha256": "619a083e43217ef85df1cbf8184549f5d01b381b7d9042170078b249c044fb27"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/desktop-fallback.jpg",
+      "bytes": 72511,
+      "sha256": "4bd2da0d3edbac932745bf5448cc311ffc5d5bfa072729e86c24ef9ed7744477"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/desktop-hero.jpg",
+      "bytes": 72334,
+      "sha256": "f1b1279d84f37b9901e5f3bca0a730b6eb3893c4eb47c7e2e1262ee5f5f79f06"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/mobile-fallback.jpg",
+      "bytes": 37607,
+      "sha256": "275aec70518d8fdb8c022bd2669c4e8bdac5f32137c91cc1a313175a8be346a7"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/mobile-hero.jpg",
+      "bytes": 36935,
+      "sha256": "3bc8c0ce5afc5131e71355e83056b9dddd4f7c435c64629e69145d2cfc98d8f7"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/navigation-checks.json",
+      "bytes": 2214,
+      "sha256": "af50bc3c6c98ed2bfe04677292897fb258cacdc1fef66fc98bc662a01f30417a"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/navigation-desktop-scrolled.jpg",
+      "bytes": 37895,
+      "sha256": "9298bea22d4fd673acd7306d20870217443c672e188db213a76d5808a3bf5593"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/navigation-desktop-top.jpg",
+      "bytes": 72714,
+      "sha256": "cee98e2f3d7fc25acd663d1dcf6eaf230fdd4b5687318c4dab937ab0568c1aaa"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/navigation-mobile-scrolled.jpg",
+      "bytes": 17322,
+      "sha256": "330fb808929e324b8750d4162ac894beda8be58ad9530f818002528e72acd397"
+    },
+    {
+      "file": "docs/changes/2026-10-04-character-resume/assets/home-fixes/tech-hub-320.jpg",
+      "bytes": 14671,
+      "sha256": "632c8b783635d2f7045ed00b84581959c2a6846f774ef07169cb26a5faad7159"
+    },
+    {
+      "file": "public/images/character-static.png",
+      "bytes": 286811,
+      "sha256": "095b5bd900e4e68a620675aa2e40f433b816cdd700e00cb8f7b4191d23e8982b"
+    },
+    {
+      "file": "public/images/character-static-compact.png",
+      "bytes": 400590,
+      "sha256": "d96ad83226a0f04572c54ee353de0da50006a229f6e8bde6047ac88266a0da63"
+    }
+  ]
+}

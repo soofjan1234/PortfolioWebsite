@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-04",
+  "fixedViewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "checks": {
+    "load": true,
+    "front": true,
+    "side": true,
+    "back": true,
+    "close": true,
+    "gaze": true,
+    "dof": true,
+    "cameraEndAndReverse": true,
+    "missingCandidateShowsFailure": true,
+    "narrowViewport": true,
+    "touchBranchSimulated": true
+  },
+  "timing": {
+    "baseline": {
+      "height": 720,
+      "medianMs": "8.30",
+      "p95Ms": "8.60",
+      "triangles": "79506",
+      "width": 1280
+    },
+    "candidate": {
+      "height": 720,
+      "medianMs": "8.30",
+      "p95Ms": "9.30",
+      "triangles": "80658",
+      "width": 1280
+    },
+    "method": "桌面前台 120 帧间隔采样，非真机或长期性能基准"
+  },
+  "newWarningsOrErrors": []
+}

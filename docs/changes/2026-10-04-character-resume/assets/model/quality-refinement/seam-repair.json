@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-04",
+  "candidateSha256": "cee437a3789719fbe33d257de40207e379a4a9bfb599877e0cdcf98e12e28b78",
+  "bytes": 9829268,
+  "counts": {
+    "nodes": 14,
+    "meshes": 8,
+    "materials": 12,
+    "textures": 11,
+    "cameras": 1,
+    "animations": 1,
+    "vertices": 58224,
+    "triangles": 81237,
+    "primitives": 12
+  },
+  "browAndFringe": {
+    "stitchedFaces": 75,
+    "openPatchEdges": 0,
+    "splitHeadEdges": 2,
+    "fringe": {
+      "stitchedFaces": 93,
+      "splitEdges": 1,
+      "openPatchEdges": 0
+    }
+  },
+  "eyelids": [
+    {
+      "side": "left",
+      "exteriorTriangles": 600,
+      "contactTriangles": 300,
+      "backFacingTriangles": 0,
+      "minimumExteriorClearance": 0.0027869973128230446
+    },
+    {
+      "side": "right",
+      "exteriorTriangles": 552,
+      "contactTriangles": 276,
+      "backFacingTriangles": 0,
+      "minimumExteriorClearance": 0.0029219189153121827
+    }
+  ],
+  "pupilFrontXDistance": {
+    "before": 0.20901761949062347,
+    "after": 0.23545443266630173,
+    "increasePercent": 12.648126622102396
+  },
+  "gapRay": {
+    "viewport": [
+      1280,
+      720
+    ],
+    "pixel": [
+      886,
+      375
+    ],
+    "firstHit": {
+      "object": "eyelid-right",
+      "distance": 0.9757236838340759
+    },
+    "beforeClosureFirstHit": {
+      "object": "character-hair",
+      "distance": 1.50786
+    }
+  },
+  "regressionBefore": {
+    "backFacingLidTriangles": {
+      "left": 38,
+      "right": 41
+    },
+    "rightCornerRayMissedLid": true
+  },
+  "verification": {
+    "pythonTests": 10,
+    "nodeTests": 10,
+    "gltfErrors": 0,
+    "gltfWarnings": 0,
+    "previewBuild": "通过，保留既有大包与 Browserslist 提示",
+    "browserGazeCorners": 4,
+    "browserObliqueViews": 2,
+    "browserWarnings": 0,
+    "browserErrors": 0
+  }
+}

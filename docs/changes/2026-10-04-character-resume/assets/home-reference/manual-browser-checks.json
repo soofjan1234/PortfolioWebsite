@@ -1,0 +1,82 @@
+{
+  "executedAt": "2026-10-04T13:42:11.998Z",
+  "baseURL": "http://localhost:4173/",
+  "reference": "https://about.senbuzy.com/",
+  "method": "Codex 浏览器工具人工浏览及 DOM 核对",
+  "viewports": [
+    [
+      1440,
+      1000
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      844,
+      390
+    ],
+    [
+      1280,
+      720
+    ]
+  ],
+  "articleCounts": [
+    {
+      "category": "Go 语言基础与进阶",
+      "count": 17
+    },
+    {
+      "category": "MySQL 入门与进阶",
+      "count": 15
+    },
+    {
+      "category": "Redis 高性能应用",
+      "count": 9
+    },
+    {
+      "category": "Map 源码剖析",
+      "count": 8
+    },
+    {
+      "category": "内存管理源码",
+      "count": 6
+    },
+    {
+      "category": "并发调度源码分析",
+      "count": 3
+    },
+    {
+      "category": "锁源码剖析",
+      "count": 2
+    },
+    {
+      "category": "其他源码",
+      "count": 3
+    }
+  ],
+  "articleTotal": 63,
+  "sceneStickers": 4,
+  "normalPageConsoleErrors": 0,
+  "checks": [
+    "首屏全景与居中简介",
+    "右侧履历与贴纸特写",
+    "作品从右侧进入和正常退出",
+    "Tech Hub 桌面横轨及手机原生横滑",
+    "八类 63 篇文章入口",
+    "Escape 关闭与入口焦点恢复",
+    "横屏简介在视口内",
+    "模型 503 后静态降级和文章仍可读",
+    "文章 503 时重试及原文章页入口",
+    "二维码联系窗口",
+    "原 /projects /experience 路由及返回主页"
+  ],
+  "limitations": [
+    "手机检查使用视口模拟，未测试真实 iOS/Android 设备",
+    "本轮未重新运行所有 WebGL/超时分支的外部 Playwright 脚本，减少动态效果由当前 Vitest 回归覆盖"
+  ],
+  "desktopProofViewport": [
+    1280,
+    720
+  ]
+}

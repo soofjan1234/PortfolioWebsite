@@ -1,0 +1,206 @@
+{
+  "screenshots": 37,
+  "totalBytes": 7831184,
+  "entries": [
+    {
+      "file": "article-failure.png",
+      "bytes": 138933,
+      "sha256": "618fd5e33688282b09deea8eaf97f707c38fdc0e9bf9eef1982222a56dcd77ed"
+    },
+    {
+      "file": "browser-checks.json",
+      "bytes": 2103,
+      "sha256": "8418511914b27ecceaecc60dc060c30df99250d333d0edb90837891e897ea3ca"
+    },
+    {
+      "file": "context-loss.png",
+      "bytes": 424944,
+      "sha256": "0b25ee4e57d3097ae7f6fb0ab821da022f78d4c504c45dcfbc2b14cee5d09746"
+    },
+    {
+      "file": "desktop-contact.png",
+      "bytes": 112691,
+      "sha256": "e5a874511f9e7afb5a6728e10a4b46be2be85caaea7deadd33489008981b8b6a"
+    },
+    {
+      "file": "desktop-education.png",
+      "bytes": 470118,
+      "sha256": "7483367b6fb324ce61bc73ceb2977e899fef33606608940a2028d65a10f24ce1"
+    },
+    {
+      "file": "desktop-hero.png",
+      "bytes": 437967,
+      "sha256": "3514fdbe1997dedf2e1c1aabd360209c3b4b80b636cd69c380fd75302293239d"
+    },
+    {
+      "file": "desktop-tech-hub-end.png",
+      "bytes": 80612,
+      "sha256": "e19eec3c21b29aa830e1204d282b4be903945eb539b9bc8842bd4ef6379caca9"
+    },
+    {
+      "file": "desktop-tech-hub-start.png",
+      "bytes": 90301,
+      "sha256": "9190a1c9cbeb5307b0510265967df87b74b4ec619cb8424c9687c4ae1877487c"
+    },
+    {
+      "file": "desktop-work.png",
+      "bytes": 503750,
+      "sha256": "a1f408a88124962d321599630a5980f8cf504b7fdba3f3a938c6b7a300bc371e"
+    },
+    {
+      "file": "desktop-works-end.png",
+      "bytes": 161993,
+      "sha256": "33f8cc01fbc22d31cc8ba3e25df85243097a7b7fe38e3a35b24425c2f7ac8fe9"
+    },
+    {
+      "file": "desktop-works-start.png",
+      "bytes": 196761,
+      "sha256": "c3957fd25d723449c05c27841bf11154d45c270e913b613c4cb04b37848750ef"
+    },
+    {
+      "file": "existing-tech-hub.png",
+      "bytes": 121967,
+      "sha256": "076c45b4e064f3bd037436dbc83e15c3b5c4e33f595038e5b1fdfc9456cc3511"
+    },
+    {
+      "file": "mobile-contact.png",
+      "bytes": 41032,
+      "sha256": "4738176851c15974019c8e2083b93cfb225e0e1fcf1a59b4ec9db81c3f229827"
+    },
+    {
+      "file": "mobile-education.png",
+      "bytes": 128210,
+      "sha256": "c4c63aeb160563890668087a93a6c9c7eef83f39fa27ff7d54a5c8d19925d53e"
+    },
+    {
+      "file": "mobile-hero.png",
+      "bytes": 111207,
+      "sha256": "bbd5d9742e6e9e97ba7e8c8436c566c53cb25818dfde45b706fc57a5698d5252"
+    },
+    {
+      "file": "mobile-landscape.png",
+      "bytes": 121808,
+      "sha256": "36ac121ee5a10f04f2cb210df309fcfb2b155d523fb0dd67a20bd78a8e400825"
+    },
+    {
+      "file": "mobile-tech-hub.png",
+      "bytes": 33632,
+      "sha256": "c90eff7eb79e5c068cf125df89e302f0d952b8a88c94cc7db12debdb2c3b4317"
+    },
+    {
+      "file": "mobile-work.png",
+      "bytes": 137789,
+      "sha256": "2efa69a1d57e15844f09514159eb868319219d22a13d432d58d7698ab21a345b"
+    },
+    {
+      "file": "mobile-works.png",
+      "bytes": 73991,
+      "sha256": "ecc70e2270f43459e342520537522b3d65c9bfc09c2c6fb67ca685964286c402"
+    },
+    {
+      "file": "model-download.png",
+      "bytes": 436180,
+      "sha256": "f40e1b3685a3fa8fc0d2ec9addb93a66c984cb6ca1cee649433f4e0205dc22c2"
+    },
+    {
+      "file": "model-parse.png",
+      "bytes": 436180,
+      "sha256": "f40e1b3685a3fa8fc0d2ec9addb93a66c984cb6ca1cee649433f4e0205dc22c2"
+    },
+    {
+      "file": "model-timeout.png",
+      "bytes": 436180,
+      "sha256": "f40e1b3685a3fa8fc0d2ec9addb93a66c984cb6ca1cee649433f4e0205dc22c2"
+    },
+    {
+      "file": "reduced-motion.png",
+      "bytes": 435492,
+      "sha256": "2f422f927e0209fb3fb05f1ee28629040c38dcbe01d63a28b512a6ca1bd2ce04"
+    },
+    {
+      "file": "scene-module.png",
+      "bytes": 436180,
+      "sha256": "f40e1b3685a3fa8fc0d2ec9addb93a66c984cb6ca1cee649433f4e0205dc22c2"
+    },
+    {
+      "file": "short-desktop-contact.png",
+      "bytes": 74933,
+      "sha256": "1ce3d8efb64675040fad8ad33d591191c3a1bfdb22fd8967eb59b3da3ab850c1"
+    },
+    {
+      "file": "short-desktop-education.png",
+      "bytes": 337528,
+      "sha256": "36cd3b4535580f4736a8a193ad37e3030bff2d88a2818ecc3b776d9868cf7b1d"
+    },
+    {
+      "file": "short-desktop-hero.png",
+      "bytes": 299316,
+      "sha256": "80c70c3c03c02a57b06fb75871665758f52f12bddb04823b848bf0e71c3ea02a"
+    },
+    {
+      "file": "short-desktop-tech-hub.png",
+      "bytes": 78478,
+      "sha256": "382180398265d8970ff8147c2c718d493bcd37922a076cde17156d589b3f3907"
+    },
+    {
+      "file": "short-desktop-work.png",
+      "bytes": 359940,
+      "sha256": "d0a4305eae49df24efc4decc99c7358e391a4659e9fb0d84c1bdd210f2ef0a09"
+    },
+    {
+      "file": "short-desktop-works.png",
+      "bytes": 156148,
+      "sha256": "760163476c5091f434b294a66a0592bc323fbe1292c6a7554d6d9f7681ff4e87"
+    },
+    {
+      "file": "small-mobile-contact.png",
+      "bytes": 34644,
+      "sha256": "d3cf0dc5da5cae7b2f4f7c1ac3e4710d932206718394e8ac34ef30dd17c10740"
+    },
+    {
+      "file": "small-mobile-education.png",
+      "bytes": 104774,
+      "sha256": "6f19d8467ed7bb32492d241259a5b0f51d9cb6d8c44600ad6161c22dec91ab2d"
+    },
+    {
+      "file": "small-mobile-hero.png",
+      "bytes": 89430,
+      "sha256": "f745e005c4b0c9d52085c06330f94946341ef825d636f4692928e3d9d40a7396"
+    },
+    {
+      "file": "small-mobile-landscape.png",
+      "bytes": 84284,
+      "sha256": "2c8ad5e0fa490a00676864b0fc82bfe24860135e23d5cb093c54f2b9943a18fb"
+    },
+    {
+      "file": "small-mobile-tech-hub.png",
+      "bytes": 32017,
+      "sha256": "171e3fd9db62f2f91e0d10afd6b341e723a54464678954d036031556e4b52b83"
+    },
+    {
+      "file": "small-mobile-work.png",
+      "bytes": 106309,
+      "sha256": "f4cfa1f58c228618f09ae0a5023177dcd951e1727c5c6901652249a72d78909f"
+    },
+    {
+      "file": "small-mobile-works.png",
+      "bytes": 67182,
+      "sha256": "eda2950185505759a981efb677560f6a6576592930d9082e6cacdc27f325dd34"
+    },
+    {
+      "file": "webgl.png",
+      "bytes": 436180,
+      "sha256": "f40e1b3685a3fa8fc0d2ec9addb93a66c984cb6ca1cee649433f4e0205dc22c2"
+    }
+  ],
+  "staticCharacter": {
+    "file": "public/images/character-static.png",
+    "bytes": 385961,
+    "sha256": "0193edf84f2ab96cffb99d2a1577aa5bd69b0d456ba3f5581c2e1ada2a45b4d4"
+  },
+  "model": {
+    "file": "public/models/me.glb",
+    "bytes": 9764808,
+    "sha256": "c2147c0a767a131d2a652a2bd399aeaa1afc9f68902739353439848d5f0a464e"
+  }
+}

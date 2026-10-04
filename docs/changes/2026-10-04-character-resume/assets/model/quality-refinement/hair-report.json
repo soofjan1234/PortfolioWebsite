@@ -1,0 +1,95 @@
+{
+  "valid": true,
+  "stage": "hair",
+  "bytes": 9919776,
+  "sha256": "aac6c0ead5ef0931c71712caf46e30e0f2f2fb1bfdc6506347d6765a8094276c",
+  "counts": {
+    "nodes": 14,
+    "meshes": 8,
+    "materials": 12,
+    "textures": 15,
+    "cameras": 1,
+    "animations": 1,
+    "vertices": 58084,
+    "triangles": 80658,
+    "primitives": 12
+  },
+  "structural": {
+    "errors": 0,
+    "warnings": 0,
+    "firstIssue": {
+      "code": "UNUSED_OBJECT",
+      "message": "This object may be unused.",
+      "severity": 2,
+      "pointer": "/meshes/4/primitives/0/attributes/TEXCOORD_0"
+    }
+  },
+  "contract": {
+    "valid": true,
+    "issues": []
+  },
+  "sourceSha256": "f74f3a6b0e8ffd7a6c19268a54b965647096a1d63a0eb1d0564c2ae11babc23f",
+  "details": {
+    "skin": {
+      "skinLoopCoverage": 0.7004,
+      "blushMax": 0.5139,
+      "maskImage": "skin-mask"
+    },
+    "eyes": [
+      {
+        "name": "eyelid-left",
+        "boundaryVertices": 150,
+        "maxBridge": 0.01712,
+        "eyeCenter": [
+          -0.09961097687482834,
+          -0.210422083735466,
+          0.32274872064590454
+        ],
+        "eyeRotation": [
+          -0.13962633907794952,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "eyelid-right",
+        "boundaryVertices": 138,
+        "maxBridge": 0.01846,
+        "eyeCenter": [
+          0.10940664261579514,
+          -0.20398637652397156,
+          0.30617979168891907
+        ],
+        "eyeRotation": [
+          -0.13962633907794952,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "hair": {
+      "movedVertices": 4768,
+      "maxDisplacement": 0.025565,
+      "fixedBoundaryVertices": 2403,
+      "uvLayers": 1
+    },
+    "generationSeconds": 3.25,
+    "unusedTangentBindingsRemoved": 9
+  },
+  "exported": [
+    "character-head",
+    "character-shirt",
+    "character-hair",
+    "character-glasses",
+    "eye-left",
+    "eye-right",
+    "ResumeCamera",
+    "focus-start",
+    "focus-1",
+    "focus-2",
+    "focus-works",
+    "focus-tech-hub",
+    "eyelid-left",
+    "eyelid-right"
+  ]
+}

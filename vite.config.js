@@ -16,4 +16,8 @@ export default defineConfig({
   server: {
     host: true,
   },
+  // Vitest 只收集浏览器侧用例，模型的 node:test 契约保持独立执行。
+  test: {
+    include: ['src/**/*.test.{js,jsx}'],
+  },
 })

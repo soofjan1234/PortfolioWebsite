@@ -1,0 +1,116 @@
+{
+  "executedAt": "2026-10-04T14:50:13.516Z",
+  "desktopTop": {
+    "backButton": false,
+    "frame": {
+      "bottom": 696,
+      "height": 672,
+      "left": 24,
+      "right": 1250,
+      "top": 24,
+      "width": 1226,
+      "x": 24,
+      "y": 24
+    },
+    "nav": {
+      "bottom": 72,
+      "height": 34,
+      "left": 1124.7578125,
+      "right": 1246,
+      "top": 38,
+      "width": 121.2421875,
+      "x": 1124.7578125,
+      "y": 38
+    }
+  },
+  "desktopScrolled": {
+    "actions": {
+      "bottom": 76.140625,
+      "height": 38,
+      "left": 892.6640625,
+      "right": 1044,
+      "top": 38.140625,
+      "width": 151.3359375,
+      "x": 892.6640625,
+      "y": 38.140625
+    },
+    "backButton": true,
+    "nav": {
+      "bottom": 72,
+      "height": 34,
+      "left": 1074.7578125,
+      "right": 1246,
+      "top": 38,
+      "width": 171.2421875,
+      "x": 1074.7578125,
+      "y": 38
+    }
+  },
+  "desktopReturn": {
+    "focus": "打开导航菜单",
+    "stage": "start",
+    "top": 0
+  },
+  "mobileTop": {
+    "backButton": false,
+    "frame": {
+      "bottom": 724,
+      "height": 708,
+      "left": 16,
+      "right": 298,
+      "top": 16,
+      "width": 282,
+      "x": 16,
+      "y": 16
+    },
+    "nav": {
+      "bottom": 71,
+      "height": 34,
+      "left": 172.7578125,
+      "right": 294,
+      "top": 37,
+      "width": 121.2421875,
+      "x": 172.7578125,
+      "y": 37
+    }
+  },
+  "mobileScrolled": {
+    "actions": {
+      "bottom": 156.984375,
+      "height": 28,
+      "left": 22.3984375,
+      "right": 291.6015625,
+      "top": 128.984375,
+      "width": 269.203125,
+      "x": 22.3984375,
+      "y": 128.984375
+    },
+    "backButton": true,
+    "nav": {
+      "bottom": 71,
+      "height": 34,
+      "left": 122.7578125,
+      "right": 294,
+      "top": 37,
+      "width": 171.2421875,
+      "x": 122.7578125,
+      "y": 37
+    },
+    "pageWidth": 314,
+    "title": {
+      "bottom": 110.984375,
+      "height": 30.796875,
+      "left": 22.3984375,
+      "right": 212.921875,
+      "top": 80.1875,
+      "width": 190.5234375,
+      "x": 22.3984375,
+      "y": 80.1875
+    },
+    "width": 314
+  },
+  "mobileReturn": {
+    "focus": "打开导航菜单",
+    "top": 0
+  }
+}

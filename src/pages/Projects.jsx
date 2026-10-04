@@ -1,3 +1,5 @@
+import { techCategories } from '../data/home-content'
+import { loadArticles } from '../lib/article-library'
 import { useState, useEffect } from 'react'
 import MarkdownRenderer from '../components/MarkdownRenderer'
 import { TextAnimate } from "@/components/magicui/text-animate"
@@ -88,77 +90,17 @@ const Projects = () => {
         const loadData = async () => {
             setInitialLoading(true)
 
-            // Fetch Knowledge Data (Multiple categories)
-            const categories = [
-                { id: 'go', name: 'Go 语言基础与进阶', icon: '🐹', intro: '深入探索Go语言核心机制与运行流程。', file: 'go.md' },
-                { id: 'mysql', name: 'MySQL 入门与进阶', icon: '🐬', intro: '精通 MySQL 核心原理、索引优化与存储逻辑。', file: 'mysql.md' },
-                { id: 'redis', name: 'Redis 高性能应用', icon: '🔴', intro: 'Redis 核心数据结构与高可用架构。', file: 'redis.md' }
-            ]
-
-            const loadedKnowledges = []
-            for (const cat of categories) {
+            const loaded = await Promise.all(techCategories.map(async (category) => {
                 try {
-                    const res = await fetch(`/knowledge/${cat.file}`)
-                    if (res.ok) {
-                        const content = await res.text()
-                        const lines = content.split('\n').filter(Boolean)
-                        const items = lines.map(line => {
-                            const parts = line.split('http')
-                            return { title: parts[0].trim(), link: parts.length > 1 ? 'http' + parts[1].trim() : '' }
-                        }).filter(item => item.link)
-                        
-                        if (items.length > 0) {
-                            loadedKnowledges.push({
-                                ...cat,
-                                items
-                            })
-                        }
-                    }
-                } catch (err) { 
-                    console.log(`Knowledge ${cat.id} not found or empty`)
+                    const articles = await loadArticles(category)
+                    return { ...category, name: category.title, intro: category.description,
+                        items: articles.map(({ title, href }) => ({ title, link: href })) }
+                } catch {
+                    return null
                 }
-            }
-            setKnowledges(loadedKnowledges)
-
-            // Fetch Source Code Data (Multiple categories)
-            const sourceFiles = [
-                { id: 'map', name: 'Map 源码剖析', icon: '🔍', intro: '深入解析 SwissTable 与 sync.Map 实现。', file: 'map.md' },
-                { id: 'memory', name: '内存管理源码', icon: '🧠', intro: 'Go 内存分配器与垃圾回收（GC）源码深度解读。', file: '内存.md' },
-                { id: 'concurrency', name: '并发调度源码分析', icon: '⚙️', intro: 'GMP 模型、Channel及同步原语源码实现。', file: '并发.md' },
-                { id: 'lock', name: '锁源码剖析', icon: '🔒', intro: 'Mutex 与 RWMutex 源码深度解读。', file: '锁.md' },
-                { id: 'other', name: '其他源码', icon: '📚', intro: 'Context、Select、Interface 源码深度解读。', file: '其他.md' },
-            ]
-
-            const loadedSourceCodes = []
-            for (const s of sourceFiles) {
-                try {
-                    const res = await fetch(`/sourceCode/${s.file}`)
-                    if (res.ok) {
-                        const content = await res.text()
-                        const lines = content.split('\n').filter(Boolean)
-                        let name = s.name
-                        if (lines.length > 0 && !lines[0].includes('http')) {
-                            name = lines[0].trim()
-                            lines.shift()
-                        }
-                        const items = lines.map(line => {
-                            const parts = line.split('http')
-                            return { title: parts[0].trim(), link: parts.length > 1 ? 'http' + parts[1].trim() : '' }
-                        }).filter(item => item.link)
-
-                        if (items.length > 0) {
-                            loadedSourceCodes.push({
-                                ...s,
-                                name, // Use name from file if available
-                                items
-                            })
-                        }
-                    }
-                } catch (err) {
-                    console.log(`Source code ${s.id} not found or empty`)
-                }
-            }
-            setSourceCodes(loadedSourceCodes)
+            }))
+            setKnowledges(loaded.filter(Boolean))
+            setSourceCodes([])
 
             setInitialLoading(false)
         }
@@ -415,50 +357,7 @@ const Projects = () => {
                                 )}
                             </section>
 
-                            <section>
-                                <div className="mb-8 md:mb-10 text-left">
-                                    <h2 className="text-3xl md:text-4xl font-black text-white mb-2 flex items-center gap-3">
-                                        <span className="bg-gray-100 p-2 rounded-xl text-2xl">💻</span>
-                                        <TextAnimate animation="blurInUp" by="character" once delay={0.2}>Source Code</TextAnimate>
-                                    </h2>
-                                    <p className="text-gray-500 font-medium ml-14">Open source scripts, components, and code snippets</p>
-                                </div>
-                                {sourceCodes.length > 0 ? (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                        {sourceCodes.map(cat => (
-                                            <div key={cat.id}
-                                                onClick={() => handleProjectClick({ ...cat, type: 'source' })}
-                                                className="group cursor-pointer h-full">
-                                                <div className="bg-white/85 backdrop-blur-md border border-white/70 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
-                                                    <div className="p-6 flex-1 flex flex-col">
-                                                        <div className="flex items-center gap-3 mb-4">
-                                                            <span className="text-3xl">{cat.icon}</span>
-                                                            <h3 className="text-lg font-bold text-gray-900 group-hover:text-gray-900 transition-colors">
-                                                                {cat.name}
-                                                            </h3>
-                                                        </div>
-                                                        <p className="text-sm text-gray-600 line-clamp-3 mb-6 flex-1">
-                                                            {cat.intro}
-                                                        </p>
-                                                        <div className="flex items-center justify-between mt-auto pt-4 border-gray-100">
-                                                            <span className="text-xs text-gray-900 font-semibold uppercase tracking-wider">
-                                                                Browse Snippets
-                                                            </span>
-                                                            <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="text-center py-16 bg-white/50 backdrop-blur-sm border-2 border-dashed border-gray-200 rounded-3xl hover:border-gray-300 transition-colors">
-                                        <p className="text-gray-400 font-medium">Repositories and snippets coming soon...</p>
-                                    </div>
-                                )}
-                            </section>
+
                         </>
                     )}
                 </div>

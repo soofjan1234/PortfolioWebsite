@@ -1,0 +1,115 @@
+{
+  "valid": true,
+  "stage": "final",
+  "bytes": 9764808,
+  "sha256": "c2147c0a767a131d2a652a2bd399aeaa1afc9f68902739353439848d5f0a464e",
+  "counts": {
+    "nodes": 14,
+    "meshes": 8,
+    "materials": 12,
+    "textures": 11,
+    "cameras": 1,
+    "animations": 1,
+    "vertices": 58290,
+    "triangles": 81244,
+    "primitives": 12
+  },
+  "structural": {
+    "errors": 0,
+    "warnings": 0,
+    "firstIssue": {
+      "code": "UNUSED_OBJECT",
+      "message": "This object may be unused.",
+      "severity": 2,
+      "pointer": "/meshes/4/primitives/0/attributes/TEXCOORD_0"
+    }
+  },
+  "contract": {
+    "valid": true,
+    "issues": []
+  },
+  "sourceSha256": "f74f3a6b0e8ffd7a6c19268a54b965647096a1d63a0eb1d0564c2ae11babc23f",
+  "details": {
+    "browStitch": {
+      "stitchedFaces": 75,
+      "openPatchEdges": 0,
+      "sealedSliverFaces": 0,
+      "splitHeadEdges": 2,
+      "fringe": {
+        "stitchedFaces": 93,
+        "splitEdges": 1,
+        "openPatchEdges": 0,
+        "sealedSliverFaces": 0
+      }
+    },
+    "sideHairStitch": {
+      "stitchedFaces": 106,
+      "splitEdges": 6,
+      "openPatchEdges": 0,
+      "sealedSliverFaces": 1
+    },
+    "skin": {
+      "skinLoopCoverage": 0.7608,
+      "blushMax": 0.5599,
+      "maskImage": "skin-mask"
+    },
+    "eyes": [
+      {
+        "name": "eyelid-left",
+        "boundaryVertices": 150,
+        "contactFaces": 150,
+        "maxBridge": 0.01908,
+        "eyeCenter": [
+          -0.09961097687482834,
+          -0.210422083735466,
+          0.32274872064590454
+        ],
+        "eyeRotation": [
+          -0.13962633907794952,
+          0.0,
+          -0.11999999731779099
+        ]
+      },
+      {
+        "name": "eyelid-right",
+        "boundaryVertices": 138,
+        "contactFaces": 138,
+        "maxBridge": 0.01873,
+        "eyeCenter": [
+          0.10940664261579514,
+          -0.20398637652397156,
+          0.30617979168891907
+        ],
+        "eyeRotation": [
+          -0.13962633907794952,
+          0.0,
+          0.11999999731779099
+        ]
+      }
+    ],
+    "hair": {
+      "movedVertices": 4809,
+      "maxDisplacement": 0.025565,
+      "fixedBoundaryVertices": 2244,
+      "uvLayers": 1
+    },
+    "generationSeconds": 6.13,
+    "unusedTangentBindingsRemoved": 7
+  },
+  "exported": [
+    "character-head",
+    "character-shirt",
+    "character-hair",
+    "character-glasses",
+    "eye-left",
+    "eye-right",
+    "ResumeCamera",
+    "focus-start",
+    "focus-1",
+    "focus-2",
+    "focus-works",
+    "focus-tech-hub",
+    "eyelid-left",
+    "eyelid-right"
+  ]
+}

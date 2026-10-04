@@ -1,0 +1,52 @@
+{
+  "fps": 24,
+  "framesPerEntry": 50,
+  "resume": [
+    {
+      "id": "education",
+      "focus": "focus-1",
+      "title": "广州大学",
+      "date": "2019.09 — 2023.06",
+      "label": "01 / EDUCATION",
+      "subtitle": "计算机科学与技术 · 学士",
+      "description": "在广州大学建立计算机科学基础，也在算法与实践中找到自己的方向。",
+      "highlights": [
+        "CET-6 · 602 分",
+        "全国大学生算法设计与编程挑战赛 · 银奖"
+      ],
+      "tags": [
+        "C++",
+        "Java",
+        "算法"
+      ]
+    },
+    {
+      "id": "work",
+      "focus": "focus-2",
+      "title": "Go 后端工程师",
+      "date": "2023.07 — 至今",
+      "label": "02 / EXPERIENCE",
+      "subtitle": "某科技有限公司 · 深圳",
+      "description": "围绕 NAS 私有云，开发文档检索、智能相册与端侧 AI 服务，并探索面向售后的智能助手。",
+      "highlights": [
+        "文档中心：多格式解析与 Bleve 全文检索，优化索引内存与中文分词",
+        "智能相册：模糊与相似照片检测，优化并行处理及时间轴查询",
+        "端侧 AI：人脸识别与聚类、模型管理及 NPU 优先级调度",
+        "邮件助手：融合全文与向量检索，生成带引用、经人工审核的回复草稿",
+        "云端信令：协助 NAS 与客户端交换连接信息，支持 NAT 穿透",
+        "文件索引：有界队列与增量扫描，支持任务持久化及崩溃恢复"
+      ],
+      "tags": [
+        "Go",
+        "Python",
+        "Bleve",
+        "SQLite",
+        "LangGraph",
+        "RKNN"
+      ]
+    }
+  ],
+  "startFocus": "focus-start",
+  "worksFocus": "focus-works",
+  "techHubFocus": "focus-tech-hub"
+}

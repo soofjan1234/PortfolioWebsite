@@ -1,0 +1,41 @@
+{
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "pixelRatio": 2
+  },
+  "gaze": false,
+  "dof": false,
+  "exposure": 0.9,
+  "environmentIntensity": 0.45,
+  "camera": {
+    "fov": 36,
+    "front": [
+      0,
+      0.06,
+      3.5
+    ],
+    "side": [
+      3.5,
+      0.06,
+      0
+    ],
+    "back": [
+      0,
+      0.06,
+      -3.5
+    ],
+    "close": [
+      0,
+      0.35,
+      2.05
+    ]
+  },
+  "baselineSha256": "201ed284f620168eea57346660116adfd9b07440edf29786e468d60c22d33534",
+  "sourceSha256": "f74f3a6b0e8ffd7a6c19268a54b965647096a1d63a0eb1d0564c2ae11babc23f",
+  "visualIssues": [
+    "皮肤颜色单一，脸颊、鼻尖、耳朵缺少暖色变化",
+    "眼窝边缘与球面衔接生硬",
+    "发束尖薄，高光碎片化"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "valid": false,
+  "stage": "ready",
+  "bytes": 12420788,
+  "sha256": "ec33a1844ac67d0de5490d14c9a6f50c70dc26b1aa46dfa8fa51d8063489bbfe",
+  "counts": {
+    "nodes": 1,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 3,
+    "cameras": 0,
+    "animations": 0,
+    "vertices": 137051,
+    "triangles": 240030,
+    "primitives": 1
+  },
+  "structural": {
+    "errors": 0,
+    "warnings": 1,
+    "firstIssue": {
+      "code": "NODE_MATRIX_DEFAULT",
+      "message": "Do not specify default transform matrix.",
+      "severity": 2,
+      "pointer": "/nodes/0/matrix"
+    }
+  },
+  "contract": {
+    "valid": false,
+    "issues": [
+      "缺少可见眼球网格：eye-left",
+      "缺少可见眼球网格：eye-right",
+      "缺少可见焦点：focus-start",
+      "缺少可见焦点：focus-1",
+      "缺少可见焦点：focus-2",
+      "缺少可见焦点：focus-works",
+      "缺少可见焦点：focus-tech-hub",
+      "缺少活动场景中的透视相机",
+      "缺少 CameraAction"
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-04",
+  "candidateSha256": "d0e8d413f1b78b99832453417f40b60c978077e06b8f6516f5b8865ff9ab0764",
+  "bytes": 9789456,
+  "counts": {
+    "nodes": 14,
+    "meshes": 8,
+    "materials": 12,
+    "textures": 11,
+    "cameras": 1,
+    "animations": 1,
+    "vertices": 58084,
+    "triangles": 80658,
+    "primitives": 12
+  },
+  "clearance": [
+    {
+      "eye": "left",
+      "mesh": "character-head",
+      "trianglesNearEye": 505,
+      "intersecting": 0,
+      "minimumClearance": 0.0028078601940333126
+    },
+    {
+      "eye": "left",
+      "mesh": "eyelid-left",
+      "trianglesNearEye": 600,
+      "intersecting": 0,
+      "minimumClearance": 0.0027987545105524897
+    },
+    {
+      "eye": "right",
+      "mesh": "character-head",
+      "trianglesNearEye": 400,
+      "intersecting": 0,
+      "minimumClearance": 0.0019687790217907397
+    },
+    {
+      "eye": "right",
+      "mesh": "eyelid-right",
+      "trianglesNearEye": 552,
+      "intersecting": 0,
+      "minimumClearance": 0.002879943580157626
+    }
+  ],
+  "gazeRadians": {
+    "horizontal": 0.38,
+    "vertical": 0.22
+  },
+  "checks": {
+    "pythonTests": 9,
+    "nodeTests": 10,
+    "previewBuild": "通过，保留既有大包与 Browserslist 提示",
+    "browserCorners": 4,
+    "browserOblique": true,
+    "browserWarnings": 0,
+    "browserErrors": 0
+  },
+  "regressionBefore": {
+    "leftLidMinimumClearance": -0.007318437757030796
+  }
+}
