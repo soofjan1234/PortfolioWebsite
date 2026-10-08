@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-08",
+  "count": 2,
+  "artifacts": [
+    {
+      "name": "mobile-resume-education-close.jpg",
+      "bytes": 24669,
+      "sha256": "130773871df90786c580b4e324a91b960e5540e8f64ddb802f2d2a0cae03304c"
+    },
+    {
+      "name": "mobile-resume-work-close.jpg",
+      "bytes": 32905,
+      "sha256": "7096a460861348263a6a9c065cf8ba37e09446791f79e296da7565615d10f51a"
+    }
+  ]
+}

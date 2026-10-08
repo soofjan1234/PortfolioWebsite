@@ -127,7 +127,7 @@ export default function HorizontalSection({
             data-mode={mode}
             style={
                 mode === 'scroll'
-                    ? { height: `calc(100svh + ${overflow}px)` }
+                    ? { height: `calc(var(--home-height, 100svh) + ${overflow}px)` }
                     : undefined
             }
         >

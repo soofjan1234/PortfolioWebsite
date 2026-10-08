@@ -2,6 +2,8 @@
 
 依据：[已确认设计](design.md)。整体目标与验收以设计正文为准，不在本文件重新定义。
 
+2026-10-08 手机修复与近景：先补失败回归，再统一视口基准、实现画布立即重绘，以及按相机时间轴平滑进入两侧脸颊近景并减弱磨砂；最终测试、构建、浏览器截图和用户 iPhone 验收结果见 [验收记录](home-verification.md)。整体状态继续由 status.md 维护。
+
 ## 阶段一：得到可编辑的真实人物 GLB
 
 输入为已确认的头像与黑发正面 v5；输出为保存到 `assets/model/hou-base-v1.glb` 的真实基础模型及彩色版 `hou-textured-v1.glb`、结构报告。最新造型参考为 `assets/character-front-v5-unified.png`。上述路径相对本主题目录。

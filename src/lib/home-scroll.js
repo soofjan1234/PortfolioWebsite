@@ -3,6 +3,18 @@ export function clamp(value, min = 0, max = 1) {
     return Math.max(min, Math.min(max, value))
 }
 
+/** 以统一时间轴平滑进入两侧脸颊近景，离开履历或反向滚动时恢复原镜头。 */
+export function getMobileResumeFraming(frame, framesPerEntry = 50) {
+    // 两端导数为零，停靠点附近微小滚动不会造成构图跳变。
+    const smooth = (value) => {
+        const progress = clamp(value)
+        return progress * progress * (3 - 2 * progress)
+    }
+    const enter = smooth(frame / framesPerEntry)
+    const leave = 1 - smooth((frame - 2 * framesPerEntry) / framesPerEntry)
+    return { mix: enter * leave, side: 2 * smooth((frame - framesPerEntry) / framesPerEntry) - 1 }
+}
+
 /** 用同一锚点序列定位镜头和焦点；直接计算保证反向滚动可以恢复。 */
 export function getSceneState(scrollY, viewportHeight, anchors, config) {
     // 1. 锚点到达视口 30% 时停靠；首屏始终从 0 帧开始。

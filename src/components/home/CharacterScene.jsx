@@ -1,11 +1,17 @@
 import { useEffect, useRef } from 'react'
 import { createResumeStickers } from './resume-stickers'
+import { getMobileResumeFraming } from '../../lib/home-scroll'
+import sceneConfig from '../../data/character-scene.json'
+import { getCharacterLook } from './character-look'
 
 // 首次下载和纹理初始化最多等待 18 秒；超时后阅读保持可用。
 const MODEL_TIMEOUT = 18000
 
+// glTF 米制坐标：两段履历对称取脸颊近景，朝下取景将黑发移出阅读区域。
+const MOBILE_RESUME_SHOT = { position: [0.30, 0.32, 0.95], target: [0.04, -0.06, 0.18] }
+
 /** 初始化独立三维场景；生命周期内拥有并清理全部 GPU 资源和事件。 */
-export default function CharacterScene({ stateRef, policy, onStatus }) {
+export default function CharacterScene({ stateRef, policy, onStatus, viewportRef }) {
     const host = useRef(null)
     useEffect(() => {
         let disposed = false,
@@ -19,6 +25,8 @@ export default function CharacterScene({ stateRef, policy, onStatus }) {
         let resizeObserver, canvas, onLost, onPointer, onVisibility
         const cleanupTasks = []
         const element = host.current
+        const look = getCharacterLook(window.location.search)
+        const lighting = look.lighting
         const timer = setTimeout(fail, MODEL_TIMEOUT)
         onStatus('loading')
 
@@ -79,13 +87,14 @@ export default function CharacterScene({ stateRef, policy, onStatus }) {
                     Math.min(window.devicePixelRatio || 1, policy.dpr),
                 )
                 renderer.toneMapping = THREE.ACESFilmicToneMapping
-                renderer.toneMappingExposure = 0.86
+                renderer.toneMappingExposure = lighting.exposure
                 renderer.shadowMap.enabled = policy.dof
                 renderer.shadowMap.type = THREE.VSMShadowMap
                 scene = new THREE.Scene()
-                scene.environmentIntensity = 0.32
+                scene.environmentIntensity = lighting.environment
                 canvas = renderer.domElement
                 canvas.setAttribute('aria-hidden', 'true')
+                canvas.dataset.quality = look.natural ? 'natural' : 'current'
                 element.append(canvas)
                 onLost = (event) => {
                     event.preventDefault()
@@ -100,9 +109,9 @@ export default function CharacterScene({ stateRef, policy, onStatus }) {
                 scene.environment = environment.texture
                 room.dispose()
                 pmrem.dispose()
-                scene.add(new THREE.HemisphereLight('#eef2dd', '#586979', 0.42))
-                const key = new THREE.DirectionalLight('#ffe2cb', 0.65)
-                key.position.set(3, 3.5, 4)
+                scene.add(new THREE.HemisphereLight('#eef2dd', '#586979', lighting.hemisphere))
+                const key = new THREE.DirectionalLight(lighting.keyColor, lighting.keyIntensity)
+                key.position.set(...lighting.keyPosition)
                 key.castShadow = policy.dof
                 key.shadow.mapSize.set(1024, 1024)
                 Object.assign(key.shadow.camera, {
@@ -119,19 +128,19 @@ export default function CharacterScene({ stateRef, policy, onStatus }) {
                 key.shadow.blurSamples = 8
                 scene.add(key)
                 RectAreaLightUniformsLib.init()
-                const softbox = new THREE.RectAreaLight('#ffe8d8', 4.5, 4, 4)
-                softbox.position.set(2.5, 2.5, 3.5)
+                const softbox = new THREE.RectAreaLight(lighting.softColor, lighting.softIntensity, lighting.softWidth, lighting.softHeight)
+                softbox.position.set(...lighting.softPosition)
                 softbox.lookAt(0, 0.2, 0)
                 scene.add(softbox)
-                const fill = new THREE.DirectionalLight('#b3d5ec', 0.6)
-                fill.position.set(-3, 1, 2)
+                const fill = new THREE.DirectionalLight(lighting.fillColor, lighting.fillIntensity)
+                fill.position.set(...lighting.fillPosition)
                 scene.add(fill)
-                const rim = new THREE.DirectionalLight('#a8d4ed', 2.2)
-                rim.position.set(-2, 3, -2)
+                const rim = new THREE.DirectionalLight(lighting.rimColor, lighting.rimIntensity)
+                rim.position.set(...lighting.rimPosition)
                 scene.add(rim)
 
-                // 3. 下载只使用正式资源；契约缺项也走失败恢复。
-                const gltf = await new GLTFLoader().loadAsync('/models/me.glb')
+                // 3. 仅加载白名单中的正式或候选资源；契约缺项也走失败恢复。
+                const gltf = await new GLTFLoader().loadAsync(look.modelPath)
                 if (disposed || failed) {
                     disposeModel(gltf.scene)
                     return
@@ -168,7 +177,11 @@ export default function CharacterScene({ stateRef, policy, onStatus }) {
                     focusA = new THREE.Vector3(),
                     focusB = new THREE.Vector3(),
                     cameraTarget = new THREE.Vector3(),
-                    direction = new THREE.Vector3()
+                    direction = new THREE.Vector3(),
+                    resumePosition = new THREE.Vector3(),
+                    resumeTarget = new THREE.Vector3(),
+                    resumeRotation = new THREE.Quaternion(),
+                    resumeMatrix = new THREE.Matrix4()
                 const view = new THREE.PerspectiveCamera()
                 view.copy(camera)
                 // 初始构图沿用已验收相机；近景与主体大小由正式 GLB 提供。
@@ -207,14 +220,29 @@ export default function CharacterScene({ stateRef, policy, onStatus }) {
                     )
                 }
 
-                /** 画布按容器尺寸适配手机，横竖屏转换不沿用旧宽高比。 */
+                // 阻尼按真实帧间隔计算；首次调整尚未绘制，后续调整必须立即恢复画面。
+                let lastRender = performance.now(), hasRendered = false
+                let size = { width: 0, height: 0, logicalHeight: 0 }
+
+                /** 保持逻辑视口的构图，并向下扩展画布覆盖工具栏收起后的区域。 */
                 const resize = () => {
                     const width = Math.max(1, element.clientWidth),
                         height = Math.max(1, element.clientHeight)
+                    const logicalHeight = viewportRef?.current.height || height
+                    if (size.width === width && size.height === height && size.logicalHeight === logicalHeight) return
+                    // 1. 相同尺寸不清空缓冲；真实变化才重新分配画布和后期资源。
+                    size = { width, height, logicalHeight }
                     renderer.setSize(width, height)
                     composer?.setSize(width, height)
-                    view.aspect = width / height
+                    // 2. 扩展视口只露出更多下方内容，不缩放原有可见区域的人物。
+                    view.setViewOffset(width, logicalHeight, 0, 0, width, height)
                     view.updateProjectionMatrix()
+                    // 3. ResizeObserver 晚于动画回调执行，不能等下一帧才填充清空的画布。
+                    if (hasRendered && !document.hidden) {
+                        if (bokeh) bokeh.uniforms.aspect.value = view.aspect
+                        if (composer) composer.render()
+                        else renderer.render(scene, view)
+                    }
                 }
                 resizeObserver = new ResizeObserver(resize)
                 resizeObserver.observe(element)
@@ -237,9 +265,6 @@ export default function CharacterScene({ stateRef, policy, onStatus }) {
                 window.addEventListener('pointermove', onPointer, {
                     passive: true,
                 })
-
-                // 阻尼按真实帧间隔计算，避免高刷新率机器和手机出现不同运镜速度。
-                let lastRender = performance.now(), hasRendered = false
 
                 /** 相机和自动对焦读取同一帧，眼球保持独立球心旋转。 */
                 function render() {
@@ -274,17 +299,27 @@ export default function CharacterScene({ stateRef, policy, onStatus }) {
                     cameraTarget.y += heroFraming * (policy.gaze ? 0.08 : 0.2)
                     view.fov = camera.fov * (1 - heroFraming * 0.1)
                     view.updateProjectionMatrix()
-                    view.quaternion.slerp(gaze, damping)
-                    // 窄屏拉远少量，避免人物两侧在横竖屏切换时被裁掉。
-                    if (!policy.gaze)
+                    // 手机首屏沿用拉远补偿，履历段再平滑切入更低的脸颊近景。
+                    if (!policy.gaze) {
                         cameraTarget.addScaledVector(
                             camera.getWorldDirection(direction),
                             -0.5,
                         )
-                    else {
+                        const { mix, side } = getMobileResumeFraming(state.frame, sceneConfig.framesPerEntry)
+                        resumePosition.fromArray(MOBILE_RESUME_SHOT.position)
+                        resumeTarget.fromArray(MOBILE_RESUME_SHOT.target)
+                        resumePosition.x *= side
+                        resumeTarget.x *= side
+                        cameraTarget.lerp(resumePosition, mix)
+                        // 朝向与位置共用进度，反向滚动不会留下近景倾角。
+                        resumeMatrix.lookAt(resumePosition, resumeTarget, view.up)
+                        resumeRotation.setFromRotationMatrix(resumeMatrix)
+                        gaze.slerp(resumeRotation, mix)
+                    } else {
                         cameraTarget.x += pointer.x * 0.035
                         cameraTarget.y -= pointer.y * 0.02
                     }
+                    view.quaternion.slerp(gaze, damping)
                     view.position.lerp(cameraTarget, damping)
                     eyes.forEach((eye, index) => {
                         euler.set(
@@ -365,6 +400,6 @@ export default function CharacterScene({ stateRef, policy, onStatus }) {
             renderer?.dispose()
             canvas?.remove()
         }
-    }, [policy.scene, policy.gaze, policy.dof, policy.dpr, stateRef, onStatus])
+    }, [policy.scene, policy.gaze, policy.dof, policy.dpr, stateRef, onStatus, viewportRef])
     return <div ref={host} className="character-canvas" />
 }

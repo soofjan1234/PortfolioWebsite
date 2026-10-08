@@ -2,6 +2,7 @@
 import React from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
+    act,
     cleanup,
     fireEvent,
     render,
@@ -11,8 +12,10 @@ import {
 import { MemoryRouter } from 'react-router-dom'
 import Home from './Home'
 
+const sceneProbe = vi.hoisted(() => ({ stateRef: null }))
 vi.mock('../components/home/CharacterScene', () => ({
-    default: ({ onStatus }) => {
+    default: ({ onStatus, stateRef }) => {
+        sceneProbe.stateRef = stateRef
         React.useEffect(() => {
             onStatus('error')
         }, [onStatus])
@@ -38,6 +41,7 @@ beforeEach(() => {
 })
 afterEach(() => {
     cleanup()
+    vi.unstubAllGlobals()
     vi.restoreAllMocks()
 })
 const mount = () =>
@@ -48,6 +52,27 @@ const mount = () =>
     )
 
 describe('主页阅读与降级', () => {
+    it('手机仅收放工具栏时，固定滚动位置的镜头和叠层不跳动', async () => {
+        vi.stubGlobal('innerWidth', 390)
+        vi.stubGlobal('innerHeight', 650)
+        vi.stubGlobal('scrollY', 1350)
+        let nextFrame
+        vi.stubGlobal('requestAnimationFrame', (callback) => { nextFrame = callback; return 1 })
+        vi.stubGlobal('cancelAnimationFrame', vi.fn())
+        const tops = { start: 0, education: 1100, work: 2100, 'tech-hub': 3400, works: 4500, contact: 6000 }
+        vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function () {
+            const id = this.getAttribute('data-scene-anchor') || this.getAttribute('data-rail') || this.id
+            return new DOMRect(0, (tops[id] || 0) - window.scrollY, 390, 100)
+        })
+        mount()
+        await screen.findByText('3D 暂时无法加载，已切换静态展示')
+        const state = { ...sceneProbe.stateRef.current }
+        const page = document.querySelector('.home-page')
+        const presentation = page.style.cssText
+        act(() => { window.innerHeight = 750; window.dispatchEvent(new Event('resize')); nextFrame() })
+        expect(sceneProbe.stateRef.current).toEqual(state)
+        expect(page.style.cssText).toBe(presentation)
+    })
     it('完整文章库在新标签打开个人掘金文章页', () => {
         mount()
         const link = screen.getByRole('link', { name: '完整文章库 ↗' })

@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-08",
+  "viewportWidths": [
+    390,
+    390
+  ],
+  "viewportHeights": [
+    700,
+    800
+  ],
+  "baseline": {
+    "camera": "-0.3000,0.3200,0.9500",
+    "canvasHeight": 1512,
+    "education": 936,
+    "frame": "50.00",
+    "logicalHeight": "700px",
+    "scrollY": 726,
+    "work": 1564.7734375
+  },
+  "after": {
+    "camera": "-0.3000,0.3200,0.9500",
+    "canvasHeight": 1512,
+    "education": 1062,
+    "frame": "50.00",
+    "logicalHeight": "800px",
+    "scrollY": 844,
+    "work": 1734.7734375
+  },
+  "changedFields": [
+    "education",
+    "logicalHeight",
+    "scrollY",
+    "work"
+  ],
+  "reverseScroll": {
+    "fromFrame": 100,
+    "toFrame": 50
+  },
+  "blur": "1.5px",
+  "phoneFeedback": "现在清楚，构图合适"
+}

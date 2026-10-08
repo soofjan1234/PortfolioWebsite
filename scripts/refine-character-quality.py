@@ -800,7 +800,7 @@ def strip_unused_tangents(path):
     return removed
 
 
-def export_candidate(stage, details):
+def export_candidate(stage, details, *, source=SOURCE, candidate=CANDIDATE, evidence=EVIDENCE):
     """只发布通过模型契约检查的候选，并保留每阶段的精简报告。"""
     import bpy
     config = json.loads((ROOT / "src/data/character-scene.json").read_text())
@@ -813,7 +813,7 @@ def export_candidate(stage, details):
         if selected:
             exported.append(obj.name)
     bpy.context.scene.frame_set(0)
-    temporary = CANDIDATE.with_name(".me-quality-pending.glb")
+    temporary = candidate.with_name(f".{candidate.stem}-pending.glb")
     bpy.ops.export_scene.gltf(filepath=str(temporary), export_format="GLB", use_selection=True,
         export_cameras=True, export_lights=False, export_animations=True, export_force_sampling=True,
         export_frame_range=True, export_frame_step=1, export_tangents=True, export_extras=True,
@@ -825,12 +825,12 @@ def export_candidate(stage, details):
     if checked.returncode:
         raise RuntimeError(f"候选校验失败，保留上一候选：{checked.stdout[:1800]} {checked.stderr[:300]}")
     report = json.loads(checked.stdout)
-    temporary.replace(CANDIDATE)
+    temporary.replace(candidate)
     bpy.context.scene.camera = bpy.data.objects["ResumeCamera"]
     bpy.context.preferences.filepaths.save_version = 0
-    bpy.ops.wm.save_as_mainfile(filepath=str(EVIDENCE / "hou-quality-candidate.blend"))
-    report.update(stage=stage, sourceSha256=sha256(SOURCE), details=details, exported=exported)
-    (EVIDENCE / f"{stage}-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2)+"\n")
+    bpy.ops.wm.save_as_mainfile(filepath=str(evidence / "hou-quality-candidate.blend"))
+    report.update(stage=stage, sourceSha256=sha256(source), details=details, exported=exported)
+    (evidence / f"{stage}-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2)+"\n")
     print(json.dumps({key: report[key] for key in ["stage", "bytes", "sha256", "counts", "structural", "details"]}, ensure_ascii=False))
 
 

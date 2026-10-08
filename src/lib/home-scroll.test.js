@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getSceneState, getHorizontalState, getMotionPolicy, parseArticleLinks, getHomePresentation } from './home-scroll'
+import { getSceneState, getHorizontalState, getMotionPolicy, parseArticleLinks, getHomePresentation, getMobileResumeFraming } from './home-scroll'
 
 const config = { fps: 24, framesPerEntry: 50 }
 const anchors = [
@@ -11,6 +11,24 @@ const anchors = [
 ]
 
 describe('主页滚动契约', () => {
+    it('手机履历近景在教育和工作停靠，首屏与横向栏目恢复原构图', () => {
+        expect(getMobileResumeFraming(0)).toEqual({ mix: 0, side: -1 })
+        expect(getMobileResumeFraming(50)).toEqual({ mix: 1, side: -1 })
+        expect(getMobileResumeFraming(100)).toEqual({ mix: 1, side: 1 })
+        expect(getMobileResumeFraming(150).mix).toBe(0)
+        expect(getMobileResumeFraming(200).mix).toBe(0)
+    })
+    it('手机近景的进入、换侧及退出连续，反向输入恢复同一构图', () => {
+        const forward = getMobileResumeFraming(25)
+        expect(forward.mix).toBeCloseTo(0.5)
+        expect(getMobileResumeFraming(75)).toEqual({ mix: 1, side: 0 })
+        expect(getMobileResumeFraming(125).mix).toBeCloseTo(0.5)
+        for (const stop of [0, 50, 100, 150]) {
+            expect(Math.abs(getMobileResumeFraming(stop + 0.01).mix - getMobileResumeFraming(stop - 0.01).mix)).toBeLessThan(0.001)
+        }
+        getMobileResumeFraming(200)
+        expect(getMobileResumeFraming(25)).toEqual(forward)
+    })
     it('履历前后各留出 35% 阅读停顿，镜头在中段推进', () => {
         expect(getSceneState(1000, 1000, anchors, config).frame).toBe(50)
         expect(getSceneState(1400, 1000, anchors, config).frame).toBe(100)

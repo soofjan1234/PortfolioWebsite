@@ -1,0 +1,83 @@
+{
+  "valid": true,
+  "stage": "natural",
+  "bytes": 9734916,
+  "sha256": "e01f6128417183514aac9ba019444d93bc93a2f51381b2669f65dadbb4ea7d9a",
+  "counts": {
+    "nodes": 14,
+    "meshes": 8,
+    "materials": 12,
+    "textures": 11,
+    "cameras": 1,
+    "animations": 1,
+    "vertices": 58866,
+    "triangles": 82396,
+    "primitives": 12
+  },
+  "structural": {
+    "errors": 0,
+    "warnings": 0,
+    "firstIssue": {
+      "code": "UNUSED_OBJECT",
+      "message": "This object may be unused.",
+      "severity": 2,
+      "pointer": "/meshes/4/primitives/0/attributes/TEXCOORD_0"
+    }
+  },
+  "contract": {
+    "valid": true,
+    "issues": []
+  },
+  "sourceSha256": "aba044203d166c42251c1b0010c30dd05f997b9c373eec705ba1bece0280a392",
+  "details": {
+    "eyelids": [
+      {
+        "side": "left",
+        "outerVertices": 150,
+        "vertices": 900,
+        "faces": 750,
+        "maxOuterDifference": 0.0
+      },
+      {
+        "side": "right",
+        "outerVertices": 138,
+        "vertices": 828,
+        "faces": 690,
+        "maxOuterDifference": 0.0
+      }
+    ],
+    "materials": {
+      "skin": {
+        "image": "natural-skin-roughness",
+        "range": [
+          0.0,
+          0.6392157077789307
+        ]
+      },
+      "hair": {
+        "image": "natural-hair-roughness",
+        "range": [
+          0.41999998688697815,
+          0.5705882906913757
+        ]
+      }
+    },
+    "unusedTangentBindingsRemoved": 7
+  },
+  "exported": [
+    "character-head",
+    "character-shirt",
+    "character-hair",
+    "character-glasses",
+    "eye-left",
+    "eye-right",
+    "ResumeCamera",
+    "focus-start",
+    "focus-1",
+    "focus-2",
+    "focus-works",
+    "focus-tech-hub",
+    "eyelid-left",
+    "eyelid-right"
+  ]
+}

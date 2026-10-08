@@ -11,6 +11,7 @@ import sceneConfig from '../data/character-scene.json'
 import { works, techCategories } from '../data/home-content'
 import { getSceneState, getHomePresentation } from '../lib/home-scroll'
 import { useHomeMotion } from '../components/home/useHomeMotion'
+import { useHomeViewport } from '../components/home/useHomeViewport'
 import HorizontalSection from '../components/home/HorizontalSection'
 import ArticleDialog from '../components/home/ArticleDialog'
 import './Home.css'
@@ -45,6 +46,7 @@ class SceneBoundary extends Component {
 /** 装配人物、统一履历、作品和文章入口，HTML 阅读独立于场景状态。 */
 export default function Home() {
     const page = useRef(null)
+    const viewport = useHomeViewport(page)
     const policy = useHomeMotion()
     const [sceneStatus, setSceneStatus] = useState('loading')
     const [selectedCategory, setSelectedCategory] = useState(null)
@@ -78,7 +80,7 @@ export default function Home() {
             })
             const state = getSceneState(
                 window.scrollY,
-                window.innerHeight,
+                viewport.current.height,
                 anchors,
                 sceneConfig,
             )
@@ -88,7 +90,7 @@ export default function Home() {
                 // 作品从右侧滑入时仍能看到背景人物，只有联系区完全覆盖后暂停绘制。
                 visible: page.current.querySelector('#contact').getBoundingClientRect().top > 0,
             }
-            const presentation = getHomePresentation(window.scrollY, window.innerHeight, anchors.find((anchor) => anchor.id === 'tech-hub').top)
+            const presentation = getHomePresentation(window.scrollY, viewport.current.height, anchors.find((anchor) => anchor.id === 'tech-hub').top)
             Object.entries(presentation).forEach(([name, value]) => page.current.style.setProperty(`--${name}`, value))
             setStage(state.stage)
         }
@@ -106,7 +108,7 @@ export default function Home() {
             window.removeEventListener('scroll', schedule)
             window.removeEventListener('resize', schedule)
         }
-    }, [])
+    }, [viewport])
 
     const statusText = !policy.scene
         ? '静态展示 · 减少动态效果'
@@ -143,6 +145,7 @@ export default function Home() {
                             <CharacterScene
                                 policy={policy}
                                 stateRef={sceneState}
+                                viewportRef={viewport}
                                 onStatus={updateStatus}
                             />
                         </Suspense>

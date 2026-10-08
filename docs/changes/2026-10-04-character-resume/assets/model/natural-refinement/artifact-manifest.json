@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-08",
+  "count": 8,
+  "formalSha256": "c2147c0a767a131d2a652a2bd399aeaa1afc9f68902739353439848d5f0a464e",
+  "candidateSha256": "e01f6128417183514aac9ba019444d93bc93a2f51381b2669f65dadbb4ea7d9a",
+  "artifacts": [
+    {
+      "name": "back.jpg",
+      "bytes": 32848,
+      "sha256": "bc1552c4d94c679312b7c8f1433a20a234192d89a17d937bd3bc14544e506c83"
+    },
+    {
+      "name": "close.jpg",
+      "bytes": 54368,
+      "sha256": "833dd4c61bee8f8cb9fbb783ce2e007a3a28496c67f1e54f432faed372f15030"
+    },
+    {
+      "name": "gaze-lower-left.jpg",
+      "bytes": 54074,
+      "sha256": "194f5e42e089669146de4eb09bc3b5764a546a050d5ce8668fddb160ccc57c39"
+    },
+    {
+      "name": "gaze-upper-right.jpg",
+      "bytes": 54059,
+      "sha256": "3c6874b2d3201fc1d6f62d1c08fe961594e5678ebd600f4654fb4f4bef77141b"
+    },
+    {
+      "name": "home-current.jpg",
+      "bytes": 31646,
+      "sha256": "0803f6b36c5d26b614f357e01365e735b4e1b03a2d2e9e5623b02093ae637672"
+    },
+    {
+      "name": "home-natural-light.jpg",
+      "bytes": 31532,
+      "sha256": "a8f0c98f37a95d6394626cb8761b5431a422454de03dcc1a3a07abf8d80c7796"
+    },
+    {
+      "name": "home-same-light.jpg",
+      "bytes": 32272,
+      "sha256": "96b45b563cd57d756374fd964c8123ca4a8d023ace401a1ef2d82deac0fcc1d9"
+    },
+    {
+      "name": "side.jpg",
+      "bytes": 35483,
+      "sha256": "6b741dcf095aebc599723dad7e93c9511bae2d86732b1d7ba5a5e27f2cc3968a"
+    }
+  ]
+}

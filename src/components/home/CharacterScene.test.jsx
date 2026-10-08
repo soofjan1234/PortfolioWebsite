@@ -6,17 +6,21 @@ import * as THREE from 'three'
 import CharacterScene from './CharacterScene'
 
 // 保留真实相机和动画插值，仅替换需要 GPU、网络的边界。
-const probe = vi.hoisted(() => ({ frames: [], nextFrame: null }))
+const probe = vi.hoisted(() => ({ frames: [], nextFrame: null, resize: null, cleared: false, sizes: [], projections: [] }))
 vi.mock('three', async (original) => ({
     ...(await original()),
     WebGLRenderer: class {
         domElement = document.createElement('canvas')
         shadowMap = {}
         setPixelRatio() {}
-        setSize() {}
+        setSize(width, height) { probe.cleared = true; probe.sizes.push([width, height]) }
         dispose() {}
         render(_scene, camera) {
+            probe.cleared = false
             probe.frames.push(camera.position.toArray())
+            // 同一相机局部点的屏幕纵坐标，可判断扩展画布是否改变原有构图。
+            const matrix = camera.projectionMatrix.elements
+            probe.projections.push((1 - (-0.2 * matrix[5] - matrix[9])) * probe.sizes.at(-1)[1] / 2)
         }
     },
     PMREMGenerator: class {
@@ -50,7 +54,11 @@ function createModel() {
 beforeEach(() => {
     probe.frames = []
     probe.nextFrame = null
-    vi.stubGlobal('ResizeObserver', class { observe() {} disconnect() {} })
+    probe.cleared = false
+    probe.sizes = []
+    probe.resize = null
+    probe.projections = []
+    vi.stubGlobal('ResizeObserver', class { constructor(callback) { probe.resize = callback } observe() {} disconnect() {} })
     vi.stubGlobal('requestAnimationFrame', vi.fn((callback) => {
         probe.nextFrame = callback
         return 1
@@ -60,16 +68,17 @@ beforeEach(() => {
 afterEach(() => {
     cleanup()
     vi.unstubAllGlobals()
+    vi.restoreAllMocks()
 })
 
 /** 以页面当前滚动状态挂载，ready 事件记录当时已绘制的帧数。 */
-async function mountScene(overrides = {}, gaze = true) {
+async function mountScene(overrides = {}, gaze = true, viewportRef) {
     const stateRef = { current: { frame: 0, fps: 24, stage: 'start', focusFrom: 'focus-start', focusTo: 'focus-1', focusMix: 0, ...overrides } }
     const readyFrames = []
     const onStatus = vi.fn((status) => {
         if (status === 'ready') readyFrames.push(probe.frames.length)
     })
-    render(<CharacterScene stateRef={stateRef} policy={{ scene: true, gaze, dof: false, dpr: 1 }} onStatus={onStatus} />)
+    render(<CharacterScene stateRef={stateRef} policy={{ scene: true, gaze, dof: false, dpr: 1 }} onStatus={onStatus} viewportRef={viewportRef} />)
     await waitFor(() => expect(onStatus).toHaveBeenCalledWith('ready'))
     return { stateRef, readyFrames }
 }
@@ -86,6 +95,14 @@ it('窄屏首次绘制直接包含拉远补偿', async () => {
     expect(probe.frames[0][1]).toBeCloseTo(0.37, 6)
 })
 
+it.each([
+    { frame: 50, stage: 'education', x: -0.30 },
+    { frame: 100, stage: 'work', x: 0.30 },
+])('手机 $stage 拉近到脸颊近景，移开文字背后的黑发', async ({ frame, stage, x }) => {
+    await mountScene({ frame, stage }, false)
+    expect(probe.frames[0]).toEqual([expect.closeTo(x, 6), expect.closeTo(0.32, 6), expect.closeTo(0.95, 6)])
+})
+
 it('首帧绘制成功后才通知页面隐藏占位图', async () => {
     const { readyFrames } = await mountScene()
     expect(readyFrames).toEqual([1])
@@ -98,4 +115,30 @@ it('从页面中段初始化时直接使用当前帧，后续滚动仍平滑推�
     probe.nextFrame()
     expect(probe.frames.at(-1)[0]).toBeGreaterThan(0)
     expect(probe.frames.at(-1)[0]).toBeLessThan(1)
+})
+
+it('画布实际变大后当次回调就恢复画面，不等待下一个动画帧', async () => {
+    await mountScene()
+    vi.spyOn(document.querySelector('.character-canvas'), 'clientHeight', 'get').mockReturnValue(750)
+    probe.resize()
+    expect(probe.cleared).toBe(false)
+    expect(probe.frames).toHaveLength(2)
+})
+
+it('容器尺寸没有变化时不重设画布，保留已经绘制的内容', async () => {
+    await mountScene()
+    const sizes = probe.sizes.length
+    probe.resize()
+    expect(probe.sizes).toHaveLength(sizes)
+    expect(probe.cleared).toBe(false)
+})
+
+it('预留画布向下延伸时，原可见区域的人物大小和纵向落点不变', async () => {
+    vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(390)
+    const height = vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(650)
+    await mountScene({}, false, { current: { height: 650 } })
+    const before = probe.projections.at(-1)
+    height.mockReturnValue(844)
+    probe.resize()
+    expect(probe.projections.at(-1)).toBeCloseTo(before, 6)
 })
